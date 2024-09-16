@@ -48,7 +48,7 @@ const AutoSuggest: React.FC<AutoSuggestProps> = ({ suggestions, onSuggestionClic
       {suggestions.map((suggestion, index) => (
         <li
           key={index}
-          className={`px-4 py-2 cursor-pointer bg-white text-gray-800 ${
+          className={`px-4 py-2 cursor-pointer bg-white text-gray-800 text-left text-sm ${
             index === selectedIndex ? 'bg-gray-100' : 'hover:bg-gray-100'
           }`}
           onClick={() => onSuggestionClick(suggestion)}

@@ -8,8 +8,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Loader2, Briefcase, BookOpen, Search, ChevronLeft, ChevronsLeft, ChevronRight, ChevronsRight, Newspaper, Handshake } from 'lucide-react'
+import {
+  Loader2,
+  Briefcase,
+  BookOpen,
+  Search,
+  ChevronLeft,
+  ChevronsLeft,
+  ChevronRight,
+  ChevronsRight,
+  Newspaper,
+  Handshake
+} from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
+import { useEasterEgg } from '@/hooks/useEasterEgg'
 
 interface Company {
   name: string;
@@ -35,6 +47,8 @@ export default function Home() {
 
   const [showSuggestions, setShowSuggestions] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
 
   useEffect(() => {
     fetch('/data.json')
@@ -82,7 +96,7 @@ export default function Home() {
   const suggestions = useMemo(() => {
     if (searchTerm.length === 0) return []
     return filteredCompanies
-      .slice(0, 6)
+      .slice(0, 10)
       .map((company: Company) => company.name)
   }, [filteredCompanies, searchTerm])
 
@@ -143,7 +157,15 @@ export default function Home() {
         <h3 className="text-3xl font-bold mb-6">Companies</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {currentCompanies.map((company: Company) => (
-            <Card key={company.id}>
+            <Card 
+              key={company.id} 
+              className='shadow-sm transition-shadow duration-300 hover:shadow-md'
+              onClick={() => {
+                if (company.name.toLowerCase().includes('proximity')) {
+                  triggerEasterEgg()
+                }
+              }}
+            >
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Avatar className="mr-2 rounded-none" style={{ width: "22px", height: "22px" }}>
@@ -159,8 +181,8 @@ export default function Home() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-col gap-2">
-                  <div className='flex space-x-4'>
+                <div className="flex flex-col gap-2 ">
+                  <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
                     <Link href={`${company.url}`} className="flex items-center text-primary hover:underline" target='_blank'>
                       <Briefcase className="w-4 h-4 mr-1" />
                       Jobs
@@ -173,7 +195,7 @@ export default function Home() {
                       </Link>
                     )}
                   </div>
-                  <div className='flex space-x-4'>
+                  <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
                     <Link href={`https://www.google.com/search?q=${company.name}`} className="flex items-center text-primary hover:underline" target='_blank'>
                       <Search className="w-4 h-4 mr-1" />
                       Search
@@ -242,6 +264,7 @@ export default function Home() {
         </div>
       )}
       
+      <EasterEggComponent />
     </div>
   )
 }
