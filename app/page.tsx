@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import _ from "lodash"
 import Link from 'next/link'
 import Image from "next/image"
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Loader2, Briefcase, BookOpen, Search, ChevronLeft, ChevronsLeft, ChevronRight, ChevronsRight, Newspaper, Handshake } from 'lucide-react'
+import AutoSuggest from '@/components/AutoSuggest'
 
 interface Company {
   name: string;
@@ -31,6 +32,9 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageState, setPageState] = useState(PAGE_STATE.LOADING);
   const companiesPerPage = 12
+
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     fetch('/data.json')
@@ -60,7 +64,14 @@ export default function Home() {
 
   const handleInputChange = useCallback((value: string) => {
     throttledSetSearchTerm(value);
+    setShowSuggestions(true);
   }, [throttledSetSearchTerm]);
+
+  const handleSuggestionClick = useCallback((suggestion: string) => {
+    setSearchTerm(suggestion);
+    setShowSuggestions(false);
+    inputRef.current?.focus();
+  }, []);
 
   const indexOfLastCompany = searchTerm.length === 0 ? currentPage * companiesPerPage : allCompanies.length -1;
   const indexOfFirstCompany = searchTerm.length === 0 ? indexOfLastCompany - companiesPerPage : 0;
@@ -68,10 +79,17 @@ export default function Home() {
 
   const totalPages = Math.ceil(filteredCompanies.length / companiesPerPage)
 
+  const suggestions = useMemo(() => {
+    if (searchTerm.length === 0) return []
+    return filteredCompanies
+      .slice(0, 6)
+      .map((company: Company) => company.name)
+  }, [filteredCompanies, searchTerm])
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header with Theme Toggle */}
-      <header className="border-b sticky">
+      <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-start items-center space-x-4">
           <Image
             width={36}
@@ -97,11 +115,21 @@ export default function Home() {
                 className="w-full bg-background text-foreground pr-24"
                 value={searchTerm}
                 onChange={(e) => handleInputChange(e.target.value)}
+                onFocus={() => setShowSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                ref={inputRef}
               />
               <Button className="absolute right-0 top-0 bottom-0 bg-transparent hover:bg-transparent">
                 <Search className="w-4 h-4 mr-2" />
                 Search
               </Button>
+              {showSuggestions && suggestions.length > 0 && (
+                <AutoSuggest 
+                  suggestions={suggestions} 
+                  onSuggestionClick={handleSuggestionClick} 
+                  onClose={() => setShowSuggestions(false)}
+                />
+              )}
             </div>
           </div>
           <p className="text-md my-4">Showing results from {allCompanies.length} Companies</p>
