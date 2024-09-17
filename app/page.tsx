@@ -53,7 +53,7 @@ export default function Home() {
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
 
   useEffect(() => {
-    fetch('/data.json')
+    fetch('/data-minify.json')
       .then(response => response.json())
       .then(data => {
         const sortedData = data
@@ -301,6 +301,7 @@ export default function Home() {
                     src='/logo-cache/ui.shadcn.com.webp'
                     alt='shadcn Logo'
                     className='mx-1'
+                    priority
                   />
                 shadcn/ui
               </Link>
@@ -312,6 +313,7 @@ export default function Home() {
                   src='/logo-cache/vercel.webp'
                   alt='Vercel Logo'
                   className='mx-1'
+                  priority
                 />
                 Vercel
               </Link>
@@ -322,6 +324,7 @@ export default function Home() {
                   height={16}
                   src='/logo-cache/v0.webp'
                   alt='V0 Logo'
+                  priority
                 />
               </Link>
             </div>
@@ -337,6 +340,7 @@ export default function Home() {
                 height={20}
                 src='/logo-cache/github.webp'
                 alt='Github Logo'
+                priority
               />
               <span>Data Thanks to ❤️</span>
             </Link>
