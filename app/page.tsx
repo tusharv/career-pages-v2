@@ -170,7 +170,7 @@ export default function Home() {
                 <CardTitle className="flex items-center">
                   <Avatar className="mr-2 rounded-none" style={{ width: "22px", height: "22px" }}>
                     <AvatarImage
-                      src={`/logo-cache/${new URL(company?.url).hostname}.png`}
+                      src={`/logo-cache/${new URL(company?.url).hostname}.webp`}
                       alt={`${company?.name} logo`}
                     />
                     <AvatarFallback>
