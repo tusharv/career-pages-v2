@@ -220,27 +220,31 @@ export default function Home() {
           <Button 
             onClick={() => setCurrentPage(1)}
             disabled={currentPage === 1}
+            aria-label='First Page'
           >
             <ChevronsLeft className="w-4 h-4 mr-2" />
           </Button>
           <Button 
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
+            aria-label='Previous Page'
           >
             <ChevronLeft className="w-4 h-4 mr-2" />
           </Button>
           {searchTerm.length === 0 &&(
-            <Button><strong>{currentPage}</strong>&nbsp;of&nbsp;<strong>{totalPages}</strong></Button>
+            <Button aria-label='Count' className='pointer-events-none'><strong>{currentPage}</strong>&nbsp;of&nbsp;<strong>{totalPages}</strong></Button>
           )}
           <Button 
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
+            aria-label='Next Page'
           >
             <ChevronRight className="w-4 h-4 ml-2" />
           </Button>
           <Button 
             onClick={() => setCurrentPage(totalPages)}
             disabled={currentPage === totalPages}
+            aria-label='Last Page'
           >
             <ChevronsRight className="w-4 h-4 ml-2" />
           </Button>
