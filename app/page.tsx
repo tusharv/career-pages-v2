@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
+import { useCompanies } from './CompaniesContext'
 
 interface Company {
   name: string;
@@ -35,17 +36,10 @@ interface Company {
   [key: string]: string | number | undefined;
 }
 
-enum PAGE_STATE {
-  LOADING = 'Loading',
-  ERROR = 'Error',
-  SUCCESS = 'Success',
-}
-
 export default function Home() {
-  const [allCompanies, setAllCompanies] = useState([])
+  const { state: { companies, loading, error }, dispatch } = useCompanies()
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageState, setPageState] = useState(PAGE_STATE.LOADING);
   const companiesPerPage = 12
 
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -54,6 +48,7 @@ export default function Home() {
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
 
   useEffect(() => {
+    dispatch({ type: 'FETCH_START' })
     fetch('/data-minify.json')
       .then(response => response.json())
       .then(data => {
@@ -63,14 +58,13 @@ export default function Home() {
             ...company,
             id: index + 1
           }));
-        setPageState(PAGE_STATE.SUCCESS)
-        setAllCompanies(sortedData);
+        dispatch({ type: 'FETCH_SUCCESS', payload: sortedData })
       })
       .catch(error => {
-        setPageState(PAGE_STATE.ERROR)
+        dispatch({ type: 'FETCH_ERROR', payload: error.message })
         console.error('Error loading companies:', error)
       })
-  }, [])
+  }, [dispatch])
 
   const handleClearSearch = () => {
     setSearchTerm('');
@@ -78,10 +72,10 @@ export default function Home() {
   };
 
   const filteredCompanies = useMemo(() => {
-    return allCompanies.filter((company: { name?: string }) => 
+    return companies.filter((company: { name?: string }) => 
       company.name?.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, [allCompanies, searchTerm]);
+  }, [companies, searchTerm]);
 
   const throttledSetSearchTerm = _.throttle(setSearchTerm, 300);
 
@@ -96,7 +90,7 @@ export default function Home() {
     inputRef.current?.focus();
   }, []);
 
-  const indexOfLastCompany = searchTerm.length === 0 ? currentPage * companiesPerPage : allCompanies.length -1;
+  const indexOfLastCompany = searchTerm.length === 0 ? currentPage * companiesPerPage : companies.length -1;
   const indexOfFirstCompany = searchTerm.length === 0 ? indexOfLastCompany - companiesPerPage : 0;
   const currentCompanies = filteredCompanies.slice(indexOfFirstCompany, indexOfLastCompany);
 
@@ -156,11 +150,26 @@ export default function Home() {
               )}
             </div>
           </div>
-          <p className="text-md my-4">Showing results from {allCompanies.length} Companies</p>
+          <p className="text-md my-4">Showing results from {companies.length} Companies</p>
         </div>
       </section>
 
-      {pageState === PAGE_STATE.SUCCESS && (
+      {loading && (
+        <div className="container mx-auto px-4 py-8 text-center">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
+          <p className="text-xl">Loading companies...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="container mx-auto px-4 py-8 text-center">
+          <h3 className="text-2xl font-bold text-red-600 mb-4">Error Loading Data</h3>
+          <p className="text-lg mb-4">{error}</p>
+          <p className="text-md">Please try refreshing the page or check back later.</p>
+        </div>
+      )}
+
+      {!loading && !error && (
         <>
           {/* Company Listings */}
       <div className="container mx-auto px-4 py-8">
@@ -264,20 +273,6 @@ export default function Home() {
         </>
       )}
 
-      {pageState === PAGE_STATE.ERROR && (
-        <div className="container mx-auto px-4 py-8 text-center">
-          <h3 className="text-2xl font-bold text-red-600 mb-4">Error Loading Data</h3>
-          <p className="text-lg mb-4">We&apos;re sorry, but there was an error loading the company data.</p>
-          <p className="text-md">Please try refreshing the page or check back later.</p>
-        </div>
-      )}
-
-      {pageState === PAGE_STATE.LOADING && (
-        <div className="container mx-auto px-4 py-8 text-center">
-          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
-          <p className="text-xl">Loading companies...</p>
-        </div>
-      )}
       <Footer />
       <EasterEggComponent />
     </div>
