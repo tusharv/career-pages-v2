@@ -3,11 +3,12 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import _ from "lodash"
 import Link from 'next/link'
-import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Loader2,
@@ -110,19 +111,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header with Theme Toggle */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-start items-center space-x-4">
-          <Image
-            width={36}
-            height={36}
-            src='/career.svg'
-            alt='Career Pages Logo'
-            priority
-          />
-          <h1 className="text-2xl font-bold">Career Pages</h1>
-        </div>
-      </header>
+      <Header/>
 
       {/* Hero Section */}
       <section className="bg-primary text-primary-foreground py-20">
@@ -289,65 +278,7 @@ export default function Home() {
           <p className="text-xl">Loading companies...</p>
         </div>
       )}
-      <footer className="border-t mt-8">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col justify-center items-center sm:flex-row sm:justify-between sm:items-center">
-            <div className="flex flex-wrap items-center gap-2">
-              <span>Built using</span>
-              <Link href="https://ui.shadcn.com/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline flex items-center">
-                <Image
-                    width={16}
-                    height={16}
-                    src='/logo-cache/ui.shadcn.com.webp'
-                    alt='shadcn Logo'
-                    className='mx-1'
-                    priority
-                  />
-                shadcn/ui
-              </Link>
-              <span>&nbsp;</span>
-              <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline flex items-center">
-                <Image
-                  width={16}
-                  height={16}
-                  src='/logo-cache/vercel.webp'
-                  alt='Vercel Logo'
-                  className='mx-1'
-                  priority
-                />
-                Vercel
-              </Link>
-              <span>and</span>
-              <Link href="https://v0.dev/" target="_blank" rel="noopener noreferrer" className="font-medium hover:underline flex items-center">
-                <Image
-                  width={16}
-                  height={16}
-                  src='/logo-cache/v0.webp'
-                  alt='V0 Logo'
-                  priority
-                />
-              </Link>
-            </div>
-            <div className='flex flex-wrap items-center gap-2'>
-            <Link 
-              href="https://github.com/Kaustubh-Natuskar/moreThanFAANGM/graphs/contributors" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 font-medium hover:underline"
-            >
-              <Image
-                width={20}
-                height={20}
-                src='/logo-cache/github.webp'
-                alt='Github Logo'
-                priority
-              />
-              <span>Data Thanks to ❤️</span>
-            </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
       <EasterEggComponent />
     </div>
   )
