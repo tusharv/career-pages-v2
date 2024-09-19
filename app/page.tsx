@@ -100,7 +100,7 @@ export default function Home() {
     setShowSuggestions(false);
     router.push(suggestion ? `/?search=${encodeURIComponent(suggestion)}` : '/', { scroll: false });
     inputRef.current?.focus();
-  }, []);
+  }, [router]);
 
   const indexOfLastCompany = searchTerm.length === 0 ? currentPage * companiesPerPage : companies.length -1;
   const indexOfFirstCompany = searchTerm.length === 0 ? indexOfLastCompany - companiesPerPage : 0;
