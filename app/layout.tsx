@@ -3,6 +3,8 @@ import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Toaster } from "@/components/ui/toaster"
+
 
 import { CompaniesProvider } from './CompaniesContext';
 
@@ -43,6 +45,7 @@ export default function RootLayout({
       >
         <CompaniesProvider>
           {children}
+          <Toaster />
         </CompaniesProvider>
         <SpeedInsights />
       </body>

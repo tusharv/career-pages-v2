@@ -21,7 +21,9 @@ import {
   ChevronsRight,
   Newspaper,
   Handshake,
-  CircleX
+  CircleX,
+  Share2,
+  Bug
 } from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
@@ -36,11 +38,17 @@ interface Company {
   [key: string]: string | number | undefined;
 }
 
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useToast } from "@/hooks/use-toast"
+
 export default function Home() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const { state: { companies, loading, error }, dispatch } = useCompanies()
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '')
   const [currentPage, setCurrentPage] = useState(1)
   const companiesPerPage = 12
+  const { toast } = useToast()
 
   const [showSuggestions, setShowSuggestions] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -66,10 +74,11 @@ export default function Home() {
       })
   }, [dispatch])
 
-  const handleClearSearch = () => {
+  const handleClearSearch = useCallback(() => {
     setSearchTerm('');
+    router.push('/', { scroll: false });
     inputRef.current?.focus();
-  };
+  }, [router]);
 
   const filteredCompanies = useMemo(() => {
     return companies.filter((company: { name?: string }) => 
@@ -82,11 +91,14 @@ export default function Home() {
   const handleInputChange = useCallback((value: string) => {
     throttledSetSearchTerm(value);
     setShowSuggestions(true);
-  }, [throttledSetSearchTerm]);
+    router.push(value ? `/?search=${encodeURIComponent(value)}` : '/', { scroll: false });
+    
+  }, [throttledSetSearchTerm, router]);
 
   const handleSuggestionClick = useCallback((suggestion: string) => {
     setSearchTerm(suggestion);
     setShowSuggestions(false);
+    router.push(suggestion ? `/?search=${encodeURIComponent(suggestion)}` : '/', { scroll: false });
     inputRef.current?.focus();
   }, []);
 
@@ -227,6 +239,32 @@ export default function Home() {
                     <Link href={`https://google.com/search?q=site:theorg.com ${company.name}&btnI=I`} className="flex items-center text-primary hover:underline" target='_blank'>
                       <Handshake className="w-4 h-4 mr-1" />
                       People <sup className='hover:no-underline'>[βeta]</sup>
+                    </Link>
+                  </div>
+                  <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
+                    <Button
+                      onClick={() => {
+                        const shareUrl = `${window.location.protocol || 'http:'}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}?search=${encodeURIComponent(company.name)}`;
+                        navigator.clipboard.writeText(shareUrl).then(() => {
+                          toast({
+                            title: "Link copied! 🎉",
+                            description: `The share link 🔗 ${shareUrl} has been copied to your clipboard.`,
+                            style: {
+                              background: "var(--background)",
+                              color: "var(--foreground)",
+                            },
+                          });
+                        });
+                      }}
+                      variant="link"
+                      className="flex items-center text-primary hover:underline p-0 h-auto sm:justify-start justify-start"
+                    >
+                      <Share2 className="w-4 h-4 mr-1" />
+                      Share
+                    </Button>
+                    <Link href={`/report?sitename=${encodeURIComponent(company.name)}`} className="flex items-center text-primary hover:underline" target='_blank'>
+                      <Bug className="w-4 h-4 mr-1" />
+                      Report Issue
                     </Link>
                   </div>
                 </div>
