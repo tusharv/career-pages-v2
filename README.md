@@ -13,7 +13,7 @@ This repo has good, alphabetically sorted list of companies with link of their c
 
 
 ## Good to have
-- Auto suggest names in search
+- ~~Auto suggest names in search~~
 - Interface to add new company
 - ~~Company with Logos and other details~~
 - Locationwise search
@@ -55,3 +55,20 @@ To learn more about Next.js + Gluestack UI template, take a look at the followin
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Developer Notes
+
+Favicon using Google API
+```
+https://www.google.com/s2/favicons?domain={{domain}}&sz={{size}}
+```
+Saving it to `logo-cache` for faster load and avoid exploiting API on every run
+
+Webp bulk conversion using
+
+```
+    for file in logo-cache/*; do cwebp -q 100 -resize {{height}} {{width}} "$file" -o "${file%.*}.webp"; done
+```
+More about [cwebp](https://developers.google.com/speed/webp/docs/cwebp)
+
+Sending Feedback using https://postmarkapp.com/
