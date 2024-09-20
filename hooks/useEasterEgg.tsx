@@ -23,7 +23,7 @@ export function useEasterEgg() {
     if (!showEasterEgg) return null
 
     return (
-      <div className="fixed inset-0 pointer-events-none z-50">
+      <div className="fixed inset-0 pointer-events-none z-50 w-full">
         {[...Array(EMOJI_COUNT)].map((_, index) => (
           <div
             key={index}
@@ -32,7 +32,8 @@ export function useEasterEgg() {
               left: `${Math.random() * 100}%`,
               animationDuration: `${Math.random() * 5 + 1}s`,
               animationDelay: `${Math.random() * 2}s`,
-              transform: `rotate(-45deg)`,
+              transform: `rotate(-45deg) scale(${0.5 + Math.random() * 4.5})`,
+              opacity: "0",
             }}
           >
             🚀
