@@ -5,7 +5,7 @@ const apiKey = process.env.POSTMARK_API_KEY || "";
 const client = new ServerClient(apiKey);
 
 export async function POST(req: NextRequest) {
-    const { reportType, issue, siteName } = await req.json();
+    const { reportType, issue, siteName, contactInfo } = await req.json();
 
     try {
         await client.sendEmailWithTemplate({
@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
             "TemplateModel": {
                 "reportType": reportType,
                 "siteName": siteName,
-                "issue": issue
+                "issue": issue,
+                "contactInfo": contactInfo
             }
         });
         return NextResponse.json({ message: 'Issue reported successfully!' }, { status: 200 });
