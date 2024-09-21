@@ -9,6 +9,25 @@ import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { AlertCircle, MessageSquare, Send, SquarePlus, Blocks, Loader2 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation'
 
+const reportTypeInfo = {
+    issue: {
+        label: 'Describe the issue:',
+        contactMessage: 'If you provide your email or contact information, we can get back to you once the issue is resolved.'
+    },
+    feedback: {
+        label: 'Provide your feedback:',
+        contactMessage: 'If you provide your email or contact information, we can follow up with you regarding your feedback.'
+    },
+    feature: {
+        label: 'Describe the feature request:',
+        contactMessage: 'If you provide your email or contact information, we can update you on the status of your feature request.'
+    },
+    contribute: {
+        label: 'How would you like to contribute?',
+        contactMessage: 'If you provide your email or contact information, we can reach out to discuss your contribution further.'
+    }
+};
+
 export default function ReportIssue() {
     const searchParams = useSearchParams()
     const [reportType, setReportType] = useState<string>('issue');
@@ -115,10 +134,7 @@ export default function ReportIssue() {
                         </div>
                         <div className="space-y-1">
                             <label htmlFor="issue" className="block text-sm font-bold text-primary">
-                                {reportType === 'issue' && 'Describe the issue:'}
-                                {reportType === 'feedback' && 'Provide your feedback:'}
-                                {reportType === 'feature' && 'Describe the feature request:'}
-                                {reportType === 'contribute' && 'How would you like to contribute?'}
+                                {reportTypeInfo[reportType as keyof typeof reportTypeInfo]?.label || 'Please provide details:'}
                             </label>
                             <Textarea
                                 id="issue"
@@ -145,10 +161,7 @@ export default function ReportIssue() {
                                 className='text-primary'
                             />
                             <p className="text-sm text-muted-foreground mt-1">
-                                {reportType === 'issue' && 'If you provide your email or contact information, we can get back to you once the issue is resolved.'}
-                                {reportType === 'feedback' && 'If you provide your email or contact information, we can follow up with you regarding your feedback.'}
-                                {reportType === 'feature' && 'If you provide your email or contact information, we can update you on the status of your feature request.'}
-                                {reportType === 'contribute' && 'If you provide your email or contact information, we can reach out to discuss your contribution further.'}
+                                {reportTypeInfo[reportType as keyof typeof reportTypeInfo]?.contactMessage || 'If you provide your email or contact information, we can follow up with you.'}
                             </p>
                         </div>
                         <Button type="submit" className="w-full" disabled={isLoading}>
