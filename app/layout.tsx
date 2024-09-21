@@ -52,14 +52,14 @@ export default function RootLayout({
           <meta property="og:title" content="CareerPages.dev - Simplifying Your Job Search" />
           <meta property="og:description" content="CareerPages.dev is designed to empower students and job seekers with tools to find their next opportunity fast. Discover company blogs, search news, and more." />
           <meta property="og:url" content="https://careerpages.dev/" />
-          <meta property="og:image" content="https://careerpages.dev/logo.png" /> {/* Correct image URL */}
+          <meta property="og:image" content="https://careerpages.dev/social.png" /> 
           <meta property="og:type" content="website" />
 
           {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content="CareerPages.dev - Simplifying Your Job Search" />
           <meta name="twitter:description" content="Discover CareerPages.dev, the fast and efficient platform that helps students and job seekers find the right opportunity. Check out company blogs, news, and more." />
-          <meta name="twitter:image" content="https://careerpages.dev/logo.png" /> {/* Correct image URL */}
+          <meta name="twitter:image" content="https://careerpages.dev/social.png" /> {/* Correct image URL */}
           
           {/* Robots.txt (Meta Tag) */}
           <meta name="robots" content="index, follow" />
