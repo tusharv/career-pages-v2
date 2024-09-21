@@ -10,7 +10,7 @@ export function Header(){
               <Image
                 width={36}
                 height={36}
-                src='/career.svg'
+                src='/logo.svg'
                 alt='Career Pages Logo'
                 priority
               />
