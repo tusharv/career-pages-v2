@@ -145,7 +145,10 @@ export default function ReportIssue() {
                                 className='text-primary'
                             />
                             <p className="text-sm text-muted-foreground mt-1">
-                                If you provide your email or contact information, we can get back to you once the {reportType} is resolved.
+                                {reportType === 'issue' && 'If you provide your email or contact information, we can get back to you once the issue is resolved.'}
+                                {reportType === 'feedback' && 'If you provide your email or contact information, we can follow up with you regarding your feedback.'}
+                                {reportType === 'feature' && 'If you provide your email or contact information, we can update you on the status of your feature request.'}
+                                {reportType === 'contribute' && 'If you provide your email or contact information, we can reach out to discuss your contribution further.'}
                             </p>
                         </div>
                         <Button type="submit" className="w-full" disabled={isLoading}>
