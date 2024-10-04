@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   description: "Discover CareerPages.dev — a fast and intuitive platform designed to simplify job searches for students and job seekers. Explore company engineering blogs, stay updated with company news, understand organizational structures, and effortlessly share job leads.",
   keywords: "job search, student jobs, career development, engineering blogs, company news, job insights, organizational structure, job opportunities, fast job search platform, job search tools, interview prep, job sharing, hacktoberfest, web dev, careerpages, job seekers",
   authors: [{ name: "CareerPages.dev" }],
-  viewport: "width=device-width, initial-scale=1.0",
   openGraph: {
     title: "CareerPages.dev - Simplifying Your Job Search",
     description: "CareerPages.dev is designed to empower students and job seekers with tools to find their next opportunity fast. Discover company blogs, search news, and more.",
@@ -46,6 +45,12 @@ export const metadata: Metadata = {
     canonical: "https://careerpages.dev/",
   },
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export default function RootLayout({
   children,

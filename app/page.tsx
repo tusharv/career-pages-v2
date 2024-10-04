@@ -50,6 +50,10 @@ export default function Home() {
   const companiesPerPage = 12
   const { toast } = useToast()
 
+  const EASTER_EGG_COMPANIES = useMemo(() => 
+    process.env.NEXT_PUBLIC_EASTER_EGG_COMPANIES?.split(",") ?? []
+  , []);
+
   const [showSuggestions, setShowSuggestions] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -114,6 +118,12 @@ export default function Home() {
       .slice(0, 10)
       .map((company: Company) => company.name)
   }, [filteredCompanies, searchTerm])
+
+  const isEasterEggCompany = useMemo(() => {
+    return (company: Company) => EASTER_EGG_COMPANIES.some(name => 
+      company.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }, [EASTER_EGG_COMPANIES]);
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -193,7 +203,7 @@ export default function Home() {
                     key={company.id} 
                     className='shadow-sm transition-shadow duration-300 hover:shadow-md'
                     onClick={() => {
-                      if (company.name.toLowerCase().includes('proximity')) {
+                      if (isEasterEggCompany(company)) {
                         triggerEasterEgg()
                       }
                     }}
