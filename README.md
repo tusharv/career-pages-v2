@@ -1,4 +1,4 @@
-# Openings
+# Career Pages V2
 [@Kaustubh-Natuskar](https://github.com/Kaustubh-Natuskar) has build repo at https://github.com/Kaustubh-Natuskar/companies-to-apply
 
 This repo has good, alphabetically sorted list of companies with link of their career page.
@@ -21,9 +21,6 @@ This repo has good, alphabetically sorted list of companies with link of their c
 
 ## Why?
 This page will help students / job seekers to find list of companies at one place.
-
-
-This is a [Next.js](https://nextjs.org/) + [Gluestack-ui](https://ui.gluestack.io/) project template bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
