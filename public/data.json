@@ -1943,6 +1943,10 @@
     "name": "Peerlist",
     "url": "https://peerlist.io/company/peerlist/careers",
     "blog": "https://peerlist.io/blog"
+  },
+  {
+    "name": "new company",
+    "url": "https://www.new-company-site.com/in/careers",
+    "blog": "https://www.new-company-site.com/in/blog"
   }
-
 ]
