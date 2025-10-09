@@ -30,11 +30,11 @@ Please make sure you've done these before submitting:
 
 ```json
 {
-  "name": "Acme Corp",
-  "slug": "acme-corp",
-  "url": "https://acme.com/careers",
-  "locations": ["Remote"],
-  "logo": "acme-corp.webp"
+  "name": "new company",
+  "url": "https://www.new-company-site.com/in/careers",
+  "blog": "https://www.new-company-site.com/in/blog"
 }
 ```
+
+Note: The `blog` field is optional.
 
