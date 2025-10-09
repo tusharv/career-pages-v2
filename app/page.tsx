@@ -61,7 +61,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_START' })
-    fetch('/data-minify.json')
+    fetch('/data.json')
       .then(response => response.json())
       .then(data => {
         const sortedData = data
