@@ -120,6 +120,12 @@ export default function Home() {
     );
   }, [companies, searchTerm]);
 
+  const savedCompanies = useMemo(() => {
+    return companies.filter((company: Company) => 
+      savedJobs.includes(String(company.id))
+    );
+  }, [companies, savedJobs]);
+
   const throttledSetSearchTerm = _.throttle(setSearchTerm, 300);
 
   const handleInputChange = useCallback((value: string) => {
@@ -136,11 +142,25 @@ export default function Home() {
     inputRef.current?.focus();
   }, [router]);
 
-  const indexOfLastCompany = searchTerm.length === 0 ? currentPage * companiesPerPage : companies.length -1;
-  const indexOfFirstCompany = searchTerm.length === 0 ? indexOfLastCompany - companiesPerPage : 0;
-  const currentCompanies = filteredCompanies.slice(indexOfFirstCompany, indexOfLastCompany);
+  const totalPages = useMemo(() => {
+    if (viewMode === 'saved') {
+      return Math.ceil(savedCompanies.length / companiesPerPage);
+    }
+    return Math.ceil(filteredCompanies.length / companiesPerPage);
+  }, [viewMode, savedCompanies, filteredCompanies, companiesPerPage]);
 
-  const totalPages = Math.ceil(filteredCompanies.length / companiesPerPage)
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, totalPages]);
+  
+  const currentDisplayedCompanies = useMemo(() => {
+    const listToPaginate = viewMode === 'saved' ? savedCompanies : filteredCompanies;
+    const indexOfLast = currentPage * companiesPerPage;
+    const indexOfFirst = indexOfLast - companiesPerPage;
+    return listToPaginate.slice(indexOfFirst, indexOfLast);
+  }, [viewMode, savedCompanies, filteredCompanies, currentPage, companiesPerPage]);
 
   const suggestions = useMemo(() => {
     if (searchTerm.length === 0) return []
@@ -166,11 +186,6 @@ export default function Home() {
     }
     setSavedJobs(getSavedJobs());
   };
-
-  const savedCompanies = useMemo(() => {
-    return companies.filter(company => savedJobs.includes(String(company.id)));
-  }, [companies, savedJobs]);
-
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header/>
@@ -239,10 +254,7 @@ export default function Home() {
         )}
 
         {!loading && !error && (
-          <>
-            {/* Company Listings */}
-            <div className="container mx-auto px-4 py-8">
-            {/* View Mode Toggle and Title */}
+          <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-3xl font-bold">Companies</h3>
               <Button
@@ -252,154 +264,159 @@ export default function Home() {
                 {viewMode === 'all' ? 'View Saved' : 'View All Companies'}
               </Button>
             </div>
+            {viewMode === 'saved' && savedCompanies.length === 0 ? (
+              <div className="text-center py-10">
+                <h4 className="text-xl font-semibold">No Saved Companies Yet</h4>
+                <p className="text-muted-foreground mt-2">Click the bookmark icon on a company to save it here.</p>
+              </div>
+            ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {(viewMode === 'all' ? currentCompanies : savedCompanies).map((company: Company) => {
-
-                  const isSaved = savedJobs.includes(String(company.id));
-                  let buttonIcon;
-                  let buttonText;
-                  if(isSaved){
-                    buttonIcon = <BookmarkCheck className="w-4 h-4 mr-1" />;
-                    buttonText = 'Saved';
-                  }
-                  else{
-                    buttonIcon = <BookmarkPlus className="w-4 h-4 mr-1" />;
-                    buttonText = 'Save';
-                  }
-
-                  return (
-                    <Card 
-                    key={company.id} 
-                    className='shadow-sm transition-shadow duration-300 hover:shadow-md'
-                    onClick={() => {
-                      if (isEasterEggCompany(company)) {
-                        triggerEasterEgg()
-                      }
-                    }}
-                  >
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <Avatar className="mr-2 rounded-none" style={{ width: "22px", height: "22px" }}>
-                          <AvatarImage
-                            src={`/logo-cache/${new URL(company?.url).hostname}.webp`}
-                            alt={`${company?.name} logo`}
-                          />
-                          <AvatarFallback>
-                            {company?.name?.split(' ').map(word => word[0]).join('').toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        {company?.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <Separator className="mb-4" />
-                    <CardContent>
-                      <div className="flex flex-col gap-2 ">
-                        <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
-                          <Link href={`${company.url}`} className="flex items-center text-primary hover:underline" target='_blank'>
-                            <Briefcase className="w-4 h-4 mr-1" />
-                            Jobs
-                          </Link>
-                          {company.blog && (
-                            <Link href={`${company.blog}`} className="flex items-center text-primary hover:underline"
-                            target='_blank'>
-                              <BookOpen className="w-4 h-4 mr-1" />
-                              Blog
+                  {/* Updated: Mapping over currentDisplayedCompanies */}
+                  {currentDisplayedCompanies.map((company: Company) => {
+                    const isSaved = savedJobs.includes(String(company.id));
+                    let buttonIcon;
+                    let buttonText;
+                    if(isSaved){
+                      buttonIcon = <BookmarkCheck className="w-4 h-4 mr-1" />;
+                      buttonText = 'Saved';
+                    }
+                    else{
+                      buttonIcon = <BookmarkPlus className="w-4 h-4 mr-1" />;
+                      buttonText = 'Save';
+                    }
+                    return (
+                      <Card 
+                      key={company.id} 
+                      className='shadow-sm transition-shadow duration-300 hover:shadow-md'
+                      onClick={() => {
+                        if (isEasterEggCompany(company)) {
+                          triggerEasterEgg()
+                        }
+                      }}
+                    >
+                      <CardHeader>
+                        <CardTitle className="flex items-center">
+                          <Avatar className="mr-2 rounded-none" style={{ width: "22px", height: "22px" }}>
+                            <AvatarImage
+                              src={`/logo-cache/${new URL(company?.url).hostname}.webp`}
+                              alt={`${company?.name} logo`}
+                            />
+                            <AvatarFallback>
+                              {company?.name?.split(' ').map(word => word[0]).join('').toUpperCase()}
+                            </AvatarFallback>
+                          </Avatar>
+                          {company?.name}
+                        </CardTitle>
+                      </CardHeader>
+                      <Separator className="mb-4" />
+                      <CardContent>
+                        <div className="flex flex-col gap-2 ">
+                          <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
+                            <Link href={`${company.url}`} className="flex items-center text-primary hover:underline" target='_blank'>
+                              <Briefcase className="w-4 h-4 mr-1" />
+                              Jobs
                             </Link>
-                          )}
-                        </div>
-                        <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
-                          <Link href={`https://www.google.com/search?q=${company.name}`} className="flex items-center text-primary hover:underline" target='_blank'>
-                            <Search className="w-4 h-4 mr-1" />
-                            Search
-                          </Link>
-                          <Link href={`https://news.google.com/search?q=${company.name}`} className="flex items-center text-primary hover:underline" target='_blank'>
-                            <Newspaper className="w-4 h-4 mr-1" />
-                            News
-                          </Link>
-                          <Link href={`https://google.com/search?q=site:theorg.com ${company.name}&btnI=I`} className="flex items-center text-primary hover:underline" target='_blank'>
-                            <Handshake className="w-4 h-4 mr-1" />
-                            People <sup className='hover:no-underline'>[βeta]</sup>
-                          </Link>
-                        </div>
-                        <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
-                          <Button
-                            onClick={() => {
-                              const shareUrl = `${window.location.protocol || 'http:'}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}?search=${encodeURIComponent(company.name)}`;
-                              navigator.clipboard.writeText(shareUrl).then(() => {
-                                toast({
-                                  title: "Link copied! 🎉",
-                                  description: `The share link 🔗 ${shareUrl} has been copied to your clipboard.`,
-                                  style: {
-                                    background: "var(--background)",
-                                    color: "var(--foreground)",
-                                  },
+                            {company.blog && (
+                              <Link href={`${company.blog}`} className="flex items-center text-primary hover:underline"
+                              target='_blank'>
+                                <BookOpen className="w-4 h-4 mr-1" />
+                                Blog
+                              </Link>
+                            )}
+                          </div>
+                          <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
+                            <Link href={`https://www.google.com/search?q=${company.name}`} className="flex items-center text-primary hover:underline" target='_blank'>
+                              <Search className="w-4 h-4 mr-1" />
+                              Search
+                            </Link>
+                            <Link href={`https://news.google.com/search?q=${company.name}`} className="flex items-center text-primary hover:underline" target='_blank'>
+                              <Newspaper className="w-4 h-4 mr-1" />
+                              News
+                            </Link>
+                            <Link href={`https://google.com/search?q=site:theorg.com ${company.name}&btnI=I`} className="flex items-center text-primary hover:underline" target='_blank'>
+                              <Handshake className="w-4 h-4 mr-1" />
+                              People <sup className='hover:no-underline'>[βeta]</sup>
+                            </Link>
+                          </div>
+                          <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
+                            <Button
+                              onClick={() => {
+                                const shareUrl = `${window.location.protocol || 'http:'}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}?search=${encodeURIComponent(company.name)}`;
+                                navigator.clipboard.writeText(shareUrl).then(() => {
+                                  toast({
+                                    title: "Link copied! 🎉",
+                                    description: `The share link 🔗 ${shareUrl} has been copied to your clipboard.`,
+                                    style: {
+                                      background: "var(--background)",
+                                      color: "var(--foreground)",
+                                    },
+                                  });
                                 });
-                              });
-                            }}
-                            variant="link"
-                            className="flex items-center text-primary hover:underline p-0 h-auto sm:justify-start justify-start"
-                          >
-                            <Share2 className="w-4 h-4 mr-1" />
-                            Share
-                          </Button>
-                          <Button
-                            variant="link"
-                            onClick={(e) => {
-                              e.stopPropagation(); // This stops the whole card from being clicked
-                              if (company.id) handleSaveToggle(company.id);
-                            }}
-                            className="flex items-center text-primary hover:underline p-0 h-auto">
-                            {buttonIcon}
-                            {buttonText}
-                          </Button>
-                          <Link href={`/report?sitename=${encodeURIComponent(company.name)}`} className="flex items-center text-primary hover:underline" target='_blank'>
-                            <Bug className="w-4 h-4 mr-1" />
-                            Report Issue
-                          </Link>
+                              }}
+                              variant="link"
+                              className="flex items-center text-primary hover:underline p-0 h-auto sm:justify-start justify-start"
+                            >
+                              <Share2 className="w-4 h-4 mr-1" />
+                              Share
+                            </Button>
+                            <Button
+                              variant="link"
+                              onClick={(e) => {
+                                e.stopPropagation(); // This stops the whole card from being clicked
+                                if (company.id) handleSaveToggle(company.id);
+                              }}
+                              className="flex items-center text-primary hover:underline p-0 h-auto">
+                              {buttonIcon}
+                              {buttonText}
+                            </Button>
+                            <Link href={`/report?sitename=${encodeURIComponent(company.name)}`} className="flex items-center text-primary hover:underline" target='_blank'>
+                              <Bug className="w-4 h-4 mr-1" />
+                              Report Issue
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  )
-                })}
-              </div>
-
-              {/* Pagination */}
-              <div className="flex justify-center mt-8 space-x-2">
-                <Button 
-                  onClick={() => setCurrentPage(1)}
-                  disabled={currentPage === 1}
-                  aria-label='First Page'
-                >
-                  <ChevronsLeft className="w-4 h-4 mr-2" />
-                </Button>
-                <Button 
-                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                  aria-label='Previous Page'
-                >
-                  <ChevronLeft className="w-4 h-4 mr-2" />
-                </Button>
-                {searchTerm.length === 0 &&(
-                  <Button aria-label='Count' className='pointer-events-none'><strong>{currentPage}</strong>&nbsp;of&nbsp;<strong>{totalPages}</strong></Button>
+                      </CardContent>
+                    </Card>
+                    )
+                  })}
+                </div>
                 )}
-                <Button 
-                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                  aria-label='Next Page'
-                >
-                  <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
-                <Button 
-                  onClick={() => setCurrentPage(totalPages)}
-                  disabled={currentPage === totalPages}
-                  aria-label='Last Page'
-                >
-                  <ChevronsRight className="w-4 h-4 ml-2" />
-                </Button>
-              </div>
-            </div>
-          </>
+                {totalPages > 1 && (
+                        <div className="flex justify-center mt-8 space-x-2">
+                          <Button 
+                            onClick={() => setCurrentPage(1)}
+                            disabled={currentPage === 1}
+                            aria-label='First Page'
+                          >
+                            <ChevronsLeft className="w-4 h-4 mr-2" />
+                          </Button>
+                          <Button 
+                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                            aria-label='Previous Page'
+                          >
+                            <ChevronLeft className="w-4 h-4 mr-2" />
+                          </Button>
+                          <Button aria-label='Count' className='pointer-events-none'>
+                            <strong>{currentPage}</strong>&nbsp;of&nbsp;<strong>{totalPages}</strong>
+                          </Button>
+                          <Button 
+                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                            aria-label='Next Page'
+                          >
+                            <ChevronRight className="w-4 h-4 ml-2" />
+                          </Button>
+                          <Button 
+                            onClick={() => setCurrentPage(totalPages)}
+                            disabled={currentPage === totalPages}
+                            aria-label='Last Page'
+                          >
+                            <ChevronsRight className="w-4 h-4 ml-2" />
+                          </Button>
+                        </div>
+                )}
+          </div>
         )}
       </main>
 
