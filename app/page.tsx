@@ -86,6 +86,7 @@ export default function Home() {
 
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
+  const [viewMode, setViewMode] = useState('all');
 
   useEffect(() => {
     setSavedJobs(getSavedJobs());
@@ -166,6 +167,10 @@ export default function Home() {
     setSavedJobs(getSavedJobs());
   };
 
+  const savedCompanies = useMemo(() => {
+    return companies.filter(company => savedJobs.includes(String(company.id)));
+  }, [companies, savedJobs]);
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header/>
@@ -237,9 +242,18 @@ export default function Home() {
           <>
             {/* Company Listings */}
             <div className="container mx-auto px-4 py-8">
-              <h3 className="text-3xl font-bold mb-6">Companies</h3>
+            {/* View Mode Toggle and Title */}
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-3xl font-bold">Companies</h3>
+              <Button
+                variant="outline"
+                onClick={() => setViewMode(viewMode === 'all' ? 'saved' : 'all')}
+              >
+                {viewMode === 'all' ? 'View Saved' : 'View All Companies'}
+              </Button>
+            </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {currentCompanies.map((company: Company) => {
+                {(viewMode === 'all' ? currentCompanies : savedCompanies).map((company: Company) => {
 
                   const isSaved = savedJobs.includes(String(company.id));
                   let buttonIcon;
