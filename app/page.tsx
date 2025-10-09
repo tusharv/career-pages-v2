@@ -23,7 +23,9 @@ import {
   Handshake,
   CircleX,
   Share2,
-  Bug
+  Bug,
+  BookmarkPlus,
+  BookmarkCheck
 } from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
@@ -40,6 +42,31 @@ interface Company {
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useToast } from "@/hooks/use-toast"
+
+const SAVED_JOBS_KEY = 'careerPages.savedJobs';
+
+function getSavedJobs(): string[] {
+  const savedJobsJSON = localStorage.getItem(SAVED_JOBS_KEY);
+  return savedJobsJSON ? JSON.parse(savedJobsJSON) : [];
+}
+
+function setSavedJobs(savedJobs: string[]): void {
+  localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(savedJobs));
+}
+
+function saveJob(jobId: string): void {
+  const savedJobs = getSavedJobs();
+  if (!savedJobs.includes(jobId)) {
+    savedJobs.push(jobId);
+    setSavedJobs(savedJobs);
+  }
+}
+
+function removeJob(jobId: string): void {
+  let savedJobs = getSavedJobs();
+  savedJobs = savedJobs.filter(id => id !== jobId);
+  setSavedJobs(savedJobs);
+}
 
 export default function Home() {
   const router = useRouter()
@@ -58,8 +85,10 @@ export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
+  const [savedJobs, setSavedJobs] = useState<string[]>([]);
 
   useEffect(() => {
+    setSavedJobs(getSavedJobs());
     dispatch({ type: 'FETCH_START' })
     fetch('/data.json')
       .then(response => response.json())
@@ -124,6 +153,18 @@ export default function Home() {
       company.name.toLowerCase().includes(name.toLowerCase())
     );
   }, [EASTER_EGG_COMPANIES]);
+
+  const handleSaveToggle = (companyId: number) => {
+    const companyIdStr = String(companyId);
+    const isSaved = savedJobs.includes(companyIdStr);
+
+    if (isSaved) {
+      removeJob(companyIdStr);
+    } else {
+      saveJob(companyIdStr);
+    }
+    setSavedJobs(getSavedJobs());
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -198,8 +239,22 @@ export default function Home() {
             <div className="container mx-auto px-4 py-8">
               <h3 className="text-3xl font-bold mb-6">Companies</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {currentCompanies.map((company: Company) => (
-                  <Card 
+                {currentCompanies.map((company: Company) => {
+
+                  const isSaved = savedJobs.includes(String(company.id));
+                  let buttonIcon;
+                  let buttonText;
+                  if(isSaved){
+                    buttonIcon = <BookmarkCheck className="w-4 h-4 mr-1" />;
+                    buttonText = 'Saved';
+                  }
+                  else{
+                    buttonIcon = <BookmarkPlus className="w-4 h-4 mr-1" />;
+                    buttonText = 'Save';
+                  }
+
+                  return (
+                    <Card 
                     key={company.id} 
                     className='shadow-sm transition-shadow duration-300 hover:shadow-md'
                     onClick={() => {
@@ -273,6 +328,16 @@ export default function Home() {
                             <Share2 className="w-4 h-4 mr-1" />
                             Share
                           </Button>
+                          <Button
+                            variant="link"
+                            onClick={(e) => {
+                              e.stopPropagation(); // This stops the whole card from being clicked
+                              if (company.id) handleSaveToggle(company.id);
+                            }}
+                            className="flex items-center text-primary hover:underline p-0 h-auto">
+                            {buttonIcon}
+                            {buttonText}
+                          </Button>
                           <Link href={`/report?sitename=${encodeURIComponent(company.name)}`} className="flex items-center text-primary hover:underline" target='_blank'>
                             <Bug className="w-4 h-4 mr-1" />
                             Report Issue
@@ -281,7 +346,8 @@ export default function Home() {
                       </div>
                     </CardContent>
                   </Card>
-                ))}
+                  )
+                })}
               </div>
 
               {/* Pagination */}
