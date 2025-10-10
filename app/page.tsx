@@ -45,27 +45,27 @@ import { useToast } from "@/hooks/use-toast"
 
 const SAVED_JOBS_KEY = 'careerPages.savedJobs';
 
-function getSavedJobs(): string[] {
-  const savedJobsJSON = localStorage.getItem(SAVED_JOBS_KEY);
-  return savedJobsJSON ? JSON.parse(savedJobsJSON) : [];
+// LocalStorage helpers (URL-based keys)
+function getSavedKeys(): string[] {
+  const savedJSON = localStorage.getItem(SAVED_JOBS_KEY);
+  return savedJSON ? JSON.parse(savedJSON) : [];
 }
 
-function setSavedJobs(savedJobs: string[]): void {
-  localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(savedJobs));
+function setSavedKeys(keys: string[]): void {
+  localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(keys));
 }
 
-function saveJob(jobId: string): void {
-  const savedJobs = getSavedJobs();
-  if (!savedJobs.includes(jobId)) {
-    savedJobs.push(jobId);
-    setSavedJobs(savedJobs);
+function addSavedKey(key: string): void {
+  const keys = getSavedKeys();
+  if (!keys.includes(key)) {
+    keys.push(key);
+    setSavedKeys(keys);
   }
 }
 
-function removeJob(jobId: string): void {
-  let savedJobs = getSavedJobs();
-  savedJobs = savedJobs.filter(id => id !== jobId);
-  setSavedJobs(savedJobs);
+function removeSavedKey(key: string): void {
+  const keys = getSavedKeys().filter(k => k !== key);
+  setSavedKeys(keys);
 }
 
 export default function Home() {
@@ -89,7 +89,8 @@ export default function Home() {
   const [viewMode, setViewMode] = useState('all');
 
   useEffect(() => {
-    setSavedJobs(getSavedJobs());
+    // Initialize saved from storage
+    setSavedJobs(getSavedKeys());
     dispatch({ type: 'FETCH_START' })
     fetch('/data.json')
       .then(response => response.json())
@@ -108,6 +109,36 @@ export default function Home() {
       })
   }, [dispatch])
 
+  // One-time migration: legacy numeric IDs -> stable URL keys
+  useEffect(() => {
+    if (!companies || companies.length === 0) return;
+    const stored = getSavedKeys();
+    // Legacy entries are non-URL (no http prefix)
+    const hasLegacy = stored.some(v => typeof v === 'string' && !v.startsWith('http'));
+    if (!hasLegacy) return;
+
+    const idToUrl = new Map<string, string>();
+    companies.forEach((c: Company) => {
+      if (c.id != null && c.url) {
+        idToUrl.set(String(c.id), c.url);
+      }
+    });
+
+    const migratedSet = new Set<string>();
+    stored.forEach((v: string) => {
+      if (v && v.startsWith('http')) {
+        migratedSet.add(v);
+      } else {
+        const mapped = idToUrl.get(String(v));
+        if (mapped) migratedSet.add(mapped);
+      }
+    });
+
+    const migrated = Array.from(migratedSet);
+    setSavedKeys(migrated);
+    setSavedJobs(migrated);
+  }, [companies]);
+
   const handleClearSearch = useCallback(() => {
     setSearchTerm('');
     router.push('/', { scroll: false });
@@ -121,8 +152,9 @@ export default function Home() {
   }, [companies, searchTerm]);
 
   const savedCompanies = useMemo(() => {
+    const savedSet = new Set(savedJobs);
     return companies.filter((company: Company) => 
-      savedJobs.includes(String(company.id))
+      savedSet.has(company.url) || savedSet.has(String(company.id)) // include legacy IDs just in case
     );
   }, [companies, savedJobs]);
 
@@ -175,16 +207,20 @@ export default function Home() {
     );
   }, [EASTER_EGG_COMPANIES]);
 
-  const handleSaveToggle = (companyId: number) => {
-    const companyIdStr = String(companyId);
-    const isSaved = savedJobs.includes(companyIdStr);
+  const handleSaveToggle = (company: Company) => {
+    const keyUrl = company.url;
+    const legacyId = company.id != null ? String(company.id) : null;
+    const current = getSavedKeys();
+    const hasNew = current.includes(keyUrl);
+    const hasLegacy = legacyId ? current.includes(legacyId) : false;
 
-    if (isSaved) {
-      removeJob(companyIdStr);
+    if (hasNew) {
+      removeSavedKey(keyUrl);
     } else {
-      saveJob(companyIdStr);
+      addSavedKey(keyUrl);
+      if (hasLegacy && legacyId) removeSavedKey(legacyId);
     }
-    setSavedJobs(getSavedJobs());
+    setSavedJobs(getSavedKeys());
   };
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -280,7 +316,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {/* Updated: Mapping over currentDisplayedCompanies */}
                   {currentDisplayedCompanies.map((company: Company) => {
-                    const isSaved = savedJobs.includes(String(company.id));
+                    const isSaved = savedJobs.includes(company.url) || savedJobs.includes(String(company.id));
                     let buttonIcon;
                     let buttonText;
                     if(isSaved){
@@ -293,7 +329,7 @@ export default function Home() {
                     }
                     return (
                       <Card 
-                      key={company.id} 
+                      key={company.url} 
                       className='shadow-sm transition-shadow duration-300 hover:shadow-md'
                       onClick={() => {
                         if (isEasterEggCompany(company)) {
@@ -370,13 +406,13 @@ export default function Home() {
                               variant="link"
                               onClick={(e) => {
                                 e.stopPropagation(); // This stops the whole card from being clicked
-                                if (company.id) handleSaveToggle(company.id);
+                                handleSaveToggle(company);
                               }}
                               className="flex items-center text-primary hover:underline p-0 h-auto">
                               {buttonIcon}
                               {buttonText}
                             </Button>
-                            <Link href={`/report?sitename=${encodeURIComponent(company.name)}`} className="flex items-center text-primary hover:underline" target='_blank'>
+                            <Link href={`https://github.com/tusharv/career-pages-v2/issues/new?template=bug_report.yml&&title=bug:${encodeURIComponent(company.name)}`} className="flex items-center text-primary hover:underline" target='_blank'>
                               <Bug className="w-4 h-4 mr-1" />
                               Report Issue
                             </Link>
