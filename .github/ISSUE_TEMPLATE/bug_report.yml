@@ -1,0 +1,93 @@
+name: "🐞 Bug report"
+description: Report a reproducible problem in the project
+title: "bug: <short description>"
+labels:
+  - bug
+  - needs-triage
+  - help-wanted
+  - hacktoberfest
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out a bug report!
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A concise description of the bug
+      placeholder: e.g., Search results page crashes when typing quickly
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Step-by-step instructions to reproduce the behavior
+      placeholder: |
+        1. Go to ...
+        2. Click on ...
+        3. Scroll to ...
+        4. See error ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      placeholder: What actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or screen recordings
+      description: If applicable, add screenshots to help explain your problem
+      placeholder: Drag and drop to upload
+    validations:
+      required: false
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: Affected browsers
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Other
+  - type: input
+    id: device
+    attributes:
+      label: Device/OS
+      placeholder: e.g., macOS 14.5, Windows 11, iOS 17
+  - type: input
+    id: app_version
+    attributes:
+      label: App/commit/version
+      placeholder: e.g., commit abc123 or v1.2.3
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste any relevant logs or errors. Please redact secrets.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      placeholder: Any other context about the problem
+    validations:
+      required: false
+

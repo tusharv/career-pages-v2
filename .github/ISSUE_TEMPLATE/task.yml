@@ -1,0 +1,41 @@
+name: "🧰 Task"
+description: Track a concrete piece of work
+title: "chore: <short description>"
+labels:
+  - chore
+  - needs-triage
+  - help-wanted
+  - hacktoberfest
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for well-defined tasks that are not bugs or features.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: A concise description of the task
+      placeholder: e.g., Update dependencies and fix lint warnings
+    validations:
+      required: true
+  - type: textarea
+    id: checklist
+    attributes:
+      label: Acceptance criteria / checklist
+      description: List the concrete requirements for completion
+      value: |
+        - [ ] Criteria 1
+        - [ ] Criteria 2
+        - [ ] Criteria 3
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      placeholder: Any relevant context or links
+    validations:
+      required: false
+
