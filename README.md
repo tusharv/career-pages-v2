@@ -1,6 +1,6 @@
 # Career Pages V2
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [@Kaustubh-Natuskar](https://github.com/Kaustubh-Natuskar) has build repo at https://github.com/Kaustubh-Natuskar/companies-to-apply
 
@@ -84,6 +84,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://www.niranjan0.xyz"><img src="https://avatars.githubusercontent.com/u/184276396?v=4?s=100" width="100px;" alt="Niranjan Dangi"/><br /><sub><b>Niranjan Dangi</b></sub></a><br /><a href="https://github.com/tusharv/career-pages-v2/commits?author=NiranjanD0" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tusharv"><img src="https://avatars.githubusercontent.com/u/358703?v=4?s=100" width="100px;" alt="Tushar"/><br /><sub><b>Tushar</b></sub></a><br /><a href="#infra-tusharv" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/tusharv/career-pages-v2/commits?author=tusharv" title="Tests">⚠️</a> <a href="https://github.com/tusharv/career-pages-v2/commits?author=tusharv" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
