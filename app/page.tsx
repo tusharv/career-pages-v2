@@ -258,11 +258,18 @@ export default function Home() {
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-3xl font-bold">Companies</h3>
               <Button
-                variant="outline"
-                onClick={() => setViewMode(viewMode === 'all' ? 'saved' : 'all')}
-              >
-                {viewMode === 'all' ? 'View Saved' : 'View All Companies'}
-              </Button>
+              variant="outline"
+              onClick={() => setViewMode(viewMode === 'all' ? 'saved' : 'all')}
+              className="flex items-center" 
+            >
+              {viewMode === 'all' ? 'View Bookmarks' : 'View All Companies'}
+              {/* Bookmarks Count */}
+              {viewMode === 'all' && savedCompanies.length > 0 && (
+                <span className="ml-2 bg-muted text-muted-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
+                  {savedCompanies.length}
+                </span>
+              )}
+            </Button>
             </div>
             {viewMode === 'saved' && savedCompanies.length === 0 ? (
               <div className="text-center py-10">
@@ -278,11 +285,11 @@ export default function Home() {
                     let buttonText;
                     if(isSaved){
                       buttonIcon = <BookmarkCheck className="w-4 h-4 mr-1" />;
-                      buttonText = 'Saved';
+                      buttonText = 'Bookmarked';
                     }
                     else{
                       buttonIcon = <BookmarkPlus className="w-4 h-4 mr-1" />;
-                      buttonText = 'Save';
+                      buttonText = 'Bookmark';
                     }
                     return (
                       <Card 
