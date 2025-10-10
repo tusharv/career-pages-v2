@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "NiranjanD0",
+      "name": "Niranjan Dangi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184276396?v=4",
+      "profile": "http://www.niranjan0.xyz",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "career-pages-v2",
+  "projectOwner": "tusharv"
+}
