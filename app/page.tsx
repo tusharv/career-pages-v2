@@ -93,7 +93,6 @@ export default function Home() {
   const [showMoveBanner, setShowMoveBanner] = useState(true);
   const [isMac, setIsMac] = useState(false);
   const [isOnNewDomain, setIsOnNewDomain] = useState(false);
-  const [wasDismissed, setWasDismissed] = useState(false);
   const reminderTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -104,7 +103,6 @@ export default function Home() {
       setIsOnNewDomain(/careerpages\.co\.in$/i.test(window.location.hostname));
     }
     const dismissed = localStorage.getItem('careerpages.moveBanner.dismissed') === 'true';
-    setWasDismissed(dismissed);
     if (dismissed) {
       // Briefly show as a reminder for 5 seconds, then hide again
       setShowMoveBanner(true);
@@ -308,7 +306,7 @@ export default function Home() {
                   ) : (
                     <>
                       <p className="font-semibold leading-5">Welcome to CareerPages.co.in 🎉</p>
-                      <p className="text-sm opacity-90">Please update your bookmarks. Tip: Press ⌘D to bookmark.</p>
+                      <p className="text-sm opacity-90">Please update your bookmarks. Tip: Press {isMac ? '⌘' : 'Ctrl'} +D to bookmark.</p>
                     </>
                   )}
                 </div>
