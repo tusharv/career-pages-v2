@@ -25,7 +25,10 @@ import {
   Share2,
   Bug,
   BookmarkPlus,
-  BookmarkCheck
+  BookmarkCheck,
+  Megaphone,
+  ExternalLink,
+  X
 } from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
@@ -87,10 +90,28 @@ export default function Home() {
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState('all');
+  const [showMoveBanner, setShowMoveBanner] = useState(true);
+  const [isMac, setIsMac] = useState(false);
+  const [isOnNewDomain, setIsOnNewDomain] = useState(false);
+  const [wasDismissed, setWasDismissed] = useState(false);
+  const reminderTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Initialize saved from storage
     setSavedJobs(getSavedKeys());
+    setIsMac(typeof window !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform));
+    if (typeof window !== 'undefined') {
+      setIsOnNewDomain(/careerpages\.co\.in$/i.test(window.location.hostname));
+    }
+    const dismissed = localStorage.getItem('careerpages.moveBanner.dismissed') === 'true';
+    setWasDismissed(dismissed);
+    if (dismissed) {
+      // Briefly show as a reminder for 5 seconds, then hide again
+      setShowMoveBanner(true);
+      reminderTimeoutRef.current = window.setTimeout(() => {
+        setShowMoveBanner(false);
+      }, 5000);
+    }
     dispatch({ type: 'FETCH_START' })
     fetch('/data.json')
       .then(response => response.json())
@@ -107,6 +128,11 @@ export default function Home() {
         dispatch({ type: 'FETCH_ERROR', payload: error.message })
         console.error('Error loading companies:', error)
       })
+    return () => {
+      if (reminderTimeoutRef.current) {
+        clearTimeout(reminderTimeoutRef.current)
+      }
+    }
   }, [dispatch])
 
   // One-time migration: legacy numeric IDs -> stable URL keys
@@ -222,11 +248,83 @@ export default function Home() {
     }
     setSavedJobs(getSavedKeys());
   };
+  const dismissMoveBanner = (persist: boolean) => {
+    setShowMoveBanner(false);
+    if (persist) {
+      localStorage.setItem('careerpages.moveBanner.dismissed', 'true');
+    }
+  };
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header/>
 
       <main className="flex-grow">
+        {/* Site Move Notice - improved UI/UX */}
+        {showMoveBanner && (
+          <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-50">
+            <div className="ml-auto max-w-md rounded-xl border border-amber-300 shadow-lg bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-100">
+              <div className="flex items-start gap-3 px-4 py-3 sm:px-4">
+                <Megaphone className="h-5 w-5 mt-0.5 text-amber-600 dark:text-amber-300" />
+                <div className="flex-1">
+                  {!isOnNewDomain ? (
+                    <>
+                      <p className="font-semibold leading-5">
+                        We’re moving to new url{" "}
+                        <Link
+                          href="https://www.careerpages.co.in/"
+                          target="_blank"
+                          className="underline underline-offset-4"
+                        >
+                          CareerPages.co.in
+                        </Link>
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <Link href="https://www.careerpages.co.in/" target="_blank">
+                          <Button size="sm" className="gap-1">
+                            Visit new site
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </Button>
+                        </Link>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="gap-1"
+                          onClick={() => {
+                            navigator.clipboard.writeText('https://www.careerpages.co.in/');
+                            toast({
+                              title: "Copied",
+                              description: "New site URL copied to clipboard.",
+                              style: {
+                                background: "var(--background)",
+                                color: "var(--foreground)",
+                              },
+                            });
+                          }}
+                        >
+                          Copy URL
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p className="font-semibold leading-5">Welcome to CareerPages.co.in 🎉</p>
+                      <p className="text-sm opacity-90">Please update your bookmarks. Tip: Press ⌘D to bookmark.</p>
+                    </>
+                  )}
+                </div>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  aria-label="Dismiss notice"
+                  onClick={() => dismissMoveBanner(true)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Hero Section */}
         <section className="bg-primary text-primary-foreground py-20">
           <div className="container mx-auto px-4 text-center">
