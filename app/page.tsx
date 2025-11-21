@@ -90,7 +90,7 @@ export default function Home() {
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState('all');
-  const [showMoveBanner, setShowMoveBanner] = useState(true);
+  const [showMoveBanner, setShowMoveBanner] = useState(false);
   const [isMac, setIsMac] = useState(false);
   const [isOnNewDomain, setIsOnNewDomain] = useState(false);
   const reminderTimeoutRef = useRef<number | null>(null);
