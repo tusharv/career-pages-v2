@@ -424,7 +424,8 @@ export default function Home() {
                       buttonText = 'Bookmark';
                     }
                     return (
-                      <Card 
+                      <Link key={company.id} href={`/company/${company.name}`}>
+                        <Card 
                       key={company.url} 
                       className='shadow-sm transition-shadow duration-300 hover:shadow-md'
                       onClick={() => {
@@ -516,6 +517,7 @@ export default function Home() {
                         </div>
                       </CardContent>
                     </Card>
+                      </Link>
                     )
                   })}
                 </div>
