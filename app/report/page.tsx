@@ -86,7 +86,7 @@ export default function ReportIssue() {
             </section>
             <div className="flex-grow overflow-auto">
                 <div className="max-w-lg mx-auto my-2 px-4">
-                    <form onSubmit={handleSubmit} className="bg-white p-4 rounded-lg shadow-lg space-y-4">
+                    <form onSubmit={handleSubmit} className="bg-card text-card-foreground p-4 rounded-lg border border-border shadow-lg space-y-4">
                         <div className="space-y-1">
                             <label htmlFor="reportType" className="block text-sm font-bold text-primary mb-2">Report Type:</label>
                             <Select onValueChange={(value) => setReportType(value)} defaultValue={reportType}>
@@ -145,10 +145,10 @@ export default function ReportIssue() {
                                 }}
                                 rows={3}
                                 placeholder={`Please provide details about your ${reportType}`}
-                                className={`text-primary ${issueError ? 'border-red-500' : ''}`}
+                                className={`text-primary ${issueError ? 'border-destructive' : ''}`}
                             />
                             {issueError && (
-                                <p className="text-red-500 text-sm mt-1">{issueError}</p>
+                                <p className="text-destructive text-sm mt-1">{issueError}</p>
                             )}
                         </div>
                         <div className="space-y-1">

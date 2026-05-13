@@ -12,6 +12,9 @@ try {
 const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
+    serverActions: {
+      bodySizeLimit: "3mb",
+    },
   },
   images: {
     remotePatterns: supabaseHostname

@@ -74,7 +74,7 @@ export default async function AdminDashboardPage() {
                   key={c.id}
                   className="group flex flex-col gap-4 px-5 py-5 transition-colors hover:bg-muted/40 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-8 sm:py-5"
                 >
-                  <div className="flex min-w-0 flex-1 gap-4">
+                  <div className="flex min-w-0 flex-1 items-center gap-4">
                     <CompanyLogoMark name={c.name} careersUrl={c.careers_url} />
                     <div className="min-w-0 flex-1 space-y-2">
                       <div>

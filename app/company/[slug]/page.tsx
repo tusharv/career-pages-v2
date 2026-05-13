@@ -65,17 +65,19 @@ export default async function CompanyPage({ params }: PageProps) {
 
         <Card className="shadow-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl">
+            <CardTitle className="flex items-center gap-3 text-2xl">
               {logoSrc ? (
-                <Image
-                  width={28}
-                  height={28}
-                  src={logoSrc}
-                  alt=""
-                  className="rounded-none shrink-0"
-                />
+                <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-card ring-0">
+                  <Image
+                    width={40}
+                    height={40}
+                    src={logoSrc}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                </span>
               ) : null}
-              {company.name}
+              <span className="min-w-0 leading-tight">{company.name}</span>
             </CardTitle>
           </CardHeader>
           <Separator />

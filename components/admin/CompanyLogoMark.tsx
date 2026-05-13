@@ -31,7 +31,7 @@ export function CompanyLogoMark({ name, careersUrl, className, size = "md" }: Pr
   return (
     <Avatar
       className={cn(
-        "shrink-0 rounded-lg border bg-background shadow-sm",
+        "shrink-0 overflow-hidden rounded-lg border-0 bg-card shadow-sm ring-1 ring-border/40",
         sizeClass[size],
         className
       )}
@@ -40,7 +40,7 @@ export function CompanyLogoMark({ name, careersUrl, className, size = "md" }: Pr
         <AvatarImage
           src={logoSrc}
           alt={`${name} logo`}
-          className="object-contain p-1.5"
+          className="object-cover"
         />
       ) : null}
       <AvatarFallback className="rounded-lg bg-muted font-semibold text-muted-foreground">

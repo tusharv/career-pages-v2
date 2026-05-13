@@ -69,7 +69,7 @@ export default function RootLayout({
           `}
       </Script>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <CompaniesProvider>
           {children}

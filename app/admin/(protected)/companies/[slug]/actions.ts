@@ -3,6 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import {
+  COMPANY_LOGOS_BUCKET,
+  getCareersHostname,
+} from "@/lib/company-logo";
 
 async function requireAdminSupabase() {
   const supabase = createSupabaseServerClient();
@@ -146,4 +150,99 @@ export async function deleteOpening(formData: FormData) {
   }
 
   revalidateCompanyPaths(company_slug);
+}
+
+export type UploadCompanyLogoState =
+  | { status: "idle" }
+  | { status: "success" }
+  | { status: "error"; message: string };
+
+export async function uploadCompanyLogo(
+  _prev: UploadCompanyLogoState,
+  formData: FormData
+): Promise<UploadCompanyLogoState> {
+  try {
+    const supabase = await requireAdminSupabase();
+    const slug = String(formData.get("company_slug") ?? "").trim();
+    const file = formData.get("logo");
+
+    if (!slug) {
+      return { status: "error", message: "Missing company." };
+    }
+    if (!file || !(file instanceof File) || file.size === 0) {
+      return { status: "error", message: "Choose an image file." };
+    }
+
+    const maxBytes = 2 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      return { status: "error", message: "File must be 2MB or smaller." };
+    }
+
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowed.includes(file.type)) {
+      return {
+        status: "error",
+        message: "Use a JPEG, PNG, WebP, or GIF image.",
+      };
+    }
+
+    const { data: row, error: loadErr } = await supabase
+      .from("companies")
+      .select("careers_url, slug")
+      .eq("slug", slug)
+      .maybeSingle();
+
+    if (loadErr || !row) {
+      return {
+        status: "error",
+        message: loadErr?.message ?? "Company not found.",
+      };
+    }
+
+    const host = getCareersHostname(row.careers_url);
+    if (!host) {
+      return {
+        status: "error",
+        message:
+          "Careers URL must be a valid URL with a hostname (used as the logo filename).",
+      };
+    }
+
+    const buf = Buffer.from(await file.arrayBuffer());
+    const sharp = (await import("sharp")).default;
+    let webp: Buffer;
+    try {
+      webp = await sharp(buf)
+        .rotate()
+        .resize(512, 512, { fit: "inside", withoutEnlargement: true })
+        .webp({ quality: 88 })
+        .toBuffer();
+    } catch {
+      return {
+        status: "error",
+        message: "Could not process that image. Try a different file.",
+      };
+    }
+
+    const key = `${host}.webp`;
+    const { error: upErr } = await supabase.storage
+      .from(COMPANY_LOGOS_BUCKET)
+      .upload(key, webp, {
+        contentType: "image/webp",
+        upsert: true,
+      });
+
+    if (upErr) {
+      return { status: "error", message: upErr.message };
+    }
+
+    revalidateCompanyPaths(row.slug);
+    return { status: "success" };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "Upload failed.";
+    if (msg === "Unauthorized" || msg === "Forbidden") {
+      throw e;
+    }
+    return { status: "error", message: msg };
+  }
 }

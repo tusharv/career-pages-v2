@@ -20,6 +20,7 @@ import {
   updateCompany,
   updateOpening,
 } from "./actions";
+import { CompanyLogoUploadForm } from "./CompanyLogoUploadForm";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 type PageProps = { params: { slug: string } };
@@ -60,8 +61,8 @@ export default async function AdminCompanyEditPage({ params }: PageProps) {
           </Link>
         </Button>
 
-        <div className="flex flex-col gap-6 border-b border-border/60 pb-8 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex min-w-0 gap-5">
+        <div className="flex flex-col gap-6 border-b border-border/60 pb-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-5">
             <CompanyLogoMark name={row.name} careersUrl={row.careers_url} size="lg" />
             <div className="min-w-0 space-y-2">
               <div className="flex flex-wrap items-center gap-2">
@@ -75,7 +76,7 @@ export default async function AdminCompanyEditPage({ params }: PageProps) {
               </p>
             </div>
           </div>
-          <Button variant="outline" size="sm" asChild className="shrink-0 gap-2 self-start sm:self-auto">
+          <Button variant="outline" size="sm" asChild className="shrink-0 gap-2 self-center sm:self-auto">
             <Link href={`/company/${row.slug}`} target="_blank" rel="noreferrer">
               View public page
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />
@@ -140,6 +141,23 @@ export default async function AdminCompanyEditPage({ params }: PageProps) {
               </Button>
             </div>
           </form>
+
+          <Separator className="my-8" />
+          <div className="mx-auto max-w-2xl space-y-4">
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold leading-none">Company logo</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Images are converted to WebP and stored in the public{" "}
+                <span className="font-mono text-foreground">company-logos</span> bucket.
+                The object key is the{" "}
+                <span className="font-mono text-foreground">hostname</span> from the
+                careers URL plus{" "}
+                <span className="font-mono text-foreground">.webp</span>. If you change the
+                careers URL, save the company first, then upload the logo.
+              </p>
+            </div>
+            <CompanyLogoUploadForm companySlug={row.slug} />
+          </div>
         </CardContent>
       </Card>
 
