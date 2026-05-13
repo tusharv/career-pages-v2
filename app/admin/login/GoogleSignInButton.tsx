@@ -12,7 +12,8 @@ export function GoogleSignInButton() {
     setLoading(true);
     try {
       const supabase = createSupabaseBrowserClient();
-      const origin = window.location.origin;
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+      const origin = siteUrl || window.location.origin;
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
