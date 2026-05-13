@@ -1,0 +1,6 @@
+# Used only by scripts/fetch_openings.py — install with:
+#   pip install -r scripts/requirements-fetch-openings.txt
+beautifulsoup4>=4.12,<5
+python-dotenv>=1.0,<2
+playwright>=1.45,<2
+requests>=2.31,<3

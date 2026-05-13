@@ -12,7 +12,6 @@ import { Footer } from '@/components/Footer'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Loader2,
-  Briefcase,
   BookOpen,
   Search,
   ChevronLeft,
@@ -26,22 +25,13 @@ import {
   Bug,
   BookmarkPlus,
   BookmarkCheck,
-  Megaphone,
   ExternalLink,
-  X
 } from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
 import { useCompanies } from './CompaniesContext'
-
-interface Company {
-  name: string;
-  url: string;
-  blog?: string;
-  id?: number;
-  // Add other known properties here
-  [key: string]: string | number | undefined;
-}
+import type { Company } from './CompaniesContext'
+import { getCompanyLogoSrc } from '@/lib/company-logo'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useToast } from "@/hooks/use-toast"
@@ -90,47 +80,28 @@ export default function Home() {
   const { triggerEasterEgg, EasterEggComponent } = useEasterEgg()
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState('all');
-  const [showMoveBanner, setShowMoveBanner] = useState(true);
-  const [isMac, setIsMac] = useState(false);
-  const [isOnNewDomain, setIsOnNewDomain] = useState(false);
-  const reminderTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Initialize saved from storage
     setSavedJobs(getSavedKeys());
-    setIsMac(typeof window !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform));
-    if (typeof window !== 'undefined') {
-      setIsOnNewDomain(/careerpages\.co\.in$/i.test(window.location.hostname));
-    }
-    const dismissed = localStorage.getItem('careerpages.moveBanner.dismissed') === 'true';
-    if (dismissed) {
-      // Briefly show as a reminder for 5 seconds, then hide again
-      setShowMoveBanner(true);
-      reminderTimeoutRef.current = window.setTimeout(() => {
-        setShowMoveBanner(false);
-      }, 5000);
-    }
     dispatch({ type: 'FETCH_START' })
-    fetch('/data.json')
-      .then(response => response.json())
-      .then(data => {
-        const sortedData = data
-          .sort((a: Company, b: Company) => a.name.localeCompare(b.name))
-          .map((company: Company, index: number) => ({
-            ...company,
-            id: index + 1
-          }));
+    fetch('/api/companies')
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then((body: { error?: string }) => {
+            throw new Error(body.error || `HTTP ${response.status}`)
+          })
+        }
+        return response.json()
+      })
+      .then((data: Company[]) => {
+        const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name))
         dispatch({ type: 'FETCH_SUCCESS', payload: sortedData })
       })
       .catch(error => {
         dispatch({ type: 'FETCH_ERROR', payload: error.message })
         console.error('Error loading companies:', error)
       })
-    return () => {
-      if (reminderTimeoutRef.current) {
-        clearTimeout(reminderTimeoutRef.current)
-      }
-    }
   }, [dispatch])
 
   // One-time migration: legacy numeric IDs -> stable URL keys
@@ -246,83 +217,11 @@ export default function Home() {
     }
     setSavedJobs(getSavedKeys());
   };
-  const dismissMoveBanner = (persist: boolean) => {
-    setShowMoveBanner(false);
-    if (persist) {
-      localStorage.setItem('careerpages.moveBanner.dismissed', 'true');
-    }
-  };
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header/>
 
       <main className="flex-grow">
-        {/* Site Move Notice - improved UI/UX */}
-        {showMoveBanner && (
-          <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-50">
-            <div className="ml-auto max-w-md rounded-xl border border-amber-300 shadow-lg bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-100">
-              <div className="flex items-start gap-3 px-4 py-3 sm:px-4">
-                <Megaphone className="h-5 w-5 mt-0.5 text-amber-600 dark:text-amber-300" />
-                <div className="flex-1">
-                  {!isOnNewDomain ? (
-                    <>
-                      <p className="font-semibold leading-5">
-                        We’re moving to new url{" "}
-                        <Link
-                          href="https://www.careerpages.co.in/"
-                          target="_blank"
-                          className="underline underline-offset-4"
-                        >
-                          CareerPages.co.in
-                        </Link>
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        <Link href="https://www.careerpages.co.in/" target="_blank">
-                          <Button size="sm" className="gap-1">
-                            Visit new site
-                            <ExternalLink className="h-3.5 w-3.5" />
-                          </Button>
-                        </Link>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="gap-1"
-                          onClick={() => {
-                            navigator.clipboard.writeText('https://www.careerpages.co.in/');
-                            toast({
-                              title: "Copied",
-                              description: "New site URL copied to clipboard.",
-                              style: {
-                                background: "var(--background)",
-                                color: "var(--foreground)",
-                              },
-                            });
-                          }}
-                        >
-                          Copy URL
-                        </Button>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <p className="font-semibold leading-5">Welcome to CareerPages.co.in 🎉</p>
-                      <p className="text-sm opacity-90">Please update your bookmarks. Tip: Press {isMac ? '⌘' : 'Ctrl'} +D to bookmark.</p>
-                    </>
-                  )}
-                </div>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  aria-label="Dismiss notice"
-                  onClick={() => dismissMoveBanner(true)}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Hero Section */}
         <section className="bg-primary text-primary-foreground py-20">
           <div className="container mx-auto px-4 text-center">
@@ -412,6 +311,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {/* Updated: Mapping over currentDisplayedCompanies */}
                   {currentDisplayedCompanies.map((company: Company) => {
+                    const logoSrc = getCompanyLogoSrc(company.url);
                     const isSaved = savedJobs.includes(company.url) || savedJobs.includes(String(company.id));
                     let buttonIcon;
                     let buttonText;
@@ -434,17 +334,25 @@ export default function Home() {
                       }}
                     >
                       <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Avatar className="mr-2 rounded-none" style={{ width: "22px", height: "22px" }}>
-                            <AvatarImage
-                              src={`/logo-cache/${new URL(company?.url).hostname}.webp`}
-                              alt={`${company?.name} logo`}
-                            />
-                            <AvatarFallback>
-                              {company?.name?.split(' ').map(word => word[0]).join('').toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                          {company?.name}
+                        <CardTitle className="text-base font-semibold">
+                          <Link
+                            href={`/company/${company.slug}`}
+                            className="flex items-center gap-2 min-w-0 rounded-md -m-1 p-1 hover:underline text-foreground"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Avatar className="shrink-0 rounded-none" style={{ width: "22px", height: "22px" }}>
+                              {logoSrc ? (
+                                <AvatarImage
+                                  src={logoSrc}
+                                  alt={`${company?.name} logo`}
+                                />
+                              ) : null}
+                              <AvatarFallback>
+                                {company?.name?.split(' ').map(word => word[0]).join('').toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
+                            <span className="truncate">{company?.name}</span>
+                          </Link>
                         </CardTitle>
                       </CardHeader>
                       <Separator className="mb-4" />
@@ -452,7 +360,7 @@ export default function Home() {
                         <div className="flex flex-col gap-2 ">
                           <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4'>
                             <Link href={`${company.url}`} className="flex items-center text-primary hover:underline" target='_blank'>
-                              <Briefcase className="w-4 h-4 mr-1" />
+                              <ExternalLink className="w-4 h-4 mr-1" />
                               Jobs
                             </Link>
                             {company.blog && (

@@ -1,13 +1,8 @@
 "use client"
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import type { CompanyListItem } from '@/lib/types/company';
 
-interface Company {
-  name: string;
-  url: string;
-  blog?: string;
-  id?: number;
-  [key: string]: string | number | undefined;
-}
+export type Company = CompanyListItem;
 
 interface CompaniesState {
   companies: Company[];
