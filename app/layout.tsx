@@ -20,29 +20,29 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CareerPages.dev - Simplifying Your Job Search",
-  description: "Discover CareerPages.dev — a fast and intuitive platform designed to simplify job searches for students and job seekers. Explore company engineering blogs, stay updated with company news, understand organizational structures, and effortlessly share job leads.",
+  title: "careerpages.co.in - Simplifying Your Job Search",
+  description: "Discover careerpages.co.in — a fast and intuitive platform designed to simplify job searches for students and job seekers. Explore company engineering blogs, stay updated with company news, understand organizational structures, and effortlessly share job leads.",
   keywords: "job search, student jobs, career development, engineering blogs, company news, job insights, organizational structure, job opportunities, fast job search platform, job search tools, interview prep, job sharing, hacktoberfest, web dev, careerpages, job seekers",
-  authors: [{ name: "CareerPages.dev" }],
+  authors: [{ name: "careerpages.co.in" }],
   openGraph: {
-    title: "CareerPages.dev - Simplifying Your Job Search",
-    description: "CareerPages.dev is designed to empower students and job seekers with tools to find their next opportunity fast. Discover company blogs, search news, and more.",
-    url: "https://careerpages.dev/",
-    images: [{ url: "https://careerpages.dev/social.png" }],
+    title: "careerpages.co.in - Simplifying Your Job Search",
+    description: "careerpages.co.in is designed to empower students and job seekers with tools to find their next opportunity fast. Discover company blogs, search news, and more.",
+    url: "https://careerpages.co.in/",
+    images: [{ url: "https://careerpages.co.in/social.png" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CareerPages.dev - Simplifying Your Job Search",
-    description: "Discover CareerPages.dev, the fast and efficient platform that helps students and job seekers find the right opportunity. Check out company blogs, news, and more.",
-    images: ["https://careerpages.dev/social.png"],
+    title: "careerpages.co.in - Simplifying Your Job Search",
+    description: "Discover careerpages.co.in, the fast and efficient platform that helps students and job seekers find the right opportunity. Check out company blogs, news, and more.",
+    images: ["https://careerpages.co.in/social.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://careerpages.dev/",
+    canonical: "https://careerpages.co.in/",
   },
 };
 
@@ -69,7 +69,7 @@ export default function RootLayout({
           `}
       </Script>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <CompaniesProvider>
           {children}
