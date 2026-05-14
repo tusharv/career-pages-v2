@@ -26,3 +26,13 @@ export interface CompanyListItem {
 export interface CompanyWithOpenings extends CompanyRow {
   openings: OpeningRow[];
 }
+
+/** Paginated list from GET /api/companies or POST /api/companies (saved) */
+export interface CompaniesPageResponse {
+  data: CompanyListItem[];
+  total: number;
+  page: number;
+  pageSize: number;
+  /** Total rows in `companies` (unfiltered); for hero / “in index” copy */
+  indexTotal: number;
+}

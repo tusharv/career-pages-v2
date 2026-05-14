@@ -29,6 +29,7 @@ import { CompanyCardMoreMenu } from '@/components/CompanyCardMoreMenu'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
 import { useCompanies } from './CompaniesContext'
 import type { Company } from './CompaniesContext'
+import type { CompaniesPageResponse } from '@/lib/types/company'
 import { getCompanyLogoSrc } from '@/lib/company-logo'
 import { cn } from '@/lib/utils'
 
@@ -63,10 +64,13 @@ export default function Home() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const {
-    state: { companies, loading, error },
+    state: { companies, total, indexTotal, loading, error },
     dispatch,
   } = useCompanies()
   const [searchTerm, setSearchTerm] = useState(
+    () => searchParams.get('search') || ''
+  )
+  const [debouncedSearch, setDebouncedSearch] = useState(
     () => searchParams.get('search') || ''
   )
   const [currentPage, setCurrentPage] = useState(1)
@@ -89,6 +93,7 @@ export default function Home() {
   const [savedJobs, setSavedJobs] = useState<string[]>([])
   /** While “More” is open, lift this card above siblings so the menu is not covered. */
   const [elevatedCardUrl, setElevatedCardUrl] = useState<string | null>(null)
+  const [suggestionNames, setSuggestionNames] = useState<string[]>([])
 
   const viewMode = searchParams.get('view') === 'saved' ? 'saved' : 'all'
 
@@ -137,7 +142,9 @@ export default function Home() {
       skipNextUrlSync.current = false
       return
     }
-    setSearchTerm(new URLSearchParams(queryKey).get('search') || '')
+    const s = new URLSearchParams(queryKey).get('search') || ''
+    setSearchTerm(s)
+    setDebouncedSearch(s)
   }, [queryKey])
 
   useEffect(() => {
@@ -145,77 +152,165 @@ export default function Home() {
   }, [queryKey])
 
   useEffect(() => {
-    setSavedJobs(getSavedKeys())
-    dispatch({ type: 'FETCH_START' })
-    fetch('/api/companies')
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((body: { error?: string }) => {
-            throw new Error(body.error || `HTTP ${response.status}`)
-          })
-        }
-        return response.json()
-      })
-      .then((data: Company[]) => {
-        const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name))
-        dispatch({ type: 'FETCH_SUCCESS', payload: sortedData })
-      })
-      .catch((err) => {
-        dispatch({ type: 'FETCH_ERROR', payload: err.message })
-        console.error('Error loading companies:', err)
-      })
-  }, [dispatch])
+    const id = window.setTimeout(() => setDebouncedSearch(searchTerm), 300)
+    return () => window.clearTimeout(id)
+  }, [searchTerm])
 
   useEffect(() => {
-    if (!companies || companies.length === 0) return
+    setCurrentPage(1)
+  }, [debouncedSearch])
+
+  useEffect(() => {
+    setSavedJobs(getSavedKeys())
+  }, [])
+
+  useEffect(() => {
     const stored = getSavedKeys()
-    const hasLegacy = stored.some(
-      (v) => typeof v === 'string' && !v.startsWith('http')
-    )
-    if (!hasLegacy) return
-
-    const idToUrl = new Map<string, string>()
-    companies.forEach((c: Company) => {
-      if (c.id != null && c.url) {
-        idToUrl.set(String(c.id), c.url)
-      }
+    if (
+      !stored.some(
+        (v) => typeof v === 'string' && v.length > 0 && !v.startsWith('http')
+      )
+    ) {
+      return
+    }
+    let cancelled = false
+    void fetch('/api/companies', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kind: 'migrate', keys: stored }),
     })
+      .then(async (response) => {
+        const body = (await response.json()) as { keys?: string[]; error?: string }
+        if (!response.ok) {
+          throw new Error(body.error || `HTTP ${response.status}`)
+        }
+        if (!body.keys) throw new Error('Invalid migrate response')
+        return body.keys
+      })
+      .then((keys) => {
+        if (cancelled) return
+        setSavedKeys(keys)
+        setSavedJobs(keys)
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
-    const migratedSet = new Set<string>()
-    stored.forEach((v: string) => {
-      if (v && v.startsWith('http')) {
-        migratedSet.add(v)
-      } else {
-        const mapped = idToUrl.get(String(v))
-        if (mapped) migratedSet.add(mapped)
+  useEffect(() => {
+    const ac = new AbortController()
+    dispatch({ type: 'FETCH_START' })
+
+    const run = async () => {
+      try {
+        if (viewMode === 'saved') {
+          const response = await fetch('/api/companies', {
+            method: 'POST',
+            signal: ac.signal,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              kind: 'saved',
+              page: currentPage,
+              pageSize: companiesPerPage,
+              keys: savedJobs,
+            }),
+          })
+          const body = (await response.json()) as CompaniesPageResponse & {
+            error?: string
+          }
+          if (!response.ok) {
+            throw new Error(body.error || `HTTP ${response.status}`)
+          }
+          dispatch({
+            type: 'FETCH_SUCCESS',
+            payload: {
+              companies: body.data,
+              total: body.total,
+              indexTotal: body.indexTotal,
+            },
+          })
+          return
+        }
+
+        const qs = new URLSearchParams({
+          page: String(currentPage),
+          limit: String(companiesPerPage),
+        })
+        const q = debouncedSearch.trim()
+        if (q) qs.set('q', q)
+        const response = await fetch(`/api/companies?${qs}`, {
+          signal: ac.signal,
+        })
+        const body = (await response.json()) as CompaniesPageResponse & {
+          error?: string
+        }
+        if (!response.ok) {
+          throw new Error(body.error || `HTTP ${response.status}`)
+        }
+        dispatch({
+          type: 'FETCH_SUCCESS',
+          payload: {
+            companies: body.data,
+            total: body.total,
+            indexTotal: body.indexTotal,
+          },
+        })
+      } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') return
+        dispatch({
+          type: 'FETCH_ERROR',
+          payload: err instanceof Error ? err.message : 'Request failed',
+        })
+        console.error('Error loading companies:', err)
       }
-    })
+    }
 
-    const migrated = Array.from(migratedSet)
-    setSavedKeys(migrated)
-    setSavedJobs(migrated)
-  }, [companies])
+    void run()
+    return () => ac.abort()
+  }, [
+    dispatch,
+    viewMode,
+    currentPage,
+    companiesPerPage,
+    debouncedSearch,
+    savedJobs,
+  ])
+
+  useEffect(() => {
+    const t = searchTerm.trim()
+    if (t.length === 0) {
+      setSuggestionNames([])
+      return
+    }
+    const ac = new AbortController()
+    const timeout = window.setTimeout(() => {
+      const qs = new URLSearchParams({ page: '1', limit: '10', q: t })
+      void fetch(`/api/companies?${qs}`, { signal: ac.signal })
+        .then(async (r) => {
+          const body = (await r.json()) as CompaniesPageResponse
+          if (!r.ok || !Array.isArray(body.data)) return
+          if (!ac.signal.aborted) {
+            setSuggestionNames(body.data.map((c) => c.name))
+          }
+        })
+        .catch(() => {
+          if (!ac.signal.aborted) setSuggestionNames([])
+        })
+    }, 200)
+    return () => {
+      ac.abort()
+      window.clearTimeout(timeout)
+    }
+  }, [searchTerm])
 
   const handleClearSearch = useCallback(() => {
     throttledReplaceSearch.cancel()
     setSearchTerm('')
+    setDebouncedSearch('')
     replaceHomeUrl({ search: '' })
     inputRef.current?.focus()
   }, [replaceHomeUrl, throttledReplaceSearch])
-
-  const filteredCompanies = useMemo(() => {
-    return companies.filter((company: { name?: string }) =>
-      company.name?.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  }, [companies, searchTerm])
-
-  const savedCompanies = useMemo(() => {
-    const savedSet = new Set(savedJobs)
-    return companies.filter(
-      (company: Company) =>
-        savedSet.has(company.url) || savedSet.has(String(company.id))
-    )
-  }, [companies, savedJobs])
 
   const handleInputChange = useCallback(
     (value: string) => {
@@ -230,6 +325,7 @@ export default function Home() {
     (suggestion: string) => {
       throttledReplaceSearch.cancel()
       setSearchTerm(suggestion)
+      setDebouncedSearch(suggestion)
       setShowSuggestions(false)
       replaceHomeUrl({ search: suggestion })
       inputRef.current?.focus()
@@ -244,33 +340,16 @@ export default function Home() {
     [replaceHomeUrl]
   )
 
-  const totalPages = useMemo(() => {
-    if (viewMode === 'saved') {
-      return Math.ceil(savedCompanies.length / companiesPerPage)
-    }
-    return Math.ceil(filteredCompanies.length / companiesPerPage)
-  }, [viewMode, savedCompanies, filteredCompanies, companiesPerPage])
+  const totalPages = useMemo(
+    () => (total > 0 ? Math.ceil(total / companiesPerPage) : 0),
+    [total, companiesPerPage]
+  )
 
   useEffect(() => {
-    if (currentPage > totalPages && totalPages > 0) {
+    if (totalPages > 0 && currentPage > totalPages) {
       setCurrentPage(1)
     }
   }, [currentPage, totalPages])
-
-  const currentDisplayedCompanies = useMemo(() => {
-    const listToPaginate =
-      viewMode === 'saved' ? savedCompanies : filteredCompanies
-    const indexOfLast = currentPage * companiesPerPage
-    const indexOfFirst = indexOfLast - companiesPerPage
-    return listToPaginate.slice(indexOfFirst, indexOfLast)
-  }, [viewMode, savedCompanies, filteredCompanies, currentPage, companiesPerPage])
-
-  const suggestions = useMemo(() => {
-    if (searchTerm.length === 0) return []
-    return filteredCompanies
-      .slice(0, 10)
-      .map((company: Company) => company.name)
-  }, [filteredCompanies, searchTerm])
 
   const isEasterEggCompany = useMemo(() => {
     return (company: Company) =>
@@ -314,8 +393,7 @@ export default function Home() {
     [toast]
   )
 
-  const listCount =
-    viewMode === 'saved' ? savedCompanies.length : filteredCompanies.length
+  const listCount = total
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -384,9 +462,9 @@ export default function Home() {
                       </>
                     )}
                   </Button>
-                  {showSuggestions && suggestions.length > 0 && (
+                  {showSuggestions && suggestionNames.length > 0 && (
                     <AutoSuggest
-                      suggestions={suggestions}
+                      suggestions={suggestionNames}
                       onSuggestionClick={handleSuggestionClick}
                       onClose={() => setShowSuggestions(false)}
                     />
@@ -405,7 +483,7 @@ export default function Home() {
                     </p>
                   ) : (
                     <p className="mt-4 text-5xl font-bold tabular-nums tracking-tight text-white">
-                      {companies.length}
+                      {indexTotal}
                     </p>
                   )}
                   <p className="mt-2 text-sm leading-relaxed text-white/75">
@@ -463,9 +541,9 @@ export default function Home() {
                   </TabsTrigger>
                   <TabsTrigger value="saved" className="rounded-lg px-4 gap-2">
                     Saved
-                    {savedCompanies.length > 0 ? (
+                    {savedJobs.length > 0 ? (
                       <span className="rounded-full bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary tabular-nums">
-                        {savedCompanies.length}
+                        {savedJobs.length}
                       </span>
                     ) : null}
                   </TabsTrigger>
@@ -482,10 +560,10 @@ export default function Home() {
                 {listCount}
               </span>{' '}
               {viewMode === 'saved' ? 'saved' : 'matching'} —{' '}
-              <span className="tabular-nums">{companies.length}</span> in index
+              <span className="tabular-nums">{indexTotal}</span> in index
             </p>
 
-            {viewMode === 'saved' && savedCompanies.length === 0 ? (
+            {viewMode === 'saved' && total === 0 ? (
               <div className="mt-12 rounded-2xl border border-dashed border-border bg-muted/20 px-6 py-14 text-center">
                 <h3 className="text-xl font-semibold">No saved companies yet</h3>
                 <p className="mx-auto mt-2 max-w-md text-muted-foreground">
@@ -503,7 +581,7 @@ export default function Home() {
               </div>
             ) : (
               <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
-                {currentDisplayedCompanies.map((company: Company) => {
+                {companies.map((company: Company) => {
                   const logoSrc = getCompanyLogoSrc(company.url)
                   const isSaved =
                     savedJobs.includes(company.url) ||
