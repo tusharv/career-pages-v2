@@ -123,10 +123,6 @@ export default async function CompanyPage({ params }: PageProps) {
                   <h2 className="text-lg font-semibold tracking-tight">
                     Company snapshot
                   </h2>
-                  <p className="text-sm text-muted-foreground">
-                    Curated from public sources; optional fields stay in a fixed
-                    layout so every company reads the same way.
-                  </p>
                 </section>
                 <CompanyMetaSections meta={profile} />
               </>

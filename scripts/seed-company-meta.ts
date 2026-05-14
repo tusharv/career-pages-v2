@@ -3,10 +3,10 @@
  * public slice we can map to a database row by normalized company name.
  *
  * Sources (highest tier wins per row, then file-level fields are merged in):
- * - `companies[]` — full profiles
+ * - `companies[]` — full profiles (optional `seed_match_names` on an entry matches extra DB company names during seed; not written to `company_meta`)
  * - `master_table[]` — short verified rows
- * - `ambiguities[]` — name-resolution notes (matches input_name / selected_match)
- * - `metadata.recovered_name_index` — name list (default ON; adds stubs + file excerpts)
+ * - `ambiguities[]` — used only to match additional company rows by name (no debug copy written to `company_meta`)
+ * - `metadata.recovered_name_index` — name list (default ON; adds minimal stubs; comparative metrics merged when matched)
  * - `metadata.comparative_data` — employee / revenue scale rows + mermaid snippet
  * - `executive_summary`, `limitations_and_methodology` — attached to recovered-name stubs
  *
@@ -87,11 +87,6 @@ function metaPresentLocal(value: string | null | undefined): string | undefined 
   return t;
 }
 
-function truncate(s: string, max: number): string {
-  if (s.length <= max) return s;
-  return `${s.slice(0, Math.max(0, max - 1))}…`;
-}
-
 function masterToProfile(row: MasterTableRow, dbName: string): CompanyMetaProfile {
   const hq = metaPresentLocal(row.hq_location);
   const domain = metaPresentLocal(row.domain_industry);
@@ -103,7 +98,7 @@ function masterToProfile(row: MasterTableRow, dbName: string): CompanyMetaProfil
       ? [
           {
             name: ceo,
-            title: "Chief Executive Officer (from master_table summary; verify on primary sources)",
+            title: "Chief Executive Officer",
           },
         ]
       : undefined;
@@ -123,34 +118,15 @@ function masterToProfile(row: MasterTableRow, dbName: string): CompanyMetaProfil
   };
 }
 
-function ambiguityToProfile(a: AmbiguityRow, dbName: string): CompanyMetaProfile {
-  const matches = (a.possible_matches ?? []).filter(Boolean).join("; ");
-  const selected = metaPresentLocal(a.selected_match);
-  const parts = [
-    a.reason?.trim(),
-    matches ? `Possible matches: ${matches}.` : null,
-    selected ? `Selected match label in source file: ${selected}.` : null,
-  ].filter(Boolean);
+function ambiguityToProfile(_a: AmbiguityRow, dbName: string): CompanyMetaProfile {
   return {
     name: dbName,
-    ambiguity_flag: true,
-    ambiguity_notes: parts.join(" "),
-    ...(selected && norm(selected) !== norm(dbName)
-      ? {
-          about: {
-            core_products_services: `Source file suggests the canonical entity name may be “${selected}”. Verify before relying on this mapping.`,
-          },
-        }
-      : {}),
   };
 }
 
 function nameIndexStub(dbName: string): CompanyMetaProfile {
   return {
     name: dbName,
-    ambiguity_flag: true,
-    ambiguity_notes:
-      "This row was matched from metadata.recovered_name_index in public/company_meta.json. Full citation-ready company objects exist only for a small subset in that export; see “Additional context from project file” below for file-level notes and methodology.",
   };
 }
 
@@ -158,7 +134,7 @@ function enrichProfileFromPublicFile(
   profile: CompanyMetaProfile,
   doc: CompanyMetaFile,
   dbName: string,
-  tier: number
+  _tier: number
 ): CompanyMetaProfile {
   const key = norm(dbName);
   const base: CompanyMetaFileSupplement = { ...(profile.file_supplement ?? {}) };
@@ -189,18 +165,6 @@ function enrichProfileFromPublicFile(
   }
   if (namesWithComparative.has(key) && chart) {
     base.comparative_chart_mermaid = chart;
-  }
-
-  if (tier === TIER_NAME_INDEX) {
-    base.from_recovered_name_index = true;
-    const cov = metaPresentLocal(doc.metadata?.coverage_note);
-    if (cov) base.coverage_note = cov;
-    if (doc.executive_summary?.trim()) {
-      base.executive_summary_excerpt = truncate(doc.executive_summary.trim(), 1400);
-    }
-    if (doc.limitations_and_methodology?.trim()) {
-      base.limitations_excerpt = truncate(doc.limitations_and_methodology.trim(), 1800);
-    }
   }
 
   const empty =
@@ -332,14 +296,30 @@ async function main() {
   let fullHits = 0;
   for (const p of fullProfiles) {
     if (!p?.name?.trim()) continue;
-    const matches = collectIdsByNorm(byNorm, p.name);
-    if (!matches.length) {
-      console.warn(`companies[]: no DB row for "${p.name}"`);
-      continue;
+    const extraNames = Array.isArray((p as CompanyMetaProfile).seed_match_names)
+      ? ((p as CompanyMetaProfile).seed_match_names ?? []).filter(
+          (x): x is string => typeof x === "string" && !!x.trim()
+        )
+      : [];
+    const tryNames = [p.name, ...extraNames];
+    const seenNorm = new Set<string>();
+    const { seed_match_names: _omit, ...profileForDb } = p as CompanyMetaProfile & {
+      seed_match_names?: string[];
+    };
+    for (const tryName of tryNames) {
+      const n = norm(tryName);
+      if (seenNorm.has(n)) continue;
+      seenNorm.add(n);
+      const matches = collectIdsByNorm(byNorm, tryName);
+      if (!matches.length) continue;
+      for (const m of matches) {
+        setIfHigher(pending, m.id, TIER_FULL, { ...profileForDb, name: m.name });
+        fullHits += 1;
+      }
     }
-    for (const m of matches) {
-      setIfHigher(pending, m.id, TIER_FULL, { ...p, name: m.name });
-      fullHits += 1;
+    const primaryMatches = collectIdsByNorm(byNorm, p.name);
+    if (!primaryMatches.length && extraNames.every((x) => !collectIdsByNorm(byNorm, x).length)) {
+      console.warn(`companies[]: no DB row for "${p.name}"${extraNames.length ? ` or seed_match_names` : ""}`);
     }
   }
   console.log(

@@ -71,6 +71,11 @@ export interface CompanyMetaProfile {
   others?: CompanyMetaOthers;
   ambiguity_flag?: boolean;
   ambiguity_notes?: string;
+  /**
+   * Optional: extra normalised name strings used only by `scripts/seed-company-meta.ts` to map
+   * `companies[]` full profiles to DB rows (e.g. uploaded list spelling). Strip before persisting to DB.
+   */
+  seed_match_names?: string[];
   /** Optional: merged during seed from other top-level / metadata sections of the JSON file. */
   file_supplement?: CompanyMetaFileSupplement;
 }

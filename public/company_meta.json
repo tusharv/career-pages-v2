@@ -6,8 +6,8 @@
     "input_name_count": 481,
     "unique_name_count": 479,
     "requested_detailed_company_count": 479,
-    "citation_ready_company_count": 7,
-    "unexpanded_name_count": 472,
+    "citation_ready_company_count": 11,
+    "unexpanded_name_count": 468,
     "full_list_recovered_from_uploaded_file": true,
     "coverage_status": "partial_deep_research",
     "coverage_note": "All 479 unique names recovered from the uploaded file are preserved in recovered_name_index below. The companies array and master_table contain only the highest-confidence citation-ready subset completed in this pass. Remaining names are retained as recovered inputs rather than expanded into unsupported company profiles.",
@@ -525,8 +525,56 @@
       "suggested_mermaid_bar_chart": "xychart-beta\n    title Selected scale metrics from verified subset\n    x-axis [Walmart_FY2025_revenue_USDbn, PeopleStrong_team_members_min, Cloudflare_paying_customers_k]\n    y-axis Values [0, 700000]\n    bar [681000, 700, 332]"
     }
   },
-  "executive_summary": "This JSON preserves all 479 unique names recovered from the uploaded list in metadata.recovered_name_index and provides a citation-ready deep-research subset for seven companies verified in this pass using official corporate websites, investor-relations pages, annual reports, and limited Reuters or FT support where primary materials were insufficient. Cross-company themes in the verified subset include AI and analytics repositioning, fintech scale with regulatory sensitivity, large-enterprise operational discipline, and rising capital intensity in Indian space technology. To avoid low-confidence inference, the remaining 472 names are retained as recovered inputs rather than being expanded into unsupported company profiles. Any item described as historical or older than 12 months should be treated as potentially outdated.",
+  "executive_summary": "This JSON preserves all 479 unique names recovered from the uploaded list in metadata.recovered_name_index and provides a citation-ready deep-research subset for eleven companies verified in this pass using official corporate websites, investor-relations pages, annual reports, and limited Reuters or FT support where primary materials were insufficient. Cross-company themes in the verified subset include AI and analytics repositioning, fintech scale with regulatory sensitivity, large-enterprise operational discipline, rising capital intensity in Indian space technology, and Indian digital healthcare and e-pharmacy scale. To avoid low-confidence inference, the remaining 468 names are retained as recovered inputs rather than being expanded into unsupported company profiles. Any item described as historical or older than 12 months should be treated as potentially outdated.",
   "companies": [
+    {
+      "hq": "Los Angeles, California, USA",
+      "name": "Proximity Works",
+      "about": {
+        "source_urls": [
+          "https://www.hdfcbank.com/personal/about-us",
+          "https://www.hdfc.bank.in/about-us/investor-relations"
+        ],
+        "founding_year": "2019",
+        "employee_count": "50+",
+        "core_products_services": "We build AI infrastructure for companies operating at the speed of live. Sports. Media. Entertainment."
+      },
+      "domain": "AI engineering and software development",
+      "others": {
+        "funding": "self-funded",
+        "patents": "unspecified",
+        "financials": " Information suggests Proximity Works operates largely as a high-growth service provider, with some profiles noting it as an unfunded company (as in, no external venture capital) rather than a venture-backed startup.",
+        "recent_news": "unspecified",
+        "mna_activity": "unspecified",
+        "regulatory_issues": "unspecified",
+        "major_customers_partners": "JioHotstar, ESPNCricinfo, Dream11, Cars24"
+      },
+      "culture": {
+        "values": "Magic happens when the brightest minds come together, regardless of where they’re from. Today, we are a fully distributed team of Proxonauts who love a good challenge and thrive in a culture of complexity and innovation.",
+        "mission": "We are engineers, product managers, designers and geeks. We love what we do and we're great at it — but that's where the similarities end. At Proximity, we go out of our way to hire exceptional talent from different places, people with different backgrounds, ideas, approaches and opinions. These differences are powerful — they help us remember that there is no single right way of thinking and help us stay curious and humble.",
+        "source_urls": [
+          "https://www.proximity.tech/about"
+        ],
+        "glassdoor_summary": "unspecified",
+        "linkedin_insights": "unspecified"
+      },
+      "website": "https://www.proximity.tech/",
+      "leadership": [
+        {
+          "name": "Hardik Jagda",
+          "title": "Founder & CEO, Proximity group of companies",
+          "source_url": "https://www.proximity.tech/about"
+        },
+        {
+          "name": "Kushaal Devanahalli",
+          "title": "Head of Product; Co-Founder Studio Proximity, SaaS",
+          "source_url": "https://www.proximity.tech/abou"
+        }
+      ],
+      "major_offices": "Los Angeles, San Francisco, Mumbai",
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
     {
       "name": "Walmart",
       "hq": "Bentonville, Arkansas, US",
@@ -896,6 +944,168 @@
       },
       "ambiguity_flag": false,
       "ambiguity_notes": ""
+    },
+    {
+      "name": "Tata 1mg",
+      "seed_match_names": [
+        "1 mg",
+        "1mg"
+      ],
+      "hq": "Gurugram, Haryana, India",
+      "major_offices": [
+        "Corporate: Tower B-46/4, 5th floor, Presidency Building, Mehrauli Gurgaon Road, Sector 14, Gurugram, Haryana 122001, India",
+        "Registered: Level 3, Vasant Square Mall, Pocket V, Sector B, Vasant Kunj, New Delhi 110070, India"
+      ],
+      "domain": "Digital healthcare, e-pharmacy, diagnostics, telemedicine, and health content",
+      "website": "https://www.1mg.com/",
+      "about": {
+        "founding_year": "2015",
+        "employee_count": "unspecified",
+        "core_products_services": "E-pharmacy and home delivery of medicines and health products from licensed pharmacies; online doctor consultations; lab test booking with home sample collection and online reports; editorial health and medicine information; OTC, wellness, and private-label health products.",
+        "source_urls": [
+          "https://www.1mg.com/aboutUs",
+          "https://en.wikipedia.org/wiki/Tata_1mg"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Prashant Tandon",
+          "title": "CEO & Co-Founder",
+          "source_url": "https://www.1mg.com/aboutUs"
+        },
+        {
+          "name": "Gaurav Agarwal",
+          "title": "CTO & Co-Founder",
+          "source_url": "https://www.1mg.com/aboutUs"
+        },
+        {
+          "name": "Tanmay Saksena",
+          "title": "COO",
+          "source_url": "https://www.1mg.com/aboutUs"
+        }
+      ],
+      "culture": {
+        "values": "Official materials list culture pillars including ownership without hierarchy (Be your own CEO), rapid experimentation and shipping (Done is better than perfect), team over individual heroics (Team before individual), and radical candor with empathy (Accountability with empathy).",
+        "mission": "Make healthcare understandable, accessible, and affordable.",
+        "glassdoor_summary": "unspecified",
+        "linkedin_insights": "unspecified",
+        "source_urls": [
+          "https://www.1mg.com/aboutUs"
+        ]
+      },
+      "others": {
+        "financials": "Public secondary summaries of FY2024 scale exist; audited headline figures were not extracted from statutory filings in this pass.",
+        "funding": "Majority ownership context is Tata Digital following the 2021 majority-stake transaction; detailed pre-IPO funding history not consolidated in this pass.",
+        "major_customers_partners": "B2C platform across India; official site states medicine delivery in 1000+ cities and partnerships in diagnostics and logistics.",
+        "recent_news": "Trade coverage on market position, partnerships, and product launches continues; specific items may be potentially outdated.",
+        "regulatory_issues": "unspecified",
+        "patents": "unspecified",
+        "mna_activity": "Tata Digital acquired a majority stake in 1mg in 2021; the consumer-facing brand is Tata 1mg.",
+        "source_urls": [
+          "https://www.1mg.com/aboutUs",
+          "https://www.thehindu.com/business/tata-digital-to-acquire-majority-stake-in-1mg/article34785024.ece",
+          "https://en.wikipedia.org/wiki/Tata_1mg"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": "Recovered input name \"1 mg\" and historic \"1mg\" refer to this company; official consumer brand is Tata 1mg."
+    },
+    {
+      "name": "X Corp.",
+      "seed_match_names": ["Twitter"],
+      "hq": "San Francisco, California, US",
+      "major_offices": "unspecified",
+      "domain": "Social media, messaging, subscriptions, and digital advertising (consumer brand X; successor to Twitter, Inc.)",
+      "website": "https://x.com/",
+      "about": {
+        "founding_year": "2006 (Twitter, Inc.); X Corp. from 2023 (legal succession)",
+        "employee_count": "unspecified",
+        "core_products_services": "Global public conversation and social graph products historically marketed as Twitter; corporate and consumer branding consolidated under X.",
+        "source_urls": [
+          "https://en.wikipedia.org/wiki/X_Corp.",
+          "https://x.com/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Elon Musk",
+          "title": "Chair and Chief Technology Officer",
+          "source_url": "https://en.wikipedia.org/wiki/X_Corp."
+        }
+      ],
+      "culture": {
+        "values": "unspecified",
+        "mission": "unspecified",
+        "glassdoor_summary": "unspecified",
+        "linkedin_insights": "unspecified",
+        "source_urls": [
+          "https://x.com/"
+        ]
+      },
+      "others": {
+        "financials": "unspecified",
+        "funding": "Private under Musk-led ownership following 2022 acquisition of Twitter, Inc.; entity renamed X Corp.",
+        "major_customers_partners": "unspecified",
+        "recent_news": "unspecified",
+        "regulatory_issues": "unspecified",
+        "patents": "unspecified",
+        "mna_activity": "March 2023 merger into X Corp. as successor to Twitter, Inc.; consumer rebrand from Twitter to X.",
+        "source_urls": [
+          "https://en.wikipedia.org/wiki/X_Corp."
+        ]
+      },
+      "ambiguity_flag": true,
+      "ambiguity_notes": "Recovered input name \"Twitter\" maps to X Corp., legal successor to Twitter, Inc.; historical brand vs current legal entity."
+    },
+    {
+      "name": "Philips",
+      "seed_match_names": ["Phillips"],
+      "hq": "Amsterdam, Netherlands",
+      "major_offices": "Global headquarters Amsterdam; India consumer and healthcare presence via the Philips India site (philips.co.in, entered from philips.com/in).",
+      "domain": "Health technology: personal health, consumer lifestyle, professional healthcare (diagnosis, treatment, monitoring), and related services and innovation",
+      "website": "https://www.philips.co.in/",
+      "about": {
+        "founding_year": "1891",
+        "employee_count": "unspecified",
+        "core_products_services": "Health technology portfolio spanning consumer well-being products, clinical diagnostics, therapy, and monitoring; India-facing home and product content is published on the Philips India site.",
+        "source_urls": [
+          "https://www.philips.com/in/en/home",
+          "https://www.philips.com/in",
+          "https://www.philips.co.in/",
+          "https://www.philips.com/a-w/about.html"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Roy Jakobs",
+          "title": "President and Chief Executive Officer, Royal Philips",
+          "source_url": "https://www.philips.com/a-w/about/executive-committee/roy-jakobs.html"
+        }
+      ],
+      "culture": {
+        "values": "unspecified",
+        "mission": "We're a health technology company improving people's health and well-being through meaningful innovation",
+        "glassdoor_summary": "unspecified",
+        "linkedin_insights": "unspecified",
+        "source_urls": [
+          "https://www.philips.co.in/"
+        ]
+      },
+      "others": {
+        "financials": "unspecified",
+        "funding": "Euronext-listed (Royal Philips); not applicable as startup-style funding.",
+        "major_customers_partners": "Consumers and healthcare providers globally; India market detail on regional Philips site.",
+        "recent_news": "unspecified",
+        "regulatory_issues": "unspecified",
+        "patents": "unspecified",
+        "mna_activity": "unspecified",
+        "source_urls": [
+          "https://www.philips.com/a-w/about.html",
+          "https://www.philips.co.in/"
+        ]
+      },
+      "ambiguity_flag": true,
+      "ambiguity_notes": "Recovered \"Phillips\" (double L) is Philips (Koninklijke Philips N.V.), not Phillips Corporation or Phillips 66. India home content from philips.co.in (philips.com/in/en/home returns 404 as of this file date)."
     }
   ],
   "master_table": [
@@ -954,19 +1164,17 @@
       "website": "https://bellatrix.aero/",
       "ceo": "Rohan M. Ganapathy",
       "notes": "Funding and CEO verified; see detailed company object."
+    },
+    {
+      "name": "Tata 1mg",
+      "hq_location": "Gurugram, Haryana, India",
+      "domain_industry": "Digital healthcare and e-pharmacy",
+      "website": "https://www.1mg.com/",
+      "ceo": "Prashant Tandon",
+      "notes": "Leadership and addresses from official about page; uploaded list used \"1 mg\"; see detailed company object."
     }
   ],
   "ambiguities": [
-    {
-      "input_name": "Phillips",
-      "possible_matches": [
-        "Koninklijke Philips N.V.",
-        "Phillips 66",
-        "Phillips Corporation"
-      ],
-      "selected_match": "unspecified",
-      "reason": "Input is materially ambiguous without surrounding context."
-    },
     {
       "input_name": "Memory",
       "possible_matches": [
@@ -1028,14 +1236,6 @@
       "reason": "Most likely intended match based on Indian-market context; not fully researched to citation-ready depth in this pass."
     },
     {
-      "input_name": "Twitter",
-      "possible_matches": [
-        "X Corp. former Twitter, Inc."
-      ],
-      "selected_match": "X Corp.",
-      "reason": "Historical brand name; legal-entity mapping changed."
-    },
-    {
       "input_name": "Discovery inc",
       "possible_matches": [
         "Discovery, Inc.",
@@ -1043,14 +1243,6 @@
       ],
       "selected_match": "unspecified",
       "reason": "Historical company name following merger or reorganisation."
-    },
-    {
-      "input_name": "1 mg",
-      "possible_matches": [
-        "Tata 1mg"
-      ],
-      "selected_match": "Tata 1mg",
-      "reason": "Spacing differs from common branding."
     },
     {
       "input_name": "blueorigin",
