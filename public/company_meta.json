@@ -6,8 +6,8 @@
     "input_name_count": 481,
     "unique_name_count": 479,
     "requested_detailed_company_count": 479,
-    "citation_ready_company_count": 11,
-    "unexpanded_name_count": 468,
+    "citation_ready_company_count": 13,
+    "unexpanded_name_count": 466,
     "full_list_recovered_from_uploaded_file": true,
     "coverage_status": "partial_deep_research",
     "coverage_note": "All 479 unique names recovered from the uploaded file are preserved in recovered_name_index below. The companies array and master_table contain only the highest-confidence citation-ready subset completed in this pass. Remaining names are retained as recovered inputs rather than expanded into unsupported company profiles.",
@@ -525,7 +525,7 @@
       "suggested_mermaid_bar_chart": "xychart-beta\n    title Selected scale metrics from verified subset\n    x-axis [Walmart_FY2025_revenue_USDbn, PeopleStrong_team_members_min, Cloudflare_paying_customers_k]\n    y-axis Values [0, 700000]\n    bar [681000, 700, 332]"
     }
   },
-  "executive_summary": "This JSON preserves all 479 unique names recovered from the uploaded list in metadata.recovered_name_index and provides a citation-ready deep-research subset for eleven companies verified in this pass using official corporate websites, investor-relations pages, annual reports, and limited Reuters or FT support where primary materials were insufficient. Cross-company themes in the verified subset include AI and analytics repositioning, fintech scale with regulatory sensitivity, large-enterprise operational discipline, rising capital intensity in Indian space technology, and Indian digital healthcare and e-pharmacy scale. To avoid low-confidence inference, the remaining 468 names are retained as recovered inputs rather than being expanded into unsupported company profiles. Any item described as historical or older than 12 months should be treated as potentially outdated.",
+  "executive_summary": "This JSON preserves all 479 unique names recovered from the uploaded list in metadata.recovered_name_index and provides a citation-ready deep-research subset for thirteen companies verified in this pass using official corporate websites, investor-relations pages, annual reports, and limited Reuters or FT support where primary materials were insufficient. Cross-company themes in the verified subset include AI and analytics repositioning, fintech scale with regulatory sensitivity, large-enterprise operational discipline, rising capital intensity in Indian space technology, and Indian digital healthcare and e-pharmacy scale. To avoid low-confidence inference, the remaining 466 names are retained as recovered inputs rather than being expanded into unsupported company profiles. Any item described as historical or older than 12 months should be treated as potentially outdated.",
   "companies": [
     {
       "hq": "Los Angeles, California, USA",
@@ -1104,8 +1104,93 @@
           "https://www.philips.co.in/"
         ]
       },
-      "ambiguity_flag": true,
-      "ambiguity_notes": "Recovered \"Phillips\" (double L) is Philips (Koninklijke Philips N.V.), not Phillips Corporation or Phillips 66. India home content from philips.co.in (philips.com/in/en/home returns 404 as of this file date)."
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Accenture",
+      "hq": "Dublin, Ireland",
+      "major_offices": "Global offices and delivery network; India careers and locations surfaced on the India English site.",
+      "domain": "Management consulting, technology services, and digital transformation across strategy, cloud, artificial intelligence, cybersecurity, industry solutions, and managed services",
+      "website": "https://www.accenture.com/in-en",
+      "about": {
+        "founding_year": "1989 (predecessor Andersen Consulting); Accenture brand from 2001",
+        "employee_count": "unspecified",
+        "core_products_services": "Reinvention services for enterprises: capabilities spanning AI and data, cloud, digital engineering, cybersecurity, managed services, industry verticals, and ecosystem partnerships; India site frames positioning around change and 360° value for stakeholders.",
+        "source_urls": [
+          "https://www.accenture.com/in-en",
+          "https://www.accenture.com/in-en/about/company-index"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Julie Sweet",
+          "title": "Chair and Chief Executive Officer",
+          "source_url": "https://www.accenture.com/in-en/about/company-index"
+        }
+      ],
+      "culture": {
+        "values": "Official India homepage and company materials emphasise reinvention with clients, 360° value for stakeholders, and global recognition for culture and brand.",
+        "mission": "Let there be change",
+        "glassdoor_summary": "unspecified",
+        "linkedin_insights": "unspecified",
+        "source_urls": [
+          "https://www.accenture.com/in-en"
+        ]
+      },
+      "others": {
+        "financials": "unspecified",
+        "funding": "Public company (NYSE: ACN); venture-style funding not applicable.",
+        "major_customers_partners": "Large enterprises and public-sector clients across industries; ecosystem partners referenced on regional site.",
+        "recent_news": "unspecified",
+        "regulatory_issues": "unspecified",
+        "patents": "unspecified",
+        "mna_activity": "unspecified",
+        "source_urls": [
+          "https://www.accenture.com/in-en",
+          "https://www.accenture.com/in-en/about/company-index"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Directi",
+      "hq": "unspecified",
+      "major_offices": "Global presence described on the corporate site: USA, UAE, and India.",
+      "domain": "Internet and software group spanning business email, collaboration, employee benefits and reimbursements, voice communications, domain registry (Radix), and developer-education initiatives",
+      "website": "https://www.directi.com/",
+      "about": {
+        "founding_year": "unspecified",
+        "employee_count": "unspecified",
+        "core_products_services": "Portfolio described on the homepage includes a customer-centric professional email suite; a communication and collaboration application; digitised, compliant employee reimbursements; international and domestic calling across many countries; Radix as a new gTLD registry; and a non-profit competitive programming community for young developers.",
+        "source_urls": [
+          "https://www.directi.com/"
+        ]
+      },
+      "culture": {
+        "values": "unspecified",
+        "mission": "Intelligent people, uncommon ideas",
+        "glassdoor_summary": "unspecified",
+        "linkedin_insights": "unspecified",
+        "source_urls": [
+          "https://www.directi.com/"
+        ]
+      },
+      "others": {
+        "financials": "unspecified",
+        "funding": "unspecified",
+        "major_customers_partners": "unspecified",
+        "recent_news": "Site footer references Directi Group with a 2019 copyright; treat non-news sections as potentially stale and confirm on live business-unit sites where relevant.",
+        "regulatory_issues": "unspecified",
+        "patents": "unspecified",
+        "mna_activity": "unspecified",
+        "source_urls": [
+          "https://www.directi.com/"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
     }
   ],
   "master_table": [
