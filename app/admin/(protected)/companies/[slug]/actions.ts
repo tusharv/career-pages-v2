@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
@@ -28,6 +28,8 @@ function revalidateCompanyPaths(slug: string) {
   revalidatePath("/admin");
   revalidatePath(`/admin/companies/${slug}`);
   revalidatePath(`/company/${slug}`);
+  revalidateTag("companies");
+  revalidateTag("openings");
 }
 
 export async function updateCompany(formData: FormData) {

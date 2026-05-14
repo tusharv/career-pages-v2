@@ -7,12 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { CompaniesSectionSkeleton } from '@/components/CompaniesSectionSkeleton'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
-  Loader2,
   BookOpen,
   Search,
   ChevronLeft,
@@ -400,8 +400,8 @@ export default function Home() {
                     Live directory
                   </p>
                   {loading ? (
-                    <p className="mt-4 text-3xl font-semibold tabular-nums text-white">
-                      …
+                    <p className="mt-4 text-5xl font-bold tabular-nums text-white">
+                      ∞
                     </p>
                   ) : (
                     <p className="mt-4 text-5xl font-bold tabular-nums tracking-tight text-white">
@@ -422,13 +422,8 @@ export default function Home() {
           </div>
         </section>
 
-        {loading && (
-          <div className="container mx-auto px-4 py-16 text-center">
-            <Loader2 className="mx-auto mb-4 h-9 w-9 animate-spin text-primary" />
-            <p className="text-lg font-medium text-muted-foreground">
-              Loading the directory…
-            </p>
-          </div>
+        {loading && !error && (
+          <CompaniesSectionSkeleton cardCount={companiesPerPage} />
         )}
 
         {error && (
@@ -475,6 +470,9 @@ export default function Home() {
                     ) : null}
                   </TabsTrigger>
                 </TabsList>
+                {/* Radix sets aria-controls on triggers; panels must exist for valid IDs */}
+                <TabsContent value="all" className="mt-0 hidden p-0" aria-hidden />
+                <TabsContent value="saved" className="mt-0 hidden p-0" aria-hidden />
               </Tabs>
             </div>
 
