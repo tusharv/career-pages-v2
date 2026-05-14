@@ -620,7 +620,7 @@ export default function Home() {
                                 .slice(0, 3)}
                             </AvatarFallback>
                           </Avatar>
-                          <div className="flex min-w-0 flex-1 items-center">
+                          <div className="flex min-w-0 flex-1 flex-col">
                             <CardTitle className="text-base leading-snug">
                               <Link
                                 href={`/company/${company.slug}`}
@@ -632,6 +632,24 @@ export default function Home() {
                                 </span>
                               </Link>
                             </CardTitle>
+                            {(company.meta?.domain ||
+                              company.meta?.hq ||
+                              company.meta?.teaser) && (
+                              <div className="mt-1.5 space-y-0.5">
+                                {(company.meta.domain || company.meta.hq) && (
+                                  <p className="text-xs leading-snug text-muted-foreground line-clamp-2">
+                                    {[company.meta.domain, company.meta.hq]
+                                      .filter(Boolean)
+                                      .join(" · ")}
+                                  </p>
+                                )}
+                                {company.meta.teaser ? (
+                                  <p className="text-xs leading-snug text-muted-foreground/90 line-clamp-2">
+                                    {company.meta.teaser}
+                                  </p>
+                                ) : null}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </CardHeader>

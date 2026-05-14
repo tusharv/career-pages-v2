@@ -16,6 +16,8 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { getCompanyPageData } from "@/lib/data/company-page";
 import { getCompanyLogoSrc } from "@/lib/company-logo";
+import { CompanyMetaSections } from "@/components/CompanyMetaSections";
+import { metaPresent } from "@/lib/company-meta";
 
 export const revalidate = 3600;
 
@@ -30,7 +32,19 @@ export async function generateMetadata({
   }
   const { company } = data;
   const title = `${company.name} — openings & careers | Career Pages`;
-  const description = `Careers, engineering blog, and job links for ${company.name}.`;
+  const meta = company.company_meta;
+  const domain = metaPresent(meta?.domain);
+  const core = metaPresent(meta?.about?.core_products_services);
+  const snippet =
+    domain ||
+    (core
+      ? core.length > 140
+        ? `${core.slice(0, 137)}…`
+        : core
+      : null);
+  const description = snippet
+    ? `${snippet} — Careers and resources for ${company.name}.`
+    : `Careers, engineering blog, and job links for ${company.name}.`;
   return {
     title,
     description,
@@ -50,12 +64,13 @@ export default async function CompanyPage({ params }: PageProps) {
 
   const { company, openings } = data;
   const logoSrc = getCompanyLogoSrc(company.careers_url);
+  const profile = company.company_meta;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header />
 
-      <main className="flex-grow container mx-auto px-4 py-8 max-w-2xl">
+      <main className="flex-grow container mx-auto px-4 py-8 max-w-3xl">
         <Button variant="ghost" className="mb-6 -ml-2 gap-1" asChild>
           <Link href="/">
             <ArrowLeft className="h-4 w-4" />
@@ -101,6 +116,23 @@ export default async function CompanyPage({ params }: PageProps) {
               ) : null}
             </div>
 
+            {profile ? (
+              <>
+                <Separator />
+                <section className="space-y-1">
+                  <h2 className="text-lg font-semibold tracking-tight">
+                    Company snapshot
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    Curated from public sources; optional fields stay in a fixed
+                    layout so every company reads the same way.
+                  </p>
+                </section>
+                <CompanyMetaSections meta={profile} />
+              </>
+            ) : null}
+
+            <Separator />
             <div>
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Link2 className="h-4 w-4" />

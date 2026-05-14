@@ -21,6 +21,7 @@ import {
   updateOpening,
 } from "./actions";
 import { CompanyLogoUploadForm } from "./CompanyLogoUploadForm";
+import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 type PageProps = { params: { slug: string } };
@@ -29,7 +30,7 @@ export default async function AdminCompanyEditPage({ params }: PageProps) {
   const supabase = createSupabaseServerClient();
   const { data: company, error } = await supabase
     .from("companies")
-    .select("id, slug, name, careers_url, blog_url")
+    .select("id, slug, name, careers_url, blog_url, company_meta")
     .eq("slug", params.slug)
     .maybeSingle();
 
@@ -132,6 +133,36 @@ export default async function AdminCompanyEditPage({ params }: PageProps) {
                   type="url"
                   defaultValue={row.blog_url ?? ""}
                   className="h-11"
+                />
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <label
+                  className="text-sm font-medium leading-none"
+                  htmlFor="company_meta_json"
+                >
+                  Company profile (JSON){" "}
+                  <span className="font-normal text-muted-foreground">(optional)</span>
+                </label>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Same structure as each entry under{" "}
+                  <span className="font-mono text-foreground">companies</span> in{" "}
+                  <span className="font-mono text-foreground">public/company_meta.json</span>.
+                  Leave empty to clear the profile. Fields set to{" "}
+                  <span className="font-mono text-foreground">&quot;unspecified&quot;</span> are
+                  hidden on the public site.
+                </p>
+                <Textarea
+                  id="company_meta_json"
+                  name="company_meta_json"
+                  rows={18}
+                  spellCheck={false}
+                  defaultValue={
+                    row.company_meta
+                      ? JSON.stringify(row.company_meta, null, 2)
+                      : ""
+                  }
+                  className="min-h-[280px] resize-y font-mono text-xs leading-relaxed sm:text-sm"
+                  placeholder='{ "name": "Example Corp", "hq": "…", "domain": "…", … }'
                 />
               </div>
             </div>

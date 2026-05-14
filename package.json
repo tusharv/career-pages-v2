@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "seed:companies": "tsx scripts/seed-from-data-json.ts",
+    "seed:company-meta": "tsx scripts/seed-company-meta.ts",
+    "seed:company-meta:minimal": "tsx scripts/seed-company-meta.ts --no-name-index",
     "upload:logos": "tsx scripts/upload-company-logos.ts"
   },
   "dependencies": {

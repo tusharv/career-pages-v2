@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { unstable_cache } from "next/cache";
 import { createSupabaseAnonServerClient } from "@/lib/supabase/server";
+import { metaToListExtras } from "@/lib/company-meta";
 import type {
   CompanyListItem,
   CompanyRow,
@@ -23,12 +24,14 @@ function escapeIlike(value: string): string {
 }
 
 function rowToListItem(row: CompanyRow): CompanyListItem {
+  const meta = metaToListExtras(row.company_meta);
   return {
     id: row.id,
     slug: row.slug,
     name: row.name,
     url: row.careers_url,
     ...(row.blog_url ? { blog: row.blog_url } : {}),
+    ...(meta ? { meta } : {}),
   };
 }
 
@@ -59,7 +62,7 @@ const getCompaniesPage = unstable_cache(
 
     let query = supabase
       .from("companies")
-      .select("id, slug, name, careers_url, blog_url", { count: "exact" })
+      .select("id, slug, name, careers_url, blog_url, company_meta", { count: "exact" })
       .order("name", { ascending: true });
 
     const trimmed = search.slice(0, MAX_SEARCH_LEN).trim();
@@ -216,7 +219,7 @@ async function handleSavedPage(
   if (urls.length > 0) {
     const { data, error } = await supabase
       .from("companies")
-      .select("id, slug, name, careers_url, blog_url")
+      .select("id, slug, name, careers_url, blog_url, company_meta")
       .in("careers_url", urls);
     if (error) {
       throw new Error(error.message);
@@ -226,7 +229,7 @@ async function handleSavedPage(
   if (rawIds.length > 0) {
     const { data, error } = await supabase
       .from("companies")
-      .select("id, slug, name, careers_url, blog_url")
+      .select("id, slug, name, careers_url, blog_url, company_meta")
       .in("id", rawIds);
     if (error) {
       throw new Error(error.message);

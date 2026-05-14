@@ -1,9 +1,14 @@
+import type { CompanyListMeta } from "@/lib/company-meta";
+import type { CompanyMetaProfile } from "@/lib/types/company-meta";
+
 export interface CompanyRow {
   id: string;
   slug: string;
   name: string;
   careers_url: string;
   blog_url: string | null;
+  /** Same shape as entries in `public/company_meta.json` → `companies`. Omitted when not selected. */
+  company_meta?: CompanyMetaProfile | null;
 }
 
 export interface OpeningRow {
@@ -21,6 +26,8 @@ export interface CompanyListItem {
   name: string;
   url: string;
   blog?: string;
+  /** Derived from `company_meta` for directory cards. */
+  meta?: CompanyListMeta;
 }
 
 export interface CompanyWithOpenings extends CompanyRow {

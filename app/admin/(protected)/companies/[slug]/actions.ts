@@ -7,6 +7,10 @@ import {
   COMPANY_LOGOS_BUCKET,
   getCareersHostname,
 } from "@/lib/company-logo";
+import {
+  parseCompanyMetaJson,
+} from "@/lib/company-meta";
+import type { CompanyMetaProfile } from "@/lib/types/company-meta";
 
 async function requireAdminSupabase() {
   const supabase = createSupabaseServerClient();
@@ -41,6 +45,15 @@ export async function updateCompany(formData: FormData) {
   const careers_url = String(formData.get("careers_url") ?? "").trim();
   const blogRaw = String(formData.get("blog_url") ?? "").trim();
   const blog_url = blogRaw === "" ? null : blogRaw;
+  const metaJsonRaw = String(formData.get("company_meta_json") ?? "");
+
+  let company_meta: CompanyMetaProfile | null;
+  try {
+    company_meta = parseCompanyMetaJson(metaJsonRaw);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "Invalid company profile JSON.";
+    throw new Error(msg);
+  }
 
   if (!prevSlug || !name || !slug || !careers_url) {
     throw new Error("Name, slug, and careers URL are required.");
@@ -48,7 +61,7 @@ export async function updateCompany(formData: FormData) {
 
   const { error } = await supabase
     .from("companies")
-    .update({ name, slug, careers_url, blog_url })
+    .update({ name, slug, careers_url, blog_url, company_meta })
     .eq("slug", prevSlug);
 
   if (error) {

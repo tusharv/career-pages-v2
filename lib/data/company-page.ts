@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { createSupabaseAnonServerClient } from "@/lib/supabase/server";
+import { getValidatedCompanyMeta } from "@/lib/company-meta";
 import type { CompanyRow, OpeningRow } from "@/lib/types/company";
 
 export type CompanyPageData = {
@@ -13,7 +14,7 @@ export const getCompanyPageData = cache(
 
     const { data: company, error: companyError } = await supabase
       .from("companies")
-      .select("id, slug, name, careers_url, blog_url")
+      .select("id, slug, name, careers_url, blog_url, company_meta")
       .eq("slug", slug)
       .maybeSingle();
 
@@ -22,6 +23,10 @@ export const getCompanyPageData = cache(
     }
 
     const row = company as CompanyRow;
+    const normalized: CompanyRow = {
+      ...row,
+      company_meta: getValidatedCompanyMeta(row.company_meta),
+    };
 
     const { data: openings, error: openingsError } = await supabase
       .from("openings")
@@ -34,7 +39,7 @@ export const getCompanyPageData = cache(
     }
 
     return {
-      company: row,
+      company: normalized,
       openings: (openings ?? []) as OpeningRow[],
     };
   }
