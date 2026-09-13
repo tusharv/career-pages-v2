@@ -26,6 +26,8 @@ export interface CompanyListItem {
   name: string;
   url: string;
   blog?: string;
+  /** Company website from profile metadata; used for logo fallback on generic careers hosts. */
+  website?: string;
   /** Derived from `company_meta` for directory cards. */
   meta?: CompanyListMeta;
 }

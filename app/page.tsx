@@ -27,12 +27,15 @@ import {
 import AutoSuggest from '@/components/AutoSuggest'
 import { CompanyCardMoreMenu } from '@/components/CompanyCardMoreMenu'
 import { RemoteJobsTeaser } from '@/components/RemoteJobsTeaser'
+import { RecentlyAddedTeaser } from '@/components/RecentlyAddedTeaser'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
 import { useCompanies } from './CompaniesContext'
 import type { Company } from './CompaniesContext'
 import type { CompaniesPageResponse } from '@/lib/types/company'
 import { getCompanyLogoSrc } from '@/lib/company-logo'
 import { cn } from '@/lib/utils'
+import { isRecentlyAddedSlug } from '@/lib/recently-added'
+import { Badge } from '@/components/ui/badge'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useToast } from '@/hooks/use-toast'
@@ -503,6 +506,8 @@ export default function Home() {
 
         <RemoteJobsTeaser />
 
+        <RecentlyAddedTeaser />
+
         {loading && !error && (
           <CompaniesSectionSkeleton cardCount={companiesPerPage} />
         )}
@@ -585,10 +590,11 @@ export default function Home() {
             ) : (
               <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
                 {companies.map((company: Company) => {
-                  const logoSrc = getCompanyLogoSrc(company.url)
+                  const logoSrc = getCompanyLogoSrc(company.url, company.website)
                   const isSaved =
                     savedJobs.includes(company.url) ||
                     savedJobs.includes(String(company.id))
+                  const isRecentlyAdded = isRecentlyAddedSlug(company.slug)
                   return (
                     <Card
                       key={company.url}
@@ -596,6 +602,9 @@ export default function Home() {
                         'relative border-border/80 shadow-sm motion-safe:transition-all motion-safe:duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-lg motion-safe:hover:border-primary/20',
                         isSaved &&
                           'border-l-[3px] border-l-[hsl(var(--chart-1))] shadow-md',
+                        isRecentlyAdded &&
+                          !isSaved &&
+                          'border-l-[3px] border-l-[hsl(var(--chart-1))]/70',
                         elevatedCardUrl === company.url && 'z-50'
                       )}
                       onClick={() => {
@@ -624,17 +633,27 @@ export default function Home() {
                             </AvatarFallback>
                           </Avatar>
                           <div className="flex min-w-0 flex-1 flex-col">
-                            <CardTitle className="text-base leading-snug">
-                              <Link
-                                href={`/company/${company.slug}`}
-                                className="rounded-md text-foreground outline-none ring-offset-background transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <span className="line-clamp-2">
-                                  {company?.name}
-                                </span>
-                              </Link>
-                            </CardTitle>
+                            <div className="flex flex-wrap items-start gap-2">
+                              <CardTitle className="text-base leading-snug">
+                                <Link
+                                  href={`/company/${company.slug}`}
+                                  className="rounded-md text-foreground outline-none ring-offset-background transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <span className="line-clamp-2">
+                                    {company?.name}
+                                  </span>
+                                </Link>
+                              </CardTitle>
+                              {isRecentlyAdded ? (
+                                <Badge
+                                  variant="secondary"
+                                  className="shrink-0 border-[hsl(var(--chart-1))]/30 bg-[hsl(var(--chart-1)/0.12)] text-[10px] font-semibold uppercase tracking-wide text-[hsl(var(--chart-5))]"
+                                >
+                                  New
+                                </Badge>
+                              ) : null}
+                            </div>
                             {(company.meta?.domain ||
                               company.meta?.hq ||
                               company.meta?.teaser) && (

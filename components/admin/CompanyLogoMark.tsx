@@ -14,6 +14,7 @@ function initialsFromName(name: string): string {
 type Props = {
   name: string;
   careersUrl: string;
+  websiteUrl?: string | null;
   className?: string;
   size?: "sm" | "md" | "lg";
 };
@@ -24,8 +25,14 @@ const sizeClass = {
   lg: "h-14 w-14 text-sm",
 } as const;
 
-export function CompanyLogoMark({ name, careersUrl, className, size = "md" }: Props) {
-  const logoSrc = getCompanyLogoSrc(careersUrl);
+export function CompanyLogoMark({
+  name,
+  careersUrl,
+  websiteUrl,
+  className,
+  size = "md",
+}: Props) {
+  const logoSrc = getCompanyLogoSrc(careersUrl, websiteUrl);
   const initials = initialsFromName(name);
 
   return (

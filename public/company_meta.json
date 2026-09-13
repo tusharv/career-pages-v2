@@ -1191,6 +1191,590 @@
       },
       "ambiguity_flag": false,
       "ambiguity_notes": ""
+    },
+    {
+      "name": "Ringg AI",
+      "hq": "HSR, Bengaluru, Karnataka, India",
+      "major_offices": "Koramangala, Bengaluru",
+      "domain": "AI voice agents for businesses",
+      "website": "https://www.ringg.ai/",
+      "about": {
+        "founding_year": "2023",
+        "employee_count": "~40",
+        "core_products_services": "No-code, multilingual AI voice and chat agents for enterprise workflows including customer support, lead qualification, loan collections, appointment scheduling, delivery coordination, and recruitment screening.",
+        "source_urls": [
+          "https://www.ringg.ai/",
+          "https://techcrunch.com/2026/08/25/indias-ringg-gets-backing-from-peak-xv-as-it-pushes-voice-ai-past-the-phone-call/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Siddharth Shankar Tripathi",
+          "title": "Co-founder & CEO",
+          "source_url": "https://techcrunch.com/2026/08/25/indias-ringg-gets-backing-from-peak-xv-as-it-pushes-voice-ai-past-the-phone-call/"
+        },
+        {
+          "name": "Utkarsh Shukla",
+          "title": "Co-founder",
+          "source_url": "https://www.forbes.com/profile/ringg-ai/"
+        },
+        {
+          "name": "Kali Charan Vemuru",
+          "title": "Co-founder",
+          "source_url": "https://tracxn.com/d/companies/ringg-ai/__IBo2jWWzYKzVE2ps0kldh6y7cZzzKEIKjOIysuWvMZs"
+        }
+      ],
+      "culture": {
+        "mission": "Bring human-like voice AI agents to every enterprise workflow that still runs on phone calls.",
+        "values": "Started as text-to-speech research lab DesiVocal; pivoted to full-stack voice agents with in-house model research and forward-deployed engineering.",
+        "source_urls": ["https://www.ringg.ai/"]
+      },
+      "others": {
+        "funding": "$10M extension from Peak XV Partners ($15M+ total Series A); earlier $5.5M led by Arkam Ventures with Capital 2B, Groww Founder Fund, and Kunal Shah.",
+        "major_customers_partners": "Cred, Flipkart, Practo, Groww, Policybazaar, PharmEasy, Shiprocket; pilots in Dubai and North America.",
+        "recent_news": "Raised $10M in fresh funding ($15M total Series A) from Peak XV Partners, Arkam Ventures and Capital 2B; processes ~20M call attempts per month.",
+        "source_urls": [
+          "https://techcrunch.com/2026/08/25/indias-ringg-gets-backing-from-peak-xv-as-it-pushes-voice-ai-past-the-phone-call/"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Runable",
+      "hq": "HSR, Bengaluru, Karnataka, India",
+      "domain": "AI agents that operate business software",
+      "website": "https://runable.com/",
+      "about": {
+        "founding_year": "2025",
+        "employee_count": "~15",
+        "core_products_services": "Single AI agent platform that helps small businesses build websites and apps, then run and grow them with ad campaigns, SEO, social content, cold outreach, and customer support automation.",
+        "source_urls": [
+          "https://runable.com/",
+          "https://techcrunch.com/2026/08/26/runable-hits-21m-to-bet-ai-agents-can-go-from-building-businesses-to-growing-them/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Umesh Kumar",
+          "title": "Co-founder & CEO",
+          "source_url": "https://techcrunch.com/2026/08/26/runable-hits-21m-to-bet-ai-agents-can-go-from-building-businesses-to-growing-them/"
+        },
+        {
+          "name": "Saksham Sarda",
+          "title": "Co-founder",
+          "source_url": "https://yourstory.com/2026/08/ai-agent-startup-runable-raises-21-million-in-series-a"
+        }
+      ],
+      "culture": {
+        "mission": "Automate everything after software creation — finding customers, running campaigns, and growing revenue.",
+        "values": "Pivoted from AI browser infrastructure to a general-purpose agent for build, run, and grow workflows.",
+        "source_urls": ["https://runable.com/"]
+      },
+      "others": {
+        "funding": "$21M Series A co-led by Susquehanna Venture Capital and Nexus Venture Partners; Together Fund and Array VC participated. Post-money valuation ~$65M.",
+        "major_customers_partners": "1.5M+ users across US, UK, Japan, and Brazil; reported $2M ARR within three weeks of launch.",
+        "recent_news": "Raised $21M Series A from Susquehanna International Group and Nexus Venture Partners.",
+        "source_urls": [
+          "https://techcrunch.com/2026/08/26/runable-hits-21m-to-bet-ai-agents-can-go-from-building-businesses-to-growing-them/"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Airbound",
+      "hq": "Hoskote, Bengaluru, Karnataka, India",
+      "major_offices": "43,000 sq ft design and manufacturing facility, Bengaluru",
+      "domain": "Autonomous delivery drones and aerial logistics",
+      "website": "https://www.airbound.com/",
+      "about": {
+        "founding_year": "2023",
+        "employee_count": "60–70",
+        "core_products_services": "Lightweight autonomous VTOL drones designed so payload weight exceeds aircraft weight, enabling aerial logistics as cheap as road trucking for healthcare samples, e-commerce, and last-mile delivery.",
+        "source_urls": [
+          "https://www.airbound.com/",
+          "https://techcrunch.com/2026/08/24/indias-airbound-bags-37m-to-take-on-trucks-with-rocket-like-drones/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Naman Pushp",
+          "title": "Founder & CEO",
+          "source_url": "https://techcrunch.com/2026/08/24/indias-airbound-bags-37m-to-take-on-trucks-with-rocket-like-drones/"
+        }
+      ],
+      "culture": {
+        "mission": "Make flying the cheapest way to move anything by rebuilding aircraft from first principles.",
+        "values": "Obsessive engineering on weight reduction; in-house airframe and core systems manufacturing in Bengaluru.",
+        "source_urls": ["https://www.airbound.com/"]
+      },
+      "others": {
+        "funding": "$37M Series A led by Greenoaks with DoorDash, Lachy Groom, Lightspeed, and Humba Ventures; ~$50M total raised.",
+        "major_customers_partners": "Narayana Health (1,000+ autonomous sample flights); 13,000+ autonomous flights across Bengaluru and Guntur.",
+        "recent_news": "Raised $37M Series A led by Greenoaks to scale manufacturing and commercial drone delivery.",
+        "source_urls": [
+          "https://techcrunch.com/2026/08/24/indias-airbound-bags-37m-to-take-on-trucks-with-rocket-like-drones/"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "CarbonStrong",
+      "hq": "Yelahanka, Bengaluru, Karnataka, India",
+      "major_offices": "4-165, Tank Road, Near Chowdeshwari Temple, Yelahanka, Bengaluru 560064",
+      "domain": "Low-carbon construction materials and technologies",
+      "website": "https://carbonstrong.in/",
+      "about": {
+        "founding_year": "2022",
+        "employee_count": "~6",
+        "core_products_services": "Proprietary low-carbon concrete binder (CSBinder) that replaces 40–50% of cement using industrial byproducts like fly ash and steel slag — drop-in for RMC, block, and precast plants.",
+        "source_urls": [
+          "https://carbonstrong.in/home/",
+          "https://www.third-derivative.org/portfolio/carbonstrong"
+        ]
+      },
+      "leadership": [],
+      "culture": {
+        "mission": "Decarbonize the built environment with economical, high-performance cement alternatives.",
+        "values": "Drop-in solution requiring no new capital expenditure; up to 30% cheaper than ordinary cement with 10–15 years longer building life.",
+        "source_urls": ["https://carbonstrong.in/why-carbonstrong/"]
+      },
+      "others": {
+        "funding": "₹12.5 Cr from IAN Group, Rainmatter, Social Alpha, Spectrum Impact",
+        "major_customers_partners": "Pilot partners across concrete producers and green building projects in India.",
+        "recent_news": "Raised ₹12.5 Cr from IAN Group, Rainmatter, Social Alpha, Spectrum Impact.",
+        "source_urls": ["https://carbonstrong.in/home/"]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "AlgoFET",
+      "hq": "Malleshwaram / Hebbal, Bengaluru, Karnataka, India",
+      "major_offices": "ARTPARK @ IISc, Bengaluru",
+      "domain": "Autonomous drone infrastructure and systems",
+      "website": "https://algofet.com/",
+      "about": {
+        "founding_year": "unspecified",
+        "employee_count": "~14",
+        "core_products_services": "Indigenous drone docking, charging, battery management (AlgoBMS), fleet monitoring (AlgoX), and safety systems enabling 24×7 autonomous drone operations for agriculture, defence, surveillance, and logistics.",
+        "source_urls": [
+          "https://algofet.com/company",
+          "https://www.artpark.in/ignite"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Ankit",
+          "title": "Founder",
+          "source_url": "https://www.artpark.in/stories/blog-post-title-four-kpyhe"
+        }
+      ],
+      "culture": {
+        "mission": "Sustainable operation of AI and robotics products through autonomous charging infrastructure.",
+        "values": "Incubated at ARTPARK, Indian Institute of Science; Innovation of the Year at Drone Expo Mumbai.",
+        "source_urls": ["https://algofet.com/home"]
+      },
+      "others": {
+        "funding": "₹15 Cr Pre-Series A from Piper Serica",
+        "major_customers_partners": "Commercial drone service providers and manufacturers across agriculture, defence, infrastructure inspection, and surveillance.",
+        "recent_news": "Raised ₹15 Cr Pre-Series A from Piper Serica.",
+        "source_urls": ["https://algofet.com/company"]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Wippi",
+      "hq": "Koramangala, Bengaluru, Karnataka, India",
+      "major_offices": "WeWork Prestige Cube, Koramangala, Bengaluru 560029",
+      "domain": "Screen-free conversational AI products for children",
+      "website": "https://wippi.com/",
+      "about": {
+        "founding_year": "unspecified",
+        "employee_count": "unspecified",
+        "core_products_services": "Screen-free Wippi Player and story cards with conversational AI, curated radio, and parent app for ages 3–8; interactive stories in 140+ languages with child-safe moderation.",
+        "source_urls": [
+          "https://wippi.com/",
+          "https://wippi.com/pages/faqs"
+        ]
+      },
+      "leadership": [],
+      "culture": {
+        "mission": "Transform screen-free playtime into conversational learning adventures for young children.",
+        "values": "Designed with early childhood educators; built-in content safety shield and no-ads policy.",
+        "source_urls": ["https://wippi.com/"]
+      },
+      "others": {
+        "funding": "$1.2M Seed led by 12 Flags",
+        "major_customers_partners": "Direct-to-consumer sales of Wippi Player, story playsets, and Wippi+ subscription.",
+        "recent_news": "Raised $1.2M Seed led by 12 Flags.",
+        "source_urls": ["https://wippi.com/"]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Ayati Devices Pvt. Ltd.",
+      "hq": "Indiranagar, Bengaluru, Karnataka, India",
+      "domain": "Medical devices for early disease screening",
+      "website": "https://ayatidevices.com/",
+      "about": {
+        "founding_year": "unspecified",
+        "employee_count": "unspecified",
+        "core_products_services": "Portable medical screening devices for early detection of neurological and metabolic conditions, designed for point-of-care use in clinics and community health settings.",
+        "source_urls": ["https://ayatidevices.com/"]
+      },
+      "leadership": [],
+      "culture": {
+        "mission": "Make early disease screening accessible through affordable, portable medical devices.",
+        "source_urls": ["https://ayatidevices.com/"]
+      },
+      "others": {
+        "funding": "₹15 Cr Pre-Series A from Inflexor Ventures",
+        "recent_news": "Raised ₹15 Cr Pre-Series A from Inflexor Ventures.",
+        "source_urls": ["https://ayatidevices.zohorecruit.in/jobs/Careers/"]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "River",
+      "hq": "Whitefield / Mahadevapura, Bengaluru, Karnataka, India",
+      "domain": "Electric scooters and mobility technology",
+      "website": "https://www.rideriver.com/",
+      "about": {
+        "founding_year": "unspecified",
+        "employee_count": "unspecified",
+        "core_products_services": "Electric scooters and mobility technology with connected software, battery systems, and consumer ride experiences.",
+        "source_urls": ["https://www.rideriver.com/"]
+      },
+      "leadership": [],
+      "culture": {
+        "mission": "Build electric mobility products for urban India.",
+        "source_urls": ["https://www.rideriver.com/"]
+      },
+      "others": {
+        "funding": "$120M Series C from ELEV8 and CLAYPOND",
+        "recent_news": "Raised $120M Series C from ELEV8 and CLAYPOND.",
+        "source_urls": ["https://www.rideriver.com/careers/current-openings"]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Sarvam AI",
+      "hq": "Indiranagar, Bengaluru, Karnataka, India",
+      "major_offices": "732, Chinmaya Mission Hospital Road, Indiranagar Stage 1, Bengaluru 560038",
+      "domain": "Indian-language foundation models and AI infrastructure",
+      "website": "https://www.sarvam.ai/",
+      "about": {
+        "founding_year": "2023",
+        "employee_count": "unspecified",
+        "core_products_services": "Full-stack sovereign AI platform with Indian-language speech, document, and multimodal models including Sarvam 30B/105B open-weight models and Sarvam Vision for 22+ Indian languages.",
+        "source_urls": [
+          "https://www.sarvam.ai/about-us",
+          "https://time.com/collection/time100-ai/2026/vivek-raghavan/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Dr. Pratyush Kumar",
+          "title": "Co-founder & CEO",
+          "source_url": "https://www.sarvam.ai/about-us"
+        },
+        {
+          "name": "Dr. Vivek Raghavan",
+          "title": "Co-founder",
+          "source_url": "https://www.sarvam.ai/about-us"
+        }
+      ],
+      "culture": {
+        "mission": "Build sovereign AI rooted in Indian data, languages, and compute for local use cases.",
+        "values": "Founded by architects of India's digital public infrastructure and AI4Bhārat open-source language AI research.",
+        "source_urls": ["https://www.sarvam.ai/about-us"]
+      },
+      "others": {
+        "funding": "$74M tranche of $300M round from NVIDIA, Activate, Glade Brook Capital Partners LLC and Gaja Capital; unicorn at ~$1.5B valuation.",
+        "major_customers_partners": "Selected by Indian government among 12 organisations building AI on Indian datasets; strategic investment from NVIDIA.",
+        "recent_news": "Raised a $74M tranche of its $300M round from NVIDIA, Activate, Glade Brook Capital Partners LLC and Gaja Capital.",
+        "source_urls": [
+          "https://time.com/collection/time100-ai/2026/vivek-raghavan/"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Superleap AI CRM",
+      "hq": "Koramangala, Bengaluru, Karnataka, India",
+      "major_offices": "Koramangala Main Road, Bengaluru 560034",
+      "domain": "AI-native CRM and sales automation",
+      "website": "https://www.superleap.com/",
+      "about": {
+        "founding_year": "2024",
+        "employee_count": "unspecified",
+        "core_products_services": "Enterprise AI-native CRM with agentic revenue workflows, automated meeting notes, real-time sales call assistance, and migration off legacy CRMs in weeks.",
+        "source_urls": [
+          "https://www.superleap.com/",
+          "https://www.superleap.com/press-release-pre-series-a-fundraise"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Subham Kumar Boundia",
+          "title": "Co-founder & CEO",
+          "source_url": "https://www.superleap.com/press-release-pre-series-a-fundraise"
+        },
+        {
+          "name": "Alok Maurya",
+          "title": "Co-founder & CTO",
+          "source_url": "https://www.superleap.com/press-release-pre-series-a-fundraise"
+        },
+        {
+          "name": "Saurabh Maheshwari",
+          "title": "Co-founder",
+          "source_url": "https://www.superleap.com/press-release-pre-series-a-fundraise"
+        }
+      ],
+      "culture": {
+        "mission": "Reimagine CRM for the AI age so revenue teams focus on selling while the platform handles the rest.",
+        "values": "Founded by former Unacademy operators who built in-house sales systems after fighting legacy CRMs.",
+        "source_urls": ["https://www.superleap.com/"]
+      },
+      "others": {
+        "funding": "₹36 Cr Pre-Series A led by Peak XV Partners' Surge",
+        "major_customers_partners": "Razorpay, Aakash Education, MediBuddy, HCL Guvi",
+        "recent_news": "Raised ₹36 Cr Pre-Series A from Peak XV Partners.",
+        "source_urls": [
+          "https://www.superleap.com/press-release-pre-series-a-fundraise"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "profound.me",
+      "hq": "Koramangala, Bengaluru, Karnataka, India",
+      "major_offices": "Doddanekkundi, Outer Ring Road, Bengaluru 560037",
+      "domain": "AI-powered professional networking",
+      "website": "https://profound.me/",
+      "about": {
+        "founding_year": "2025",
+        "employee_count": "1–10",
+        "core_products_services": "AI-native professional network where each person gets a voice-first AI Rep that learns their expertise and represents them for opportunities, introductions, and hiring matches.",
+        "source_urls": [
+          "https://profound.me/",
+          "https://www.indianstartuptimes.com/investment/former-swiggy-and-zomato-leaders-launch-profound-raise-1-5-million-to-give-every-professional-their-own-ai-rep/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Anuj Rathi",
+          "title": "Co-founder",
+          "source_url": "https://www.indianstartuptimes.com/investment/former-swiggy-and-zomato-leaders-launch-profound-raise-1-5-million-to-give-every-professional-their-own-ai-rep/"
+        },
+        {
+          "name": "Prashant Parashar",
+          "title": "Co-founder",
+          "source_url": "https://www.indianstartuptimes.com/investment/former-swiggy-and-zomato-leaders-launch-profound-raise-1-5-million-to-give-every-professional-their-own-ai-rep/"
+        }
+      ],
+      "culture": {
+        "mission": "Give every professional an always-on AI Rep that captures judgment and context beyond résumés.",
+        "values": "Voice-first onboarding; targeting AI-first white-collar professionals across engineering, product, design, marketing, and sales.",
+        "source_urls": ["https://profound.me/"]
+      },
+      "others": {
+        "funding": "$1.5M Seed from Stellaris Venture Partners and 3one4 Capital; angels include Sriharsha Majety, Nandan Reddy, Harshil Mathur, and Kunal Shah.",
+        "recent_news": "Raised $1.5M Seed from Stellaris Venture Partners and 3one4 Capital; targeting 1M professionals via waitlist.",
+        "source_urls": [
+          "https://www.linkedin.com/posts/profoundme_activity-7494294385518505984-nEqZ"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Revspot",
+      "hq": "Koramangala, Bengaluru, Karnataka, India",
+      "major_offices": "Indiqube Octagon, 3rd Floor, Koramangala",
+      "domain": "AI revenue intelligence for sales teams",
+      "website": "https://revspot.ai/",
+      "about": {
+        "founding_year": "2024",
+        "employee_count": "~69",
+        "core_products_services": "AI-native revenue platform (Spot agent) for high-ticket B2C: lead generation, enrichment, Voice AI qualification, WhatsApp nurture, and sales-ready handoffs across real estate, edtech, fintech, and automotive.",
+        "source_urls": [
+          "https://revspot.ai/",
+          "https://revspot.ai/about.html"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Darshan Subash",
+          "title": "Co-founder & CEO",
+          "source_url": "https://revspot.ai/about.html"
+        },
+        {
+          "name": "Chirag Wadhera",
+          "title": "Co-founder & CTO",
+          "source_url": "https://revspot.ai/about.html"
+        },
+        {
+          "name": "Varun Garg",
+          "title": "Co-founder & COO",
+          "source_url": "https://revspot.ai/about.html"
+        }
+      ],
+      "culture": {
+        "mission": "Replace fragmented B2C sales and marketing workflows with one AI revenue engine that delivers qualified buyers.",
+        "values": "Built by alumni of IITs and IIMs with deep GTM and fintech engineering experience.",
+        "source_urls": ["https://revspot.ai/about.html"]
+      },
+      "others": {
+        "funding": "$4.8M Series A from Inflexor Ventures and Info Edge Ventures; Pentathlon Ventures and Silicon Road also participated.",
+        "major_customers_partners": "50+ customers across real estate, education, automotive, and wealth management.",
+        "recent_news": "Raised $4.8M Series A from Inflexor Ventures and Info Edge Ventures.",
+        "source_urls": [
+          "https://entrepreneur.economictimes.indiatimes.com/news/funding/revspot-secures-48-million-series-a-funding-to-revolutionize-b2c-revenue-technology/132706040"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Mandrake Bio",
+      "hq": "Bengaluru, Karnataka, India",
+      "domain": "AI-driven protein design and biotechnology",
+      "website": "https://mandrakebio.com/",
+      "about": {
+        "founding_year": "2025",
+        "employee_count": "~10",
+        "core_products_services": "Generative AI protein design platform that creates compact, precise gene-editing enzymes from first principles for agriculture and medicine, validated in an in-house wet lab.",
+        "source_urls": [
+          "https://analyticsindiamag.com/ai-news/bengaluru-based-mandrake-bio-raises-16-crore-to-build-ai-designed-gene-editors",
+          "https://www.thehindubusinessline.com/specials/emerging-entrepreneurs/getting-ai-to-engineer-gene-editors/article71408707.ece"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Tanay Lohia",
+          "title": "Founder & CEO",
+          "source_url": "https://www.pninews.com/mandrake-bio-raises-%e2%82%b916-crore-to-design-a-new-generation-of-gene-editors-from-scratch/"
+        },
+        {
+          "name": "Dr. Kutubuddin Molla",
+          "title": "Scientific Co-founder",
+          "source_url": "https://www.pninews.com/mandrake-bio-raises-%e2%82%b916-crore-to-design-a-new-generation-of-gene-editors-from-scratch/"
+        }
+      ],
+      "culture": {
+        "mission": "Design programmable gene editors from scratch rather than adapting natural enzymes.",
+        "values": "Treats editor development as an engineering discipline — compressing years of enzyme screening into weeks of AI-guided design.",
+        "source_urls": [
+          "https://www.thehindubusinessline.com/specials/emerging-entrepreneurs/getting-ai-to-engineer-gene-editors/article71408707.ece"
+        ]
+      },
+      "others": {
+        "funding": "₹16 Cr Pre-seed co-led by Activate and Antler; Spectrum Impact, DeVC, and biotech angels participated.",
+        "major_customers_partners": "B2B licensing model targeting global seed corporations and genetic therapy developers.",
+        "recent_news": "Raised ₹16 Cr Pre-seed from Activate and Antler.",
+        "source_urls": [
+          "https://analyticsindiamag.com/ai-news/bengaluru-based-mandrake-bio-raises-16-crore-to-build-ai-designed-gene-editors"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "SwitchOn Inc.",
+      "hq": "HSR Layout, Bengaluru, Karnataka, India",
+      "domain": "Computer-vision AI for manufacturing quality inspection",
+      "website": "https://switchon.io/",
+      "about": {
+        "founding_year": "2017",
+        "employee_count": "unspecified",
+        "core_products_services": "DeepInspect platform integrates edge-native computer vision into factory lines for automated defect detection at 1,200+ products/minute with sub-150-micron precision and 99%+ accuracy.",
+        "source_urls": [
+          "https://switchon.io/",
+          "https://entrepreneur.economictimes.indiatimes.com/news/funding/switchon-secures-8-million-pre-series-b-funding-to-revolutionize-manufacturing-with-ai/132430202"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Aniruddha Banerjee",
+          "title": "Co-founder",
+          "source_url": "https://entrepreneur.economictimes.indiatimes.com/news/funding/switchon-secures-8-million-pre-series-b-funding-to-revolutionize-manufacturing-with-ai/132430202"
+        },
+        {
+          "name": "Avra Banerjee",
+          "title": "Co-founder",
+          "source_url": "https://www.forbesindia.com/article/take-one-big-story-of-the-day/how-switchon-automates-quality-check-on-the-factory-floor/84705/1"
+        }
+      ],
+      "culture": {
+        "mission": "Make zero-defect manufacturing a reality on every factory floor through Physical AI.",
+        "values": "Edge-first architecture for remote factories with limited connectivity; deployed across 170+ production lines in 60+ facilities globally.",
+        "source_urls": ["https://switchon.io/"]
+      },
+      "others": {
+        "funding": "$8M Pre-Series B led by IvyCap Ventures; SIG Tattva and Trifecta Capital participated.",
+        "major_customers_partners": "Unilever, Bosch, Maruti Suzuki, and ALPA across consumer goods, automotive, electronics, and pharma.",
+        "recent_news": "Raised $8M Pre-Series B from IvyCap Ventures.",
+        "source_urls": [
+          "https://yourstory.com/2026/07/manufacturing-tech-startup-switchon-pre-series-b-funding-ivycap-ventures"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
+    },
+    {
+      "name": "Emergent",
+      "hq": "Bengaluru, Karnataka, India",
+      "major_offices": "San Francisco, US (small office; majority of ~200 employees in Bengaluru)",
+      "domain": "AI platform for building software with natural language",
+      "website": "https://emergent.sh/",
+      "about": {
+        "founding_year": "2024",
+        "employee_count": "~200",
+        "core_products_services": "Autonomous coding agents that generate, test, and deploy production web and mobile applications from plain-language instructions — an engineering team in a box for serious builders.",
+        "source_urls": [
+          "https://emergent.sh/",
+          "https://techcrunch.com/2026/07/15/indian-ai-coding-startup-emergent-becomes-a-unicorn-just-over-a-year-after-launch/"
+        ]
+      },
+      "leadership": [
+        {
+          "name": "Mukund Jha",
+          "title": "Co-founder & CEO",
+          "source_url": "https://techcrunch.com/2026/07/15/indian-ai-coding-startup-emergent-becomes-a-unicorn-just-over-a-year-after-launch/"
+        },
+        {
+          "name": "Madhav Jha",
+          "title": "Co-founder & CTO",
+          "source_url": "https://www.ycombinator.com/companies/emergent"
+        }
+      ],
+      "culture": {
+        "mission": "Democratize software development so domain experts can build production-grade apps without traditional engineering teams.",
+        "values": "Y Combinator S24 company; twin founders previously built Dunzo and Amazon SageMaker research; 5M+ users and 6M+ apps built on platform.",
+        "source_urls": [
+          "https://emergent.sh/news/emergent-now-a-unicorn-at-1-5-billion-valuation"
+        ]
+      },
+      "others": {
+        "funding": "$130M Series C led by Creaegis at $1.5B valuation; $230M total raised from Khosla, SoftBank, Google, Lightspeed, and Y Combinator.",
+        "major_customers_partners": "200,000+ paying customers; $120M annual run-rate revenue reported July 2026.",
+        "recent_news": "Raised $130M Series C; became unicorn at $1.5B valuation.",
+        "source_urls": [
+          "https://emergent.sh/news/emergent-now-a-unicorn-at-1-5-billion-valuation"
+        ]
+      },
+      "ambiguity_flag": false,
+      "ambiguity_notes": ""
     }
   ],
   "master_table": [

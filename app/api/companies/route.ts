@@ -25,12 +25,18 @@ function escapeIlike(value: string): string {
 
 function rowToListItem(row: CompanyRow): CompanyListItem {
   const meta = metaToListExtras(row.company_meta);
+  const rawMeta = row.company_meta as { website?: string } | null | undefined;
+  const website =
+    typeof rawMeta?.website === "string" && rawMeta.website.trim()
+      ? rawMeta.website.trim()
+      : undefined;
   return {
     id: row.id,
     slug: row.slug,
     name: row.name,
     url: row.careers_url,
     ...(row.blog_url ? { blog: row.blog_url } : {}),
+    ...(website ? { website } : {}),
     ...(meta ? { meta } : {}),
   };
 }
@@ -80,6 +86,31 @@ const getCompaniesPage = unstable_cache(
   { revalidate: CACHE_TTL_SECONDS, tags: ["companies"] }
 );
 
+const getCompaniesBySlugs = unstable_cache(
+  async (slugsKey: string): Promise<CompanyRow[]> => {
+    const slugs = slugsKey.split(",").filter(Boolean);
+    if (slugs.length === 0) return [];
+
+    const supabase = createSupabaseAnonServerClient();
+    const { data, error } = await supabase
+      .from("companies")
+      .select("id, slug, name, careers_url, blog_url, company_meta")
+      .in("slug", slugs);
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const bySlug = new Map(
+      ((data ?? []) as CompanyRow[]).map((row) => [row.slug, row])
+    );
+    return slugs
+      .map((slug) => bySlug.get(slug))
+      .filter((row): row is CompanyRow => row != null);
+  },
+  ["companies-by-slugs"],
+  { revalidate: CACHE_TTL_SECONDS, tags: ["companies"] }
+);
+
 function parsePageParams(searchParams: URLSearchParams): {
   page: number;
   pageSize: number;
@@ -99,11 +130,32 @@ function parsePageParams(searchParams: URLSearchParams): {
 }
 
 /** GET ?page=&limit=&q= — paginated directory (default list for the home page). */
+/** GET ?slugs=slug1,slug2 — fetch specific companies by slug (preserves slug order). */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const { page, pageSize, q } = parsePageParams(searchParams);
+  const slugsParam = searchParams.get("slugs");
 
   try {
+    if (slugsParam) {
+      const slugs = slugsParam
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .slice(0, MAX_PAGE_SIZE);
+      const rows = await getCompaniesBySlugs(slugs.join(","));
+      const data = rows.map(rowToListItem);
+      const indexTotal = await getCompanyIndexTotal();
+      const body: CompaniesPageResponse = {
+        data,
+        total: data.length,
+        page: 1,
+        pageSize: data.length,
+        indexTotal,
+      };
+      return NextResponse.json(body, { headers: CACHE_HEADERS });
+    }
+
+    const { page, pageSize, q } = parsePageParams(searchParams);
     const [{ rows, total }, indexTotal] = await Promise.all([
       getCompaniesPage(page, pageSize, q),
       getCompanyIndexTotal(),

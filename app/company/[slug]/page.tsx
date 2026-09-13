@@ -63,8 +63,11 @@ export default async function CompanyPage({ params }: PageProps) {
   }
 
   const { company, openings } = data;
-  const logoSrc = getCompanyLogoSrc(company.careers_url);
   const profile = company.company_meta;
+  const logoSrc = getCompanyLogoSrc(
+    company.careers_url,
+    profile?.website ?? null
+  );
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
