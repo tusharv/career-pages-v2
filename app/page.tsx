@@ -26,6 +26,7 @@ import {
 } from 'lucide-react'
 import AutoSuggest from '@/components/AutoSuggest'
 import { CompanyCardMoreMenu } from '@/components/CompanyCardMoreMenu'
+import { RemoteJobsTeaser } from '@/components/RemoteJobsTeaser'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
 import { useCompanies } from './CompaniesContext'
 import type { Company } from './CompaniesContext'
@@ -499,6 +500,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <RemoteJobsTeaser />
 
         {loading && !error && (
           <CompaniesSectionSkeleton cardCount={companiesPerPage} />

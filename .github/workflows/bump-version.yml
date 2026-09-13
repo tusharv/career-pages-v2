@@ -34,8 +34,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Configure git user
         run: |
@@ -68,7 +68,7 @@ jobs:
           TYPE: ${{ steps.semver.outputs.type }}
         run: |
           npm ci
-          npm version "$TYPE" -m "chore(release): %s [skip ci]"
+          npm version "$TYPE" -m "chore(release): %s"
 
       - name: Push commit and tags
         env:
@@ -81,5 +81,3 @@ jobs:
           fi
           git push origin "$CURRENT_BRANCH"
           git push origin --tags
-
-
