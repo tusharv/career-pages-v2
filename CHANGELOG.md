@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 - 2026-09-13
+
+- feat: more company data
+
 ## 0.2.0 - 2026-09-13
 
 - fix: version changes
