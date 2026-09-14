@@ -14,10 +14,11 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/JsonLd";
 import { getCompanyPageData } from "@/lib/data/company-page";
 import { getCompanyLogoSrc } from "@/lib/company-logo";
 import { CompanyMetaSections } from "@/components/CompanyMetaSections";
-import { metaPresent } from "@/lib/company-meta";
+import { buildCompanyJsonLd, buildCompanyMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -28,32 +29,12 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const data = await getCompanyPageData(params.slug);
   if (!data) {
-    return { title: "Company not found | Career Pages" };
+    return {
+      title: "Company not found",
+      robots: { index: false, follow: false },
+    };
   }
-  const { company } = data;
-  const title = `${company.name} — openings & careers | Career Pages`;
-  const meta = company.company_meta;
-  const domain = metaPresent(meta?.domain);
-  const core = metaPresent(meta?.about?.core_products_services);
-  const snippet =
-    domain ||
-    (core
-      ? core.length > 140
-        ? `${core.slice(0, 137)}…`
-        : core
-      : null);
-  const description = snippet
-    ? `${snippet} — Careers and resources for ${company.name}.`
-    : `Careers, engineering blog, and job links for ${company.name}.`;
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "website",
-    },
-  };
+  return buildCompanyMetadata(data.company);
 }
 
 export default async function CompanyPage({ params }: PageProps) {
@@ -71,6 +52,7 @@ export default async function CompanyPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <JsonLd data={buildCompanyJsonLd(company)} />
       <Header />
 
       <main className="flex-grow container mx-auto px-4 py-8 max-w-3xl">

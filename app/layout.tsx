@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster"
 
 
 import { CompaniesProvider } from './CompaniesContext';
+import { buildPageMetadata, getSiteUrl, siteConfig } from "@/lib/seo";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,30 +22,33 @@ const geistMono = localFont({
   adjustFontFallback: "Times New Roman",
 });
 
+const rootMetadata = buildPageMetadata({
+  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  description: siteConfig.defaultDescription,
+  path: "/",
+});
+
 export const metadata: Metadata = {
-  title: "careerpages.co.in - Simplifying Your Job Search",
-  description: "Discover careerpages.co.in — a fast and intuitive platform designed to simplify job searches for students and job seekers. Explore company engineering blogs, stay updated with company news, understand organizational structures, and effortlessly share job leads.",
-  keywords: "job search, student jobs, career development, engineering blogs, company news, job insights, organizational structure, job opportunities, fast job search platform, job search tools, interview prep, job sharing, hacktoberfest, web dev, careerpages, job seekers",
-  authors: [{ name: "careerpages.co.in" }],
-  openGraph: {
-    title: "careerpages.co.in - Simplifying Your Job Search",
-    description: "careerpages.co.in is designed to empower students and job seekers with tools to find their next opportunity fast. Discover company blogs, search news, and more.",
-    url: "https://careerpages.co.in/",
-    images: [{ url: "https://careerpages.co.in/social.png" }],
-    type: "website",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "careerpages.co.in - Simplifying Your Job Search",
-    description: "Discover careerpages.co.in, the fast and efficient platform that helps students and job seekers find the right opportunity. Check out company blogs, news, and more.",
-    images: ["https://careerpages.co.in/social.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "https://careerpages.co.in/",
+  description: rootMetadata.description,
+  keywords: rootMetadata.keywords,
+  authors: [{ name: siteConfig.legalName, url: getSiteUrl() }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  applicationName: siteConfig.name,
+  category: "technology",
+  openGraph: rootMetadata.openGraph,
+  twitter: rootMetadata.twitter,
+  robots: rootMetadata.robots,
+  alternates: rootMetadata.alternates,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
 };
 

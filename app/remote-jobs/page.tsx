@@ -8,21 +8,13 @@ import { Separator } from '@/components/ui/separator'
 import { getReferralSiteUrl, getRemoteJobs } from '@/lib/remote-jobs'
 import type { RemoteJob } from '@/lib/types/remote-job'
 import { RemoteJobsBrowser } from './RemoteJobsBrowser'
+import { buildRemoteJobsMetadata } from '@/lib/seo'
 
 export const revalidate = 3600
 
 const PAGE_SIZE = 12
 
-const title = 'Remote technical jobs | Career Pages'
-const description =
-  'Open remote engineering, AI/ML, data, and security roles at micro1—apply directly, no account needed.'
-
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: { title, description, type: 'website' },
-  alternates: { canonical: 'https://careerpages.co.in/remote-jobs' },
-}
+export const metadata: Metadata = buildRemoteJobsMetadata()
 
 export default async function RemoteJobsPage() {
   const sourceUrl = getReferralSiteUrl()
