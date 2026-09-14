@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 - 2026-09-14
+
+- feat: seo and 404 page
+
 ## 0.3.0 - 2026-09-13
 
 - feat: more company data
