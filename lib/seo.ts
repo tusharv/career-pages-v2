@@ -201,6 +201,87 @@ export function buildRemoteJobsMetadata(): Metadata {
   });
 }
 
+export function buildInterviewPrepMetadata(): Metadata {
+  return buildPageMetadata({
+    title: "Interview prep for remote and company jobs",
+    description:
+      "Prepare for micro1 AI interviews and traditional company screens. Practice with Zara, then apply through career pages in this directory.",
+    path: "/interview-prep",
+    keywords: [
+      "interview prep",
+      "AI interview",
+      "micro1 interview",
+      "remote job interview",
+      "tech interview guide",
+      "practice interview",
+    ],
+  });
+}
+
+/** HowTo JSON-LD for the interview prep guide. */
+export function buildInterviewPrepJsonLd() {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Interview prep for remote and company jobs",
+    description:
+      "How to prepare for micro1 AI interviews and traditional company hiring loops.",
+    url: `${siteUrl}/interview-prep`,
+    step: [
+      {
+        "@type": "HowToStep",
+        name: "Pick the interview type",
+        text: "Remote micro1 roles use an on-demand AI interview. Company jobs listed on Career Pages follow a recruiter and hiring-manager loop.",
+      },
+      {
+        "@type": "HowToStep",
+        name: "Get ready before the call",
+        text: "Polish GitHub, LinkedIn, and your CV. Use AI tools only in prep to find skill gaps and drill resume questions. Research the company, seek a referral, and confirm logistics.",
+      },
+      {
+        "@type": "HowToStep",
+        name: "Handle the live round well",
+        text: "Arrive a few minutes early, confirm your setup, walk through your resume, keep AI tools closed, and talk through your reasoning.",
+      },
+      {
+        "@type": "HowToStep",
+        name: "Close the loop after you hang up",
+        text: "Write down what happened, start one improvement, wait for the stated timeline, follow up once if silent, and keep applying.",
+      },
+    ],
+  };
+}
+
+/** Breadcrumb JSON-LD for the interview prep guide. */
+export function buildInterviewPrepBreadcrumbJsonLd() {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Companies",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Remote jobs",
+        item: `${siteUrl}/remote-jobs`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Interview prep",
+        item: `${siteUrl}/interview-prep`,
+      },
+    ],
+  };
+}
+
 export const adminMetadata: Metadata = buildPageMetadata({
   title: "Admin",
   description: "Career Pages administration.",

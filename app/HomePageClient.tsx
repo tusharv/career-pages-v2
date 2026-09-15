@@ -27,6 +27,7 @@ import {
 import AutoSuggest from '@/components/AutoSuggest'
 import { CompanyCardMoreMenu } from '@/components/CompanyCardMoreMenu'
 import { RemoteJobsTeaser } from '@/components/RemoteJobsTeaser'
+import { InterviewPrepBanner } from '@/components/InterviewPrepBanner'
 import { RecentlyAddedTeaser } from '@/components/RecentlyAddedTeaser'
 import { useEasterEgg } from '@/hooks/useEasterEgg'
 import { useCompanies } from './CompaniesContext'
@@ -505,6 +506,8 @@ export default function HomePageClient() {
         </section>
 
         <RemoteJobsTeaser />
+
+        <InterviewPrepBanner context="home" />
 
         <RecentlyAddedTeaser />
 

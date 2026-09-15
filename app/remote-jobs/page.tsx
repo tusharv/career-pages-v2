@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { getReferralSiteUrl, getRemoteJobs } from '@/lib/remote-jobs'
 import type { RemoteJob } from '@/lib/types/remote-job'
 import { RemoteJobsBrowser } from './RemoteJobsBrowser'
+import { InterviewPrepBanner } from '@/components/InterviewPrepBanner'
 import { buildRemoteJobsMetadata } from '@/lib/seo'
 
 export const revalidate = 3600
@@ -83,6 +84,8 @@ export default async function RemoteJobsPage() {
             </div>
           </div>
         </section>
+
+        <InterviewPrepBanner context="remote" />
 
         <RemoteJobsBrowser
           initialJobs={jobs.slice(0, PAGE_SIZE)}

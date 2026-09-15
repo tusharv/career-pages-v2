@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { HeaderNav } from '@/components/HeaderNav'
 
 export function Header() {
   return (
@@ -25,20 +26,7 @@ export function Header() {
           </div>
         </Link>
 
-        <nav aria-label="Main" className="flex items-center gap-1 sm:gap-2">
-          <Link
-            href="/"
-            className="rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground outline-none ring-offset-background transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-3"
-          >
-            Companies
-          </Link>
-          <Link
-            href="/remote-jobs"
-            className="rounded-lg px-2.5 py-2 text-sm font-medium text-muted-foreground outline-none ring-offset-background transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-3"
-          >
-            Remote jobs
-          </Link>
-        </nav>
+        <HeaderNav />
       </div>
     </header>
   )

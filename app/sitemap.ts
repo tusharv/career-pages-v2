@@ -20,6 +20,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    {
+      url: `${base}/interview-prep`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
     ...companies.map((company) => ({
       url: `${base}/company/${company.slug}`,
       lastModified: company.updated_at
