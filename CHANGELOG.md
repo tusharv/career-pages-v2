@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0 - 2026-09-15
+
+- feat: interview prep guide, footer
+
 ## 0.4.0 - 2026-09-14
 
 - feat: seo and 404 page
