@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 - 2026-09-17
+
+- feat: new courses
+- feat: tools
+
 ## 0.5.0 - 2026-09-15
 
 - feat: interview prep guide, footer
