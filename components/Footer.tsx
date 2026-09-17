@@ -12,6 +12,7 @@ const CONTRIBUTORS_URL =
 const NAV = [
   { href: '/', label: 'Companies' },
   { href: '/remote-jobs', label: 'Remote jobs' },
+  { href: '/tools', label: 'Tools' },
   { href: '/interview-prep', label: 'Interview prep' },
 ] as const
 
@@ -119,7 +120,7 @@ export function Footer() {
             aria-label="Built with"
             className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
           >
-            <TextLink href="https://ui.shadcn.com/" external muted>
+            <TextLink href="/tools/shadcn" muted>
               <Image
                 width={16}
                 height={16}
@@ -129,7 +130,7 @@ export function Footer() {
               />
               shadcn/ui
             </TextLink>
-            <TextLink href="https://vercel.com" external muted>
+            <TextLink href="/tools/vercel" muted>
               <Image
                 width={16}
                 height={16}
@@ -139,7 +140,7 @@ export function Footer() {
               />
               Vercel
             </TextLink>
-            <TextLink href="https://v0.dev/" external muted>
+            <TextLink href="/tools/v0" muted>
               <Image
                 width={16}
                 height={16}
@@ -149,7 +150,7 @@ export function Footer() {
               />
               v0
             </TextLink>
-            <TextLink href="https://supabase.com" external muted>
+            <TextLink href="/tools/supabase" muted>
               <svg
                 width={16}
                 height={16}
@@ -199,7 +200,7 @@ export function Footer() {
               </svg>
               Supabase
             </TextLink>
-            <TextLink href="https://cursor.com" external muted>
+            <TextLink href="/tools/cursor" muted>
               <svg
                 width={16}
                 height={16}

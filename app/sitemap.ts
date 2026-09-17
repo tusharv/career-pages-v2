@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo";
 import { getSitemapCompanies } from "@/lib/data/sitemap-companies";
+import { TOOLS } from "@/lib/tools";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl();
@@ -26,6 +27,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: `${base}/tools`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    ...TOOLS.map((tool) => ({
+      url: `${base}/tools/${tool.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })),
     ...companies.map((company) => ({
       url: `${base}/company/${company.slug}`,
       lastModified: company.updated_at

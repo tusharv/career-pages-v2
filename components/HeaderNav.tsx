@@ -18,6 +18,11 @@ const links = [
     isActive: (path: string) => path.startsWith("/remote-jobs"),
   },
   {
+    href: "/tools",
+    label: "Tools",
+    isActive: (path: string) => path.startsWith("/tools"),
+  },
+  {
     href: "/interview-prep",
     label: "Interview prep",
     shortLabel: "Prep",
@@ -29,7 +34,7 @@ export function HeaderNav() {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Main" className="flex items-center gap-1 sm:gap-2">
+    <nav aria-label="Main" className="flex shrink-0 items-center gap-0.5 sm:gap-2">
       {links.map((link) => {
         const active = link.isActive(pathname);
         const isInterviewPrep = link.href === "/interview-prep";
@@ -48,7 +53,7 @@ export function HeaderNav() {
             href={link.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "rounded-lg px-2 py-2 text-sm font-medium outline-none ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-3",
+              "rounded-lg px-1.5 py-2 text-sm font-medium outline-none ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:px-3",
               isInterviewPrep
                 ? cn(
                     "inline-flex items-center gap-1.5 bg-[hsl(var(--ring))] px-2.5 font-semibold text-[hsl(222_58%_10%)] shadow-sm hover:bg-[hsl(var(--ring)/0.9)] hover:text-[hsl(222_58%_10%)] sm:px-3.5",

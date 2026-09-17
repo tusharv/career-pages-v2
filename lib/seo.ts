@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { metaPresent } from "@/lib/company-meta";
 import { getCompanyLogoSrc } from "@/lib/company-logo";
 import type { CompanyRow } from "@/lib/types/company";
+import { TOOLS, type ToolGuide } from "@/lib/tools";
 
 const DEFAULT_SITE_URL = "https://careerpages.co.in";
 
@@ -248,6 +249,123 @@ export function buildInterviewPrepJsonLd() {
         "@type": "HowToStep",
         name: "Close the loop after you hang up",
         text: "Write down what happened, start one improvement, wait for the stated timeline, follow up once if silent, and keep applying.",
+      },
+    ],
+  };
+}
+
+export function buildToolsMetadata(): Metadata {
+  return buildPageMetadata({
+    title: "Tools and resources for your developer job search",
+    description:
+      "Find tools for learning developer skills, building and sharing portfolio projects, and meeting other developers. Practical guides, tips, and small activities.",
+    path: "/tools",
+    keywords: [
+      "job search tools",
+      "Cursor portfolio",
+      "v0.dev",
+      "shadcn/ui",
+      "Supabase",
+      "Vercel deploy",
+      "Hacktoberfest",
+      "Scrimba",
+      "tech job hunt",
+    ],
+  });
+}
+
+export function buildToolMetadata(tool: ToolGuide): Metadata {
+  return buildPageMetadata({
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    path: `/tools/${tool.slug}`,
+    keywords: [...tool.keywords],
+  });
+}
+
+/** ItemList JSON-LD for the tools hub. */
+export function buildToolsJsonLd() {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Tools and resources for your developer job search",
+    description:
+      "Guides for using v0, shadcn/ui, Cursor, Supabase, Vercel, Scrimba, Meetup, Luma, and Hacktoberfest while job hunting.",
+    url: `${siteUrl}/tools`,
+    numberOfItems: TOOLS.length,
+    itemListElement: TOOLS.map((tool, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: tool.name,
+      url: `${siteUrl}/tools/${tool.slug}`,
+      description: tool.tagline,
+    })),
+  };
+}
+
+export function buildToolsBreadcrumbJsonLd() {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Companies",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Tools",
+        item: `${siteUrl}/tools`,
+      },
+    ],
+  };
+}
+
+/** HowTo JSON-LD for a single tool guide. */
+export function buildToolJsonLd(tool: ToolGuide) {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: tool.activity,
+    description: tool.metaDescription,
+    url: `${siteUrl}/tools/${tool.slug}#try`,
+    step: tool.playbook.map((item) => ({
+      "@type": "HowToStep",
+      name: item.title,
+      text: item.body,
+    })),
+  };
+}
+
+export function buildToolBreadcrumbJsonLd(tool: ToolGuide) {
+  const siteUrl = getSiteUrl();
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Companies",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Tools",
+        item: `${siteUrl}/tools`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: tool.name,
+        item: `${siteUrl}/tools/${tool.slug}`,
       },
     ],
   };

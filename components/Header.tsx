@@ -5,10 +5,10 @@ import { HeaderNav } from '@/components/HeaderNav'
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
-      <div className="container mx-auto flex items-center justify-between gap-4 px-4 py-3 md:py-4">
+      <div className="container mx-auto flex items-center justify-between gap-2 px-4 py-3 md:gap-4 md:py-4">
         <Link
           href="/"
-          className="group flex items-center gap-3 rounded-lg outline-none ring-offset-background transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="group flex min-w-0 items-center gap-3 rounded-lg outline-none ring-offset-background transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
           <Image
             width={36}
@@ -19,7 +19,9 @@ export function Header() {
             className="transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
           />
           <div className="flex flex-col leading-tight">
-            <span className="text-lg font-bold tracking-tight md:text-xl">Career Pages</span>
+            <span className="hidden text-lg font-bold tracking-tight sm:inline md:text-xl">
+              Career Pages
+            </span>
             <span className="hidden text-xs font-medium text-muted-foreground sm:block">
               Curated company entry points
             </span>
