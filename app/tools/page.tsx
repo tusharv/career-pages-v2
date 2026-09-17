@@ -40,7 +40,7 @@ const groups: {
   },
   {
     id: "community",
-    title: "Meet and learn with developers",
+    title: "Meet and learn with like-minded people",
     description:
       "Find events near your city, learn with others, and build connections through shared interests.",
     slugs: ["meetup", "luma", "hacktoberfest"],
@@ -73,7 +73,7 @@ export default function ToolsPage() {
             <span className="text-white">Tools</span>
           </nav>
           <div className="mt-8 max-w-3xl">
-            <h1 className="text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl">
+            <h1 className="text-pretty text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl">
               Find a useful tool for your next step.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
@@ -87,13 +87,13 @@ export default function ToolsPage() {
           </div>
           <nav
             aria-label="Browse tools by purpose"
-            className="mt-8 flex flex-wrap gap-3"
+            className="-mx-4 mt-8 flex gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0"
           >
             {groups.map((group) => (
               <a
                 key={group.id}
                 href={`#${group.id}`}
-                className="rounded-full border border-white/25 px-4 py-2 text-sm text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="shrink-0 rounded-full border border-white/25 px-4 py-2 text-sm text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
                 {group.title}
               </a>
@@ -114,17 +114,23 @@ export default function ToolsPage() {
             <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
               {group.description}
             </p>
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
+            <div
+              className={
+                group.slugs.length > 1
+                  ? "mt-8 grid gap-5 md:grid-cols-2"
+                  : "mt-8 grid max-w-2xl gap-5"
+              }
+            >
               {group.slugs
                 .map((slug) => TOOLS.find((tool) => tool.slug === slug)!)
                 .map((tool) => (
                   <article
                     key={tool.slug}
-                    className="flex flex-col rounded-2xl border border-border bg-card p-6 md:p-8"
+                    className="flex min-w-0 flex-col rounded-2xl border border-border bg-card p-5 sm:p-6 md:p-8"
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex min-w-0 items-center gap-4">
                       <ToolLogo tool={tool} size={44} framed />
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-xs text-muted-foreground">
                           {tool.kind === "event"
                             ? "Community event"

@@ -62,7 +62,7 @@ export function RemoteJobsTeaser() {
             </p>
           </div>
 
-          <Button asChild variant="outline" className="shrink-0 gap-1.5">
+          <Button asChild variant="outline" className="w-full shrink-0 gap-1.5 sm:w-auto">
             <Link href="/remote-jobs">
               {status === 'ready' && total > 0
                 ? `View all ${total} roles`

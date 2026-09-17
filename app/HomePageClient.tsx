@@ -421,7 +421,7 @@ export default function HomePageClient() {
                 <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-white/70">
                   Index
                 </p>
-                <h1 className="mt-3 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl">
+                <h1 className="mt-3 text-pretty text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl">
                   Your shortcut to real career pages.
                 </h1>
                 <p className="mt-4 max-w-lg text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
@@ -450,7 +450,7 @@ export default function HomePageClient() {
                   <Button
                     type="button"
                     variant="ghost"
-                    className="absolute right-1 top-1/2 h-10 -translate-y-1/2 px-3 text-white hover:bg-white/10 hover:text-white"
+                    className="absolute right-1 top-1/2 h-10 -translate-y-1/2 px-3 text-muted-foreground hover:bg-muted hover:text-foreground"
                     onClick={() => {
                       if (searchTerm) handleClearSearch()
                       else inputRef.current?.focus()

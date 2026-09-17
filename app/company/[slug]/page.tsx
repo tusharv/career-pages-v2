@@ -18,7 +18,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { getCompanyPageData } from "@/lib/data/company-page";
 import { getCompanyLogoSrc } from "@/lib/company-logo";
 import { CompanyMetaSections } from "@/components/CompanyMetaSections";
-import { buildCompanyJsonLd, buildCompanyMetadata } from "@/lib/seo";
+import { buildCompanyJsonLd, buildCompanyMetadata, siteIcons } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -32,6 +32,7 @@ export async function generateMetadata({
     return {
       title: "Company not found",
       robots: { index: false, follow: false },
+      icons: siteIcons,
     };
   }
   return buildCompanyMetadata(data.company);

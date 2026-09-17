@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExternalLink, Home, Wrench } from "lucide-react";
+import { ExternalLink, Home, Wrench, MoveDownRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/JsonLd";
 import { ToolLogo } from "@/components/ToolLogo";
+import { TOOL_SPARKS } from "@/lib/tool-sparks";
 import { ToolsPlaybook } from "@/components/ToolsPlaybook";
 import { getTool, TOOL_SLUGS } from "@/lib/tools";
 import { getToolReferralUrl, hasToolReferral } from "@/lib/tool-referrals";
@@ -12,6 +13,7 @@ import {
   buildToolBreadcrumbJsonLd,
   buildToolJsonLd,
   buildToolMetadata,
+  siteIcons,
 } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -28,6 +30,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
     return {
       title: "Tool not found",
       robots: { index: false, follow: false },
+      icons: siteIcons,
     };
   }
   return buildToolMetadata(tool);
@@ -84,14 +87,18 @@ export default function ToolGuidePage({ params }: PageProps) {
               <p className="mt-5 font-mono text-xs font-medium uppercase tracking-[0.2em] text-white/70">
                 {tool.purpose}
               </p>
-              <h1 className="mt-3 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl">
+              <h1 className="mt-3 text-pretty text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl">
                 {tool.name}
               </h1>
               <p className="mt-4 max-w-lg text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
                 {tool.description}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button asChild variant="secondary" className="gap-1.5">
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="w-full gap-1.5 sm:w-auto"
+                >
                   <Link
                     href={referralUrl}
                     target="_blank"
@@ -119,6 +126,18 @@ export default function ToolGuidePage({ params }: PageProps) {
             </div>
 
             <aside>
+              <a
+                href="#try"
+                className="mb-6 flex items-center gap-4 rounded-xl border border-yellow-200/50 bg-yellow-200 px-5 py-4 text-slate-900 shadow-md transition-transform motion-safe:hover:-rotate-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <span className="flex-1 text-lg font-semibold leading-snug">
+                  {TOOL_SPARKS[tool.slug].note}
+                  <span className="mt-2 block text-xs font-normal">
+                    Jump to a small experiment
+                  </span>
+                </span>
+                <MoveDownRight className="h-6 w-6 shrink-0" aria-hidden />
+              </a>
               <div className="rounded-2xl border border-white/15 bg-white/[0.07] p-6 shadow-xl backdrop-blur-md">
                 <p className="font-mono text-xs font-medium uppercase tracking-widest text-white/60">
                   Is it a fit for you?

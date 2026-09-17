@@ -1,15 +1,18 @@
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { RandomPracticePicker } from "@/components/RandomPracticePicker";
+import { TOOL_EXAMPLES } from "@/lib/tool-examples";
+import { ArrowRight, ExternalLink, PencilLine } from "lucide-react";
 import { ToolLogo } from "@/components/ToolLogo";
 import { getRelatedTools, type ToolGuide } from "@/lib/tools";
 
 export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
   const related = getRelatedTools(tool);
+
   return (
-    <div className="container mx-auto max-w-5xl px-4">
+    <div className="container mx-auto px-4">
       <nav
         aria-label="Guide sections"
-        className="flex flex-wrap gap-x-6 gap-y-3 border-b border-border py-6 text-sm"
+        className="-mx-4 flex gap-x-6 gap-y-3 overflow-x-auto border-b border-border px-4 py-6 text-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:flex-wrap md:overflow-visible md:px-0"
       >
         {[
           ["features", "Features"],
@@ -21,7 +24,7 @@ export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
           <a
             key={id}
             href={`#${id}`}
-            className="rounded-sm underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            className="shrink-0 whitespace-nowrap rounded-sm underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           >
             {label}
           </a>
@@ -32,7 +35,9 @@ export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
         className="scroll-mt-24 border-b border-border py-12 md:py-16"
       >
         <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-          {tool.kind === "event" ? "Ways to take part" : "Useful features"}
+          {tool.kind === "event"
+            ? "Find your way in"
+            : "What’s in the toolbox?"}
         </h2>
         <dl className="mt-8 grid gap-8 md:grid-cols-3">
           {tool.features.map((item) => (
@@ -50,7 +55,7 @@ export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
         className="scroll-mt-24 border-b border-border py-12 md:py-16"
       >
         <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-          How it can help while you job hunt
+          Where it fits into your job search
         </h2>
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           {tool.uses.map((item) => (
@@ -67,28 +72,37 @@ export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
         id="try"
         className="scroll-mt-24 border-b border-border py-12 md:py-16"
       >
-        <div className="rounded-2xl border border-border bg-muted/30 p-6 md:p-8">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            {tool.activity}
-          </h2>
-          <ol className="mt-8 space-y-7">
-            {tool.playbook.map((item, index) => (
-              <li key={item.title} className="flex gap-4">
-                <span
-                  aria-hidden
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold"
-                >
-                  {index + 1}
-                </span>
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="mt-2 max-w-prose text-sm leading-relaxed text-muted-foreground md:text-base">
-                    {item.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+        <div className="rounded-2xl border border-border bg-muted/20 p-6 md:p-10">
+          <p className="mb-4 flex items-center gap-2 text-sm font-medium text-muted-foreground">
+            <PencilLine className="h-4 w-4" aria-hidden /> A little room to
+            experiment
+          </p>
+          <RandomPracticePicker
+            items={TOOL_EXAMPLES[tool.slug]}
+            label={
+              tool.slug === "scrimba"
+                ? `${TOOL_EXAMPLES[tool.slug].length} courses and paths to explore`
+                : `${TOOL_EXAMPLES[tool.slug].length} portfolio ideas to explore`
+            }
+            buttonLabel={
+              tool.slug === "v0"
+                ? "Try another prompt"
+                : tool.slug === "shadcn"
+                  ? "Try another challenge"
+                  : tool.slug === "scrimba"
+                    ? "Explore another course"
+                    : "Try another example"
+            }
+            cardLabel={
+              tool.slug === "v0"
+                ? "A prompt to play with"
+                : tool.slug === "shadcn"
+                  ? "A tiny design challenge"
+                  : tool.slug === "scrimba"
+                    ? "A course to learn from"
+                    : "Something worth building"
+            }
+          />
         </div>
       </section>
       <section
@@ -96,11 +110,14 @@ export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
         className="scroll-mt-24 border-b border-border py-12 md:py-16"
       >
         <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-          Tips and things to know
+          A few things worth trying
         </h2>
-        <div className="mt-8 space-y-7">
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
           {tool.tips.map((item) => (
-            <div key={item.title} className="max-w-prose">
+            <div
+              key={item.title}
+              className="max-w-prose border-t-2 border-[hsl(var(--ring))] pt-5"
+            >
               <h3 className="font-semibold">{item.title}</h3>
               <p className="mt-2 leading-relaxed text-muted-foreground">
                 {item.body}
@@ -139,7 +156,7 @@ export function ToolsPlaybook({ tool }: { tool: ToolGuide }) {
       </section>
       <section className="py-12 md:py-16">
         <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-          You might also find useful
+          Follow your curiosity
         </h2>
         <p className="mt-3 text-muted-foreground">
           Explore these if they fit what you want to do next.

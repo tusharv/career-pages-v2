@@ -75,7 +75,7 @@ export default async function AdminProtectedLayout({
                 Admin
               </span>
             </Link>
-            <nav className="flex items-center gap-1 border-l pl-6 text-sm">
+            <nav className="hidden items-center gap-1 border-l pl-6 text-sm sm:flex">
               <Button
                 variant="ghost"
                 size="sm"

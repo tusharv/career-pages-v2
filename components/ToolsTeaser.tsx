@@ -21,7 +21,7 @@ export function ToolsTeaser() {
             </p>
           </div>
 
-          <Button asChild variant="outline" className="h-11 shrink-0 gap-1.5">
+          <Button asChild variant="outline" className="h-11 w-full shrink-0 gap-1.5 sm:w-auto">
             <Link href="/tools">
               See the tools
               <ArrowRight className="h-4 w-4" aria-hidden />

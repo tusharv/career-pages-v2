@@ -44,14 +44,14 @@ export default async function RemoteJobsPage() {
                 <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-white/70">
                   Remote jobs
                 </p>
-                <h1 className="mt-3 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl">
+                <h1 className="mt-3 text-pretty text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl">
                   Remote technical roles, open right now.
                 </h1>
                 <p className="mt-4 max-w-lg text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
                   Engineering, AI/ML, data, and security work at micro1—remote
                   worldwide, flexible hours, paid by the hour.
                 </p>
-                <Button asChild variant="secondary" className="mt-8 gap-1.5">
+                <Button asChild variant="secondary" className="mt-8 w-full gap-1.5 sm:w-auto">
                   <Link
                     href={sourceUrl}
                     target="_blank"

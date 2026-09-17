@@ -77,6 +77,18 @@ function resolveOgImage(
   ];
 }
 
+/** Declared on every public page so tab / home-screen icons never drop out of nested metadata. */
+export const siteIcons: NonNullable<Metadata["icons"]> = {
+  icon: [
+    { url: "/favicon.ico", sizes: "any" },
+    { url: "/logo.svg", type: "image/svg+xml" },
+    { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
+    { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+  ],
+  apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  shortcut: "/favicon.ico",
+};
+
 type BuildPageMetadataOptions = {
   title: string;
   description: string;
@@ -103,6 +115,7 @@ export function buildPageMetadata({
     title,
     description,
     keywords: keywords ?? [...siteConfig.defaultKeywords],
+    icons: siteIcons,
     alternates: { canonical },
     openGraph: {
       title,
@@ -326,20 +339,14 @@ export function buildToolsBreadcrumbJsonLd() {
   };
 }
 
-/** HowTo JSON-LD for a single tool guide. */
+/** WebPage JSON-LD for a guide with multiple selectable exercises. */
 export function buildToolJsonLd(tool: ToolGuide) {
-  const siteUrl = getSiteUrl();
   return {
     "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: tool.activity,
+    "@type": "WebPage",
+    name: tool.metaTitle,
     description: tool.metaDescription,
-    url: `${siteUrl}/tools/${tool.slug}#try`,
-    step: tool.playbook.map((item) => ({
-      "@type": "HowToStep",
-      name: item.title,
-      text: item.body,
-    })),
+    url: `${getSiteUrl()}/tools/${tool.slug}`,
   };
 }
 

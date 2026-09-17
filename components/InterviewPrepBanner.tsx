@@ -34,7 +34,7 @@ export function InterviewPrepBanner({
 
           <Button
             asChild
-            className="h-11 shrink-0 gap-1.5 bg-[hsl(var(--ring))] px-5 font-semibold text-[hsl(222_58%_10%)] shadow-sm hover:bg-[hsl(var(--ring)/0.9)] hover:text-[hsl(222_58%_10%)]"
+            className="h-11 w-full shrink-0 gap-1.5 bg-[hsl(var(--ring))] px-5 font-semibold text-[hsl(222_58%_10%)] shadow-sm hover:bg-[hsl(var(--ring)/0.9)] hover:text-[hsl(222_58%_10%)] sm:w-auto"
           >
             <Link href="/interview-prep">
               Interview prep

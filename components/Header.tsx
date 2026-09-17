@@ -4,8 +4,8 @@ import { HeaderNav } from '@/components/HeaderNav'
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
-      <div className="container mx-auto flex items-center justify-between gap-2 px-4 py-3 md:gap-4 md:py-4">
+    <header className="relative sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="container mx-auto flex items-center justify-between gap-3 px-4 py-3 md:py-4">
         <Link
           href="/"
           className="group flex min-w-0 items-center gap-3 rounded-lg outline-none ring-offset-background transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -16,13 +16,13 @@ export function Header() {
             src="/logo.svg"
             alt="Career Pages Logo"
             priority
-            className="transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
+            className="shrink-0 transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
           />
-          <div className="flex flex-col leading-tight">
-            <span className="hidden text-lg font-bold tracking-tight sm:inline md:text-xl">
+          <div className="flex min-w-0 flex-col leading-tight">
+            <span className="hidden truncate text-lg font-bold tracking-tight sm:inline md:text-xl">
               Career Pages
             </span>
-            <span className="hidden text-xs font-medium text-muted-foreground sm:block">
+            <span className="hidden truncate text-xs font-medium text-muted-foreground sm:block">
               Curated company entry points
             </span>
           </div>

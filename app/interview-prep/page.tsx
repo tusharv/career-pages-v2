@@ -88,7 +88,7 @@ export default function InterviewPrepPage() {
 
             <div className="mt-8 grid items-start gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16">
               <div className="max-w-xl text-left">
-                <h1 className="text-balance text-4xl font-bold leading-[1.08] tracking-tight text-white md:text-5xl">
+                <h1 className="text-pretty text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl">
                   Interview prep for remote roles and company jobs.
                 </h1>
                 <p className="mt-4 max-w-lg text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
@@ -96,7 +96,7 @@ export default function InterviewPrepPage() {
                   classic loop. Work the round in three parts.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Button asChild variant="secondary" className="gap-1.5">
+                  <Button asChild variant="secondary" className="w-full gap-1.5 sm:w-auto">
                     <Link
                       href={MICRO1_INTERVIEW_PREP_URL}
                       target="_blank"
@@ -112,7 +112,7 @@ export default function InterviewPrepPage() {
                   <Button
                     asChild
                     variant="outline"
-                    className="border-white/25 bg-white/10 text-white hover:bg-white/15 hover:text-white"
+                    className="w-full border-white/25 bg-white/10 text-white hover:bg-white/15 hover:text-white sm:w-auto"
                   >
                     <Link
                       href={MICRO1_AI_INTERVIEW_GUIDE_URL}

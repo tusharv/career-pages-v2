@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster"
 
 
 import { CompaniesProvider } from './CompaniesContext';
-import { buildPageMetadata, getSiteUrl, siteConfig } from "@/lib/seo";
+import { buildPageMetadata, getSiteUrl, siteConfig, siteIcons } from "@/lib/seo";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,6 +45,7 @@ export const metadata: Metadata = {
   twitter: rootMetadata.twitter,
   robots: rootMetadata.robots,
   alternates: rootMetadata.alternates,
+  icons: siteIcons,
   formatDetection: {
     email: false,
     address: false,
@@ -53,9 +54,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-}
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#0a255f" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c1524" },
+  ],
+};
 
 export default function RootLayout({
   children,
