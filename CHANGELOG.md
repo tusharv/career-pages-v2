@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0 - 2026-11-01
+
+- feat: new jobs from peerlist
+
 ## 0.6.0 - 2026-09-17
 
 - feat: new courses
