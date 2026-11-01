@@ -18,8 +18,10 @@ import { RemoteJobCard } from '@/components/RemoteJobCard'
 import { cn } from '@/lib/utils'
 import {
   REMOTE_JOB_CATEGORIES,
+  REMOTE_JOB_SOURCES,
   type RemoteJob,
   type RemoteJobCategory,
+  type RemoteJobSource,
   type RemoteJobsPageResponse,
 } from '@/lib/types/remote-job'
 
@@ -41,6 +43,7 @@ export function RemoteJobsBrowser({
   const [searchTerm, setSearchTerm] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [category, setCategory] = useState<RemoteJobCategory | null>(null)
+  const [source, setSource] = useState<RemoteJobSource | null>(null)
   const [page, setPage] = useState(1)
 
   const [jobs, setJobs] = useState<RemoteJob[]>(initialJobs)
@@ -50,7 +53,7 @@ export function RemoteJobsBrowser({
 
   const inputRef = useRef<HTMLInputElement>(null)
   /** The server already rendered page 1 of the unfiltered list. */
-  const isInitialQuery = page === 1 && !debouncedSearch && !category
+  const isInitialQuery = page === 1 && !debouncedSearch && !category && !source
   const skipFirstFetch = useRef(true)
 
   useEffect(() => {
@@ -60,7 +63,7 @@ export function RemoteJobsBrowser({
 
   useEffect(() => {
     setPage(1)
-  }, [debouncedSearch, category])
+  }, [debouncedSearch, category, source])
 
   useEffect(() => {
     if (skipFirstFetch.current && isInitialQuery) {
@@ -78,6 +81,7 @@ export function RemoteJobsBrowser({
     })
     if (debouncedSearch.trim()) qs.set('q', debouncedSearch.trim())
     if (category) qs.set('category', category)
+    if (source) qs.set('source', source)
 
     void fetch(`/api/remote-jobs?${qs}`, { signal: ac.signal })
       .then(async (response) => {
@@ -98,7 +102,7 @@ export function RemoteJobsBrowser({
       })
 
     return () => ac.abort()
-  }, [page, debouncedSearch, category, isInitialQuery])
+  }, [page, debouncedSearch, category, source, isInitialQuery])
 
   const totalPages = useMemo(
     () => (total > 0 ? Math.ceil(total / PAGE_SIZE) : 0),
@@ -119,19 +123,19 @@ export function RemoteJobsBrowser({
             Open technical roles
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-            Contract and full-time remote work training and evaluating frontier AI
-            models. Apply directly on micro1—no account needed here.
+            Hourly contract roles at micro1, plus recent remote engineering
+            openings from Peerlist. Apply on the employer&apos;s site.
           </p>
         </div>
 
         <div className="relative w-full lg:max-w-sm">
           <label htmlFor="remote-job-search" className="sr-only">
-            Search remote roles by title or skill
+            Search remote roles by title, skill, or company
           </label>
           <Input
             id="remote-job-search"
             type="text"
-            placeholder="Search by role or skill"
+            placeholder="Search by role, skill, or company"
             className="h-11 w-full pr-24"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -192,6 +196,36 @@ export function RemoteJobsBrowser({
         ))}
       </div>
 
+      <div
+        className="mt-3 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter roles by source"
+      >
+        <Button
+          type="button"
+          size="sm"
+          variant={source === null ? 'default' : 'outline'}
+          aria-pressed={source === null}
+          onClick={() => setSource(null)}
+          className="rounded-full"
+        >
+          All sources
+        </Button>
+        {REMOTE_JOB_SOURCES.map((item) => (
+          <Button
+            key={item.id}
+            type="button"
+            size="sm"
+            variant={source === item.id ? 'default' : 'outline'}
+            aria-pressed={source === item.id}
+            onClick={() => setSource(item.id)}
+            className="rounded-full"
+          >
+            {item.label}
+          </Button>
+        ))}
+      </div>
+
       <p className="mt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground">
         Showing <span className="font-semibold text-foreground">{total}</span>{' '}
         matching — <span className="tabular-nums">{indexTotal}</span> technical
@@ -221,7 +255,7 @@ export function RemoteJobsBrowser({
         <div className="mt-12 rounded-2xl border border-dashed border-border bg-muted/20 px-6 py-14 text-center">
           <h3 className="text-xl font-semibold">No roles match that search</h3>
           <p className="mx-auto mt-2 max-w-md text-muted-foreground">
-            Try a broader keyword, or clear the category filter.
+            Try a broader keyword, or clear the category and source filters.
           </p>
           <Button
             type="button"
@@ -230,6 +264,7 @@ export function RemoteJobsBrowser({
             onClick={() => {
               handleClearSearch()
               setCategory(null)
+              setSource(null)
             }}
           >
             Reset filters

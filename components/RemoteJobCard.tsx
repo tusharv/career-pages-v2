@@ -20,7 +20,24 @@ function formatPostedAt(iso: string | null): string | null {
   return Number.isNaN(date.getTime()) ? null : dateFormatter.format(date)
 }
 
-function formatRate(rate: RemoteJob['hourlyRate']): string | null {
+function formatMoney(amount: number, currency: string): string {
+  const grouped = amount.toLocaleString('en-US')
+  if (currency === 'USD') return `$${grouped}`
+  if (currency === 'INR') return `₹${grouped}`
+  if (currency === 'EUR') return `€${grouped}`
+  if (currency === 'GBP') return `£${grouped}`
+  return `${currency} ${grouped}`
+}
+
+function formatPay(job: RemoteJob): string | null {
+  const yearly = job.yearlySalary
+  if (yearly) {
+    const min = formatMoney(yearly.min, yearly.currency)
+    if (yearly.max == null) return `${min}+/yr`
+    if (yearly.max === yearly.min) return `${min}/yr`
+    return `${min}–${formatMoney(yearly.max, yearly.currency)}/yr`
+  }
+  const rate = job.hourlyRate
   if (!rate) return null
   return rate.min === rate.max
     ? `$${rate.min}/hr`
@@ -35,7 +52,7 @@ export function RemoteJobCard({
   className?: string
 }) {
   const postedAt = formatPostedAt(job.postedAt)
-  const rate = formatRate(job.hourlyRate)
+  const rate = formatPay(job)
 
   return (
     <Card
@@ -47,6 +64,9 @@ export function RemoteJobCard({
       <CardHeader className="pb-2 pt-6">
         <div className="flex flex-wrap items-center gap-1.5">
           <Badge variant="secondary">{job.categoryLabel}</Badge>
+          {job.source === 'peerlist' ? (
+            <Badge variant="outline">Peerlist</Badge>
+          ) : null}
           {job.highDemand ? (
             <Badge
               variant="outline"
@@ -71,7 +91,7 @@ export function RemoteJobCard({
           {job.company} ·{' '}
           <span className="inline-flex items-center gap-1">
             <MapPin className="h-3 w-3" aria-hidden />
-            Remote
+            Remote{job.location ? ` · ${job.location}` : ''}
           </span>
           {job.engagement ? ` · ${job.engagement.replace('-', ' ')}` : null}
         </p>

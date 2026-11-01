@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { PEERLIST_REMOTE_JOBS_URL } from '@/lib/peerlist-jobs'
 import { getReferralSiteUrl, getRemoteJobs } from '@/lib/remote-jobs'
 import type { RemoteJob } from '@/lib/types/remote-job'
 import { RemoteJobsBrowser } from './RemoteJobsBrowser'
@@ -48,19 +49,35 @@ export default async function RemoteJobsPage() {
                   Remote technical roles, open right now.
                 </h1>
                 <p className="mt-4 max-w-lg text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                  Engineering, AI/ML, data, and security work at micro1—remote
-                  worldwide, flexible hours, paid by the hour.
+                  Engineering, AI/ML, data, and security work — hourly remote
+                  roles at micro1, plus recent remote openings from Peerlist.
                 </p>
-                <Button asChild variant="secondary" className="mt-8 w-full gap-1.5 sm:w-auto">
-                  <Link
-                    href={sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Button asChild variant="secondary" className="w-full gap-1.5 sm:w-auto">
+                    <Link
+                      href={sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Browse every micro1 role
+                      <ExternalLink className="h-3.5 w-3.5 opacity-80" aria-hidden />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full gap-1.5 border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white sm:w-auto"
                   >
-                    Browse every micro1 role
-                    <ExternalLink className="h-3.5 w-3.5 opacity-80" aria-hidden />
-                  </Link>
-                </Button>
+                    <Link
+                      href={PEERLIST_REMOTE_JOBS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Remote roles on Peerlist
+                      <ExternalLink className="h-3.5 w-3.5 opacity-80" aria-hidden />
+                    </Link>
+                  </Button>
+                </div>
               </div>
 
               <aside className="hidden lg:block">
@@ -72,7 +89,8 @@ export default async function RemoteJobsPage() {
                     {jobs.length || '—'}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-white/75">
-                    Live roles pulled from micro1, refreshed hourly.
+                    Live micro1 roles, refreshed hourly, plus recent remote
+                    roles from Peerlist.
                   </p>
                   <Separator className="my-5 bg-white/15" />
                   <p className="text-sm leading-relaxed text-white/80">

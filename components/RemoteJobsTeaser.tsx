@@ -54,11 +54,11 @@ export function RemoteJobsTeaser() {
               Remote jobs
             </p>
             <h2 className="mt-2 text-2xl font-bold tracking-tight md:text-3xl">
-              Remote technical roles at micro1
+              Remote technical roles
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-              Engineering, AI/ML, data, and security work you can do from
-              anywhere—flexible hours, paid hourly.
+              Hourly work at micro1, plus recent remote engineering roles from
+              Peerlist.
             </p>
           </div>
 

@@ -203,7 +203,7 @@ export function buildRemoteJobsMetadata(): Metadata {
   return buildPageMetadata({
     title: "Remote technical jobs",
     description:
-      "Open remote engineering, AI/ML, data, and security roles at micro1 — apply directly with flexible hours and hourly pay.",
+      "Open remote engineering, AI/ML, data, and security roles. Hourly work at micro1, plus recent remote openings from Peerlist.",
     path: "/remote-jobs",
     keywords: [
       "remote jobs",

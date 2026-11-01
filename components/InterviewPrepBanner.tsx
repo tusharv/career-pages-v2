@@ -22,12 +22,12 @@ export function InterviewPrepBanner({
             </p>
             <h2 className="mt-2 text-xl font-bold tracking-tight md:text-2xl">
               {isRemote
-                ? "Heading into a micro1 interview?"
+                ? "Prepare for the interview this role uses"
                 : "Prepare before you apply"}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
               {isRemote
-                ? "Roles here go through an AI interview with Zara. Read how it works, then take a free practice round."
+                ? "micro1 roles use an on-demand AI interview. Roles from Peerlist are company screens. The guide covers both."
                 : "Remote micro1 roles use an AI interview. Company jobs still run a recruiter and hiring-manager loop. Here is how to prepare for both."}
             </p>
           </div>

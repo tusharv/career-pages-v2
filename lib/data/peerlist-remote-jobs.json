@@ -1,0 +1,1147 @@
+{
+  "fetchedAt": "2026-11-01T08:28:33.000Z",
+  "source": "https://peerlist.io/api/v1/jobs?remoteOnly=true",
+  "jobs": [
+    {
+      "id": "JOBHP6LMGJDAQ8QEL1QE7LGEGB9BE8",
+      "title": "Software Engineer (Time & Billing)",
+      "company": "Litify",
+      "handle": "litify",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Java",
+        "C#",
+        "TypeScript",
+        "React",
+        "SQL",
+        "AI coding assistants",
+        "Data modeling",
+        "CSS"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-30T11:07:55.759Z",
+      "applyLink": "https://job-boards.greenhouse.io/litify/jobs/8334694",
+      "salary": {
+        "min": 115000,
+        "max": 120000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHDNDRO9RLDBJ6NCL6RKGGB9DMBM",
+      "title": "Senior Data Engineer, Ads",
+      "company": "Discord",
+      "handle": "discord",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Data Engineer"
+      ],
+      "skills": [
+        "SQL",
+        "Python",
+        "Data Pipelines",
+        "Digital Advertising",
+        "Data Models",
+        "Data Quality"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-30T10:52:09.515Z",
+      "applyLink": "https://discord.com/jobs/8299493002",
+      "salary": {
+        "min": 196000,
+        "max": 245000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBH6A7OPNEERJ9NAI9MQAPPLM8QLB",
+      "title": "Fullstack Software Engineer",
+      "company": "Diagrid",
+      "handle": "diagrid_io",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "TypeScript",
+        "Node.js",
+        "React",
+        "REST APIs",
+        "PostgreSQL"
+      ],
+      "locations": [
+        "India"
+      ],
+      "publishedAt": "2026-10-30T10:09:06.729Z",
+      "applyLink": "https://jobs.ashbyhq.com/Diagrid/06fdf2f3-fff0-4628-b58c-2c07d408e656/application",
+      "salary": null
+    },
+    {
+      "id": "JOBH6A7OPA9D7BKK639MQAPPLPLJBR",
+      "title": "Backend Software Engineer - Identity",
+      "company": "Atlassian",
+      "handle": "atlassian",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "GoLang",
+        "Java",
+        "Python",
+        "Kotlin",
+        "Scala",
+        "Microservices",
+        "REST APIs",
+        "AWS"
+      ],
+      "locations": [
+        "United States",
+        "San Francisco, United States"
+      ],
+      "publishedAt": "2026-10-30T08:46:43.794Z",
+      "applyLink": "https://join.atlassian.com/atlassian-talent-community/jobs/27819",
+      "salary": {
+        "min": 196600,
+        "max": null,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHBARLJPKQJK7DLCB87GLRLPNG8G",
+      "title": "Software Engineering Intern",
+      "company": "Subtotal ",
+      "handle": "subtotal",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Autonomous systems",
+        "APIs",
+        "Data pipelines",
+        "Third-party integrations"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-29T11:41:07.481Z",
+      "applyLink": "https://jobs.ashbyhq.com/subtotal/3891929c-0ee6-46ea-a833-4efba2862801/application",
+      "salary": {
+        "min": 30,
+        "max": null,
+        "currency": "USD",
+        "unit": "PER_HOUR"
+      }
+    },
+    {
+      "id": "JOBHLKLGBJKP6AE981E6BDJMJ7PAD6",
+      "title": "AI Intern",
+      "company": "EQT",
+      "handle": "eqt854",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "AI Engineer",
+        "Machine Learning Engineer"
+      ],
+      "skills": [
+        "AI",
+        "Machine Learning",
+        "Data Science",
+        "Low-code AI frameworks",
+        "LLMs"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-29T10:31:21.749Z",
+      "applyLink": "https://job-boards.greenhouse.io/eqtcorporation/jobs/5462562008",
+      "salary": null
+    },
+    {
+      "id": "JOBHR8D79PJKRO8EM2D78768OROKRB",
+      "title": "Full Stack Product Engineer",
+      "company": "Matomo",
+      "handle": "matomo",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "Full-stack development",
+        "AI tools",
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "VueJS",
+        "TypeScript"
+      ],
+      "locations": [
+        "Bengaluru, India",
+        "Pune, India",
+        "Mumbai, India"
+      ],
+      "publishedAt": "2026-10-29T10:21:22.538Z",
+      "applyLink": "https://jobs.lever.co/innocraft/bb0292b7-ad59-4f96-9f29-2836ac109b5b/apply",
+      "salary": null
+    },
+    {
+      "id": "JOBHBARLJPBBG6KM9HKAGA9G6A9QAN",
+      "title": "Senior Software Engineer, II",
+      "company": "Life360",
+      "handle": "life360",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "AI tools",
+        "Spring Boot",
+        "Java",
+        "Kafka",
+        "AWS",
+        "iOS development",
+        "Android development",
+        "Prompt engineering"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-29T09:52:53.477Z",
+      "applyLink": "https://job-boards.greenhouse.io/life360/jobs/8920421002",
+      "salary": {
+        "min": 118500,
+        "max": 216500,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHJKND9EQ8KE889FRJNJDNPJNKK9",
+      "title": "Data Analyst",
+      "company": "Leegality",
+      "handle": "leegality",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Data Analyst"
+      ],
+      "skills": [
+        "SQL",
+        "Amazon Redshift",
+        "Tableau",
+        "Metabase",
+        "Power BI",
+        "Excel",
+        "AI tools",
+        "ETL concepts"
+      ],
+      "locations": [
+        "India"
+      ],
+      "publishedAt": "2026-10-29T09:47:40.043Z",
+      "applyLink": "https://careers.leegality.com/jobs/Careers/10926000063865333/Data-Analyst-Leegality-",
+      "salary": null
+    },
+    {
+      "id": "JOBHBARLJE9MEGND6CB87GLRLJGPO7",
+      "title": "Software Engineering Intern, AI Agents and Backend Infrastructure \u2013 2027",
+      "company": "NVIDIA",
+      "handle": "nvidia",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Go",
+        "Python",
+        "C#",
+        "LLM APIs",
+        "Git",
+        "SQL",
+        "data structures",
+        "algorithms"
+      ],
+      "locations": [
+        "United Kingdom"
+      ],
+      "publishedAt": "2026-10-29T08:47:20.161Z",
+      "applyLink": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/UK-Remote/Software-Engineering-Intern--AI-Agents-and-Backend-Infrastructure---2027_JR2027939",
+      "salary": null
+    },
+    {
+      "id": "JOBHGNQ96MOK8GPKQFME7BN9NOMLEN",
+      "title": "Senior Platform Software Engineer",
+      "company": "Clera",
+      "handle": "getclera",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer",
+        "Cloud Engineer"
+      ],
+      "skills": [
+        "AWS",
+        "Terraform",
+        "PostgreSQL",
+        "CI/CD",
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "Distributed Systems"
+      ],
+      "locations": [
+        "Europe"
+      ],
+      "publishedAt": "2026-10-29T08:34:27.509Z",
+      "applyLink": "https://jobs.ashbyhq.com/clera/53763b58-e70a-4532-96ce-3679bfe7bb50/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHKKDEA7PRJ8BR8FOEAENA9K6B9A",
+      "title": "Senior Software Engineer, UI Tooling (Full Stack iOS)",
+      "company": "Airbnb",
+      "handle": "airbnb",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer",
+        "iOS Developer"
+      ],
+      "skills": [
+        "Swift",
+        "iOS architecture",
+        "SwiftUI",
+        "dependency injection"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-29T08:30:46.944Z",
+      "applyLink": "https://careers.airbnb.com/positions/8325813/",
+      "salary": {
+        "min": 196000,
+        "max": 227000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHA9EKQ6KRLJKKOHALELQEOBP86O",
+      "title": "AI Engineer",
+      "company": "IMA",
+      "handle": "imacorp",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "AI Engineer"
+      ],
+      "skills": [
+        "Microsoft Copilot Studio",
+        "Azure",
+        "Python",
+        "C#",
+        "REST APIs",
+        "SDLC",
+        "AI agents",
+        "workflow automations"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-28T12:06:39.044Z",
+      "applyLink": "https://imacorp.com/careers/openings/5275163007",
+      "salary": {
+        "min": 120000,
+        "max": 150000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBH6A7OEADBK7NBOI9DMEAP8KODGB",
+      "title": "AI Software Engineer",
+      "company": "Second Front Systems",
+      "handle": "secondfront",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer",
+        "AI Engineer"
+      ],
+      "skills": [
+        "LangGraph",
+        "LangChain",
+        "AWS",
+        "Terraform",
+        "Kubernetes",
+        "Docker",
+        "LLM integration",
+        "Cloud infrastructure"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-28T10:06:55.347Z",
+      "applyLink": "https://jobs.ashbyhq.com/Second-Front-Systems/e75017ca-8bfb-4c2f-bdce-b0f0cc8bf4ef/application",
+      "salary": {
+        "min": 150000,
+        "max": 160000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHA9EKQ9JBNDD8KFJDOEP6Q8869G",
+      "title": "Developer Intern, Developer Interfaces - Winter 2027",
+      "company": "1Password ",
+      "handle": "1password",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Go",
+        "Rust",
+        "CLI",
+        "SDK",
+        "API"
+      ],
+      "locations": [
+        "United States",
+        "Canada"
+      ],
+      "publishedAt": "2026-10-28T09:38:43.196Z",
+      "applyLink": "https://jobs.ashbyhq.com/1password/00f861d4-2b4a-4159-b6dc-8aed0cde6e39/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHA9EKQ9ALON66GCALELQE6QEERG",
+      "title": "Senior Software Engineer, Certificates Management",
+      "company": "Coinbase",
+      "handle": "coinbase",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer",
+        "Security Engineer"
+      ],
+      "skills": [
+        "Public Key Infrastructure",
+        "applied cryptography",
+        "Golang",
+        "Java",
+        "C++",
+        "Rust",
+        "certificate authorities",
+        "cloud KMS"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-28T08:29:24.581Z",
+      "applyLink": "https://www.coinbase.com/en-in/careers/positions/8326127",
+      "salary": {
+        "min": 186065,
+        "max": 218900,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBH9OB8POEKLBOQOF8L7LK7BKE97N",
+      "title": "Backend Engineer",
+      "company": "YipitData",
+      "handle": "yipitdata",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Backend Engineer"
+      ],
+      "skills": [
+        "Python",
+        "Golang",
+        "Java",
+        "Kafka",
+        "MySQL",
+        "Postgres",
+        "MongoDB",
+        "Cassandra"
+      ],
+      "locations": [
+        "India"
+      ],
+      "publishedAt": "2026-10-28T08:25:11.808Z",
+      "applyLink": "https://job-boards.greenhouse.io/yipitdata/jobs/8280705",
+      "salary": null
+    },
+    {
+      "id": "JOBH9OB8POGKAEPDOH8L7LK7BKG9L6",
+      "title": "Developer Intern, Machine Identity - Winter 2027",
+      "company": "1Password ",
+      "handle": "1password",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "Backend Engineer"
+      ],
+      "skills": [
+        "Go",
+        "Node.js",
+        "Ruby",
+        "Python",
+        "OAuth",
+        "OIDC",
+        "policy enforcement"
+      ],
+      "locations": [
+        "United States",
+        "Canada"
+      ],
+      "publishedAt": "2026-10-28T08:16:29.854Z",
+      "applyLink": "https://jobs.ashbyhq.com/1password/6a6869a7-98d2-43e3-b9b5-b68fa4daeb9f/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHP6LMJNGPKJB9MCMDENJ9NKA776",
+      "title": "Backend Engineer",
+      "company": "Astra",
+      "handle": "astrafi_",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Backend Engineer"
+      ],
+      "skills": [
+        "Python 3",
+        "Flask",
+        "SQL",
+        "NoSQL",
+        "microservices",
+        "GCP"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-27T12:15:01.523Z",
+      "applyLink": "https://jobs.ashbyhq.com/astra/c34d486b-4fc9-4c24-8a18-577fcd6d5194/application",
+      "salary": {
+        "min": 125000,
+        "max": 160000,
+        "currency": "USD",
+        "unit": null
+      }
+    },
+    {
+      "id": "JOBHGNQ9RAL9QEPQNCDKBO6DAOLAD6",
+      "title": "Software Mobile Engineer",
+      "company": "Weave",
+      "handle": "getweave",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Mobile Developer"
+      ],
+      "skills": [
+        "Flutter",
+        "Dart",
+        "RESTful APIs",
+        "SQLite",
+        "Git"
+      ],
+      "locations": [
+        "India"
+      ],
+      "publishedAt": "2026-10-27T11:15:37.224Z",
+      "applyLink": "https://jobs.ashbyhq.com/weave/f3cf7c49-b575-43b4-90c3-274dd47a490e/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHP6LMJD6RBJPRMI6R7AGG8EKKJO",
+      "title": "Senior Engineer, Full Stack - Pentest Experience",
+      "company": "Horizon3",
+      "handle": "horizon3_ai",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "Go",
+        "Rust",
+        "Python",
+        "Java",
+        "TypeScript",
+        "React",
+        "Angular",
+        "SQL"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-27T09:10:26.428Z",
+      "applyLink": "https://jobs.ashbyhq.com/horizon3ai/88ea4306-8af9-43ca-850f-13a27c505ca5/application",
+      "salary": {
+        "min": 170000,
+        "max": 235000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHBARL77G8M6O6DHPARJ7DBEBAOG",
+      "title": "Software Engineer Intern",
+      "company": "ShopBack",
+      "handle": "corporate_sh",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "TypeScript",
+        "Kafka",
+        "Kubernetes",
+        "NodeJS",
+        "PostgreSQL"
+      ],
+      "locations": [
+        "San Francisco, United States"
+      ],
+      "publishedAt": "2026-10-26T12:10:21.900Z",
+      "applyLink": "https://jobs.lever.co/shopback-2/640ac3fb-dae5-4738-95b9-9cb80cc7ad15",
+      "salary": null
+    },
+    {
+      "id": "JOBHLKLGRRND9PL6JCPNMGB8EL976G",
+      "title": "Software Engineer - Storage",
+      "company": "Supabase",
+      "handle": "supabase",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Backend Engineer",
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "Node.js",
+        "PostgreSQL",
+        "Prometheus",
+        "Grafana",
+        "S3 protocol",
+        "CDN",
+        "CLI"
+      ],
+      "locations": [],
+      "publishedAt": "2026-10-26T11:54:47.579Z",
+      "applyLink": "https://jobs.ashbyhq.com/supabase/9f2ba0b2-6d3b-43ea-990f-5b4bf3930520/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHNN7KJNG9JJ9OMHKMG6R8JJDKOL",
+      "title": "Full-Stack Engineer",
+      "company": "ElevenLabs",
+      "handle": "elevenlabs_i",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "Python",
+        "Typescript",
+        "React",
+        "APIs",
+        "cloud infrastructure"
+      ],
+      "locations": [],
+      "publishedAt": "2026-10-26T11:04:29.116Z",
+      "applyLink": "https://jobs.ashbyhq.com/elevenlabs/6a530871-b6c6-4783-ac6b-69cc3b084192/application",
+      "salary": null
+    },
+    {
+      "id": "JOBH8OE7POGLREEQ8CPQBOAE7QKGBK",
+      "title": "Senior Software Engineer",
+      "company": "Prompt.io",
+      "handle": "prompt_io",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Java",
+        "JavaScript",
+        "TypeScript",
+        "APIs",
+        "Microservices",
+        "SQL",
+        "NoSQL",
+        "Cloud environments"
+      ],
+      "locations": [
+        "United States",
+        "Canada"
+      ],
+      "publishedAt": "2026-10-26T10:32:20.100Z",
+      "applyLink": "https://job-boards.greenhouse.io/promptioinc/jobs/4463857009",
+      "salary": {
+        "min": 125000,
+        "max": 175000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHJKNDG6GQBJPMJIAM6OLMKGBGKQ",
+      "title": "Developer Intern, Front-End Platform - Winter 2027",
+      "company": "1Password ",
+      "handle": "1password",
+      "type": "Internship",
+      "department": "ENGINEERING",
+      "roles": [
+        "Frontend Engineer"
+      ],
+      "skills": [
+        "React",
+        "Figma",
+        "JavaScript",
+        "TypeScript",
+        "Git"
+      ],
+      "locations": [
+        "United States",
+        "Canada"
+      ],
+      "publishedAt": "2026-10-23T11:35:06.145Z",
+      "applyLink": "https://jobs.ashbyhq.com/1password/71a3afd1-12b3-4f55-a3bd-fc4e7c46ee37/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHLKLG68L9RA76NHEBLPAJ6KO7KR",
+      "title": "Senior Software Developer",
+      "company": "AHEAD",
+      "handle": "ahead867",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Elixir",
+        "Phoenix",
+        "AI tools",
+        "Software design",
+        "Architecture",
+        "Continuous integration",
+        "Code review",
+        "Containerization"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-23T11:17:53.614Z",
+      "applyLink": "https://jobs.lever.co/thinkahead/9200bbf1-3b43-4bf4-95e5-7d15c5d11001",
+      "salary": {
+        "min": 160000,
+        "max": 200000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHA9EKAJ8LA9OBG1JOAK7PDQRMOM",
+      "title": "Software Engineer - Turso",
+      "company": "Supabase",
+      "handle": "supabase",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Postgres",
+        "SQLite",
+        "Rust",
+        "AWS",
+        "Kubernetes"
+      ],
+      "locations": [],
+      "publishedAt": "2026-10-23T10:07:40.052Z",
+      "applyLink": "https://jobs.ashbyhq.com/supabase/7c5eb3fc-1087-4c1c-b3a2-a19fe01dd259/application",
+      "salary": null
+    },
+    {
+      "id": "JOBHGNQ9J7LBBP7N91A8ODN8D6KPQB",
+      "title": "Software Engineer, Sustaining Automation",
+      "company": "Chainguard",
+      "handle": "chainguardv",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Go",
+        "AI/LLM",
+        "Systems design",
+        "Developer tools",
+        "Container ecosystem"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-23T08:34:54.188Z",
+      "applyLink": "https://job-boards.greenhouse.io/chainguard/jobs/4723523006",
+      "salary": {
+        "min": 121000,
+        "max": 142000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHMQ6JRQMR889PB3BQEJGQLDGDG8",
+      "title": "Senior Software Engineer",
+      "company": "Grafana Labs",
+      "handle": "grafana",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Go",
+        "Rust",
+        "Python",
+        "Distributed Systems",
+        "Cloud"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-22T12:07:20.004Z",
+      "applyLink": "https://job-boards.greenhouse.io/grafanalabs/jobs/6230155004",
+      "salary": {
+        "min": 154445,
+        "max": 185334,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHKKDEQQOGGQ6AOIQJKLBJEDE9OJ",
+      "title": "Frontend Software Engineer",
+      "company": "CodeCargo",
+      "handle": "codecargo",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Frontend Engineer"
+      ],
+      "skills": [
+        "React",
+        "Next.js",
+        "JavaScript",
+        "TypeScript",
+        "HTML",
+        "CSS",
+        "API integration",
+        "frontend performance optimization"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-22T11:29:27.915Z",
+      "applyLink": "https://codecargo.com/careers/frontend-software-engineer",
+      "salary": null
+    },
+    {
+      "id": "JOBH6A7OGGDN8ROPA29MRGLAOQDB68",
+      "title": "Software Engineer, AI Data",
+      "company": "Speechify",
+      "handle": "speechify",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Data Engineer"
+      ],
+      "skills": [
+        "Python",
+        "Bash",
+        "Linux",
+        "data pipelines",
+        "large-scale data processing"
+      ],
+      "locations": [
+        "Mumbai, India"
+      ],
+      "publishedAt": "2026-10-22T11:24:45.035Z",
+      "applyLink": "https://job-boards.greenhouse.io/speechify/jobs/6229147004",
+      "salary": null
+    },
+    {
+      "id": "JOBHKKDEQQGAOORAGFDMOQPBJKOLKP",
+      "title": "Software Engineer - Agent Team",
+      "company": "Automox",
+      "handle": "automox",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer",
+        "Backend Engineer"
+      ],
+      "skills": [
+        "Golang",
+        "Java",
+        "TypeScript",
+        "AWS",
+        "SaaS"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-22T11:17:01.069Z",
+      "applyLink": "https://job-boards.greenhouse.io/automox/jobs/5454109008",
+      "salary": {
+        "min": 122000,
+        "max": 160000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBH9OB8EEN87LALEIDG9AQGLARKL6",
+      "title": "Senior Machine Learning Engineer, Ads ML Efficiency",
+      "company": "Reddit",
+      "handle": "reddit",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Machine Learning Engineer"
+      ],
+      "skills": [
+        "ML performance engineering",
+        "inference execution",
+        "ML runtimes",
+        "GPU/kernel optimization",
+        "Python"
+      ],
+      "locations": [
+        "United States",
+        "Canada"
+      ],
+      "publishedAt": "2026-10-22T11:10:40.423Z",
+      "applyLink": "https://job-boards.greenhouse.io/reddit/jobs/8304463",
+      "salary": {
+        "min": 216700,
+        "max": 303400,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHOK8LNJLQRQR9OI7PNA9PJKMJEP",
+      "title": "Full Stack Software Engineer, New Grad",
+      "company": "Quora",
+      "handle": "quora906",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Python",
+        "React",
+        "Data Structures",
+        "Algorithms",
+        "Software Design"
+      ],
+      "locations": [
+        "United States",
+        "Canada"
+      ],
+      "publishedAt": "2026-10-21T11:26:22.774Z",
+      "applyLink": "https://jobs.ashbyhq.com/quora/5494e6a1-a973-46af-b9f3-57208eb91b52",
+      "salary": {
+        "min": 97600,
+        "max": 139000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHJKNDBA8BRGQBEHKQRAELAOAB6D",
+      "title": "Senior Software Engineer, Users Foundation",
+      "company": "Airbnb",
+      "handle": "airbnb",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Distributed Systems",
+        "Backend Services",
+        "APIs",
+        "Data Consistency",
+        "Service Reliability"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-21T10:52:52.665Z",
+      "applyLink": "https://careers.airbnb.com/positions/8304030/?gh_jid=8304030",
+      "salary": {
+        "min": 196000,
+        "max": 227000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHLKLGMDRDNE8761P9G7J9A96NE9",
+      "title": "Senior Software Engineer",
+      "company": "Toast",
+      "handle": "toasttab",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Software Engineer"
+      ],
+      "skills": [
+        "Java",
+        "Kotlin",
+        "React",
+        "TypeScript",
+        "REST",
+        "GraphQL",
+        "databases",
+        "distributed systems"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-21T10:40:22.066Z",
+      "applyLink": "https://careers.toasttab.com/jobs/senior-software-engineer-remote-united-states-990135d0-a2f6-4275-b9ce-bfff910ba563",
+      "salary": {
+        "min": 125000,
+        "max": 254000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBH8OE7L7MOJ7PDGFPDO98DNPPPQL",
+      "title": "Software Engineer - Crypto Data Foundations",
+      "company": "Coinbase",
+      "handle": "coinbase",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Backend Engineer"
+      ],
+      "skills": [
+        "Distributed Systems",
+        "Data Systems",
+        "Systems Design",
+        "Go",
+        "Python",
+        "Blockchain",
+        "Kafka",
+        "gRPC"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-21T09:10:01.424Z",
+      "applyLink": "https://www.coinbase.com/en-in/careers/positions/8304038",
+      "salary": {
+        "min": 152405,
+        "max": 179300,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHDNDRDMPB8MQPMCL6NABK6Q8P8A",
+      "title": "Software Engineer I - LLM Observability",
+      "company": "Honeycomb.io",
+      "handle": "honeycomb_io",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "Full-Stack Engineer"
+      ],
+      "skills": [
+        "Go",
+        "Python",
+        "TypeScript",
+        "React",
+        "AI tools"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-19T12:31:35.921Z",
+      "applyLink": "https://job-boards.greenhouse.io/honeycomb/jobs/5452584008",
+      "salary": {
+        "min": 160000,
+        "max": 180000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    },
+    {
+      "id": "JOBHKKDEDBR87N6EPCDMOQPBMRRJ6G",
+      "title": "Sr. Software Engineer - Customer Facing Applied AI",
+      "company": "Addepar",
+      "handle": "addepar",
+      "type": "Full-time",
+      "department": "ENGINEERING",
+      "roles": [
+        "AI Engineer"
+      ],
+      "skills": [
+        "Python",
+        "LLM APIs",
+        "SQL",
+        "AI-assisted development tools",
+        "AI system monitoring",
+        "Claude",
+        "Codex"
+      ],
+      "locations": [
+        "United States"
+      ],
+      "publishedAt": "2026-10-19T12:26:04.769Z",
+      "applyLink": "https://job-boards.greenhouse.io/addepar1/jobs/8879314002",
+      "salary": {
+        "min": 188000,
+        "max": 235000,
+        "currency": "USD",
+        "unit": "year"
+      }
+    }
+  ]
+}

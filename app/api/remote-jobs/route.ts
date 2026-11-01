@@ -4,6 +4,7 @@ import {
   getReferralSiteUrl,
   getRemoteJobs,
   isRemoteJobCategory,
+  isRemoteJobSource,
 } from "@/lib/remote-jobs";
 import type { RemoteJobsPageResponse } from "@/lib/types/remote-job";
 
@@ -16,7 +17,7 @@ const MAX_PAGE_SIZE = 100;
 const DEFAULT_PAGE_SIZE = 12;
 const MAX_SEARCH_LEN = 160;
 
-/** GET ?page=&limit=&q=&category= — paginated remote technical roles. */
+/** GET ?page=&limit=&q=&category=&source= — paginated remote technical roles. */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
@@ -33,10 +34,12 @@ export async function GET(request: Request) {
   const q = (searchParams.get("q") ?? "").slice(0, MAX_SEARCH_LEN);
   const rawCategory = searchParams.get("category") ?? "";
   const category = isRemoteJobCategory(rawCategory) ? rawCategory : undefined;
+  const rawSource = searchParams.get("source") ?? "";
+  const source = isRemoteJobSource(rawSource) ? rawSource : undefined;
 
   try {
     const all = await getRemoteJobs();
-    const matches = filterRemoteJobs(all, { search: q, category });
+    const matches = filterRemoteJobs(all, { search: q, category, source });
     const from = (page - 1) * pageSize;
 
     const body: RemoteJobsPageResponse = {

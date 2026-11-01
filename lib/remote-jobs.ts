@@ -1,7 +1,10 @@
+import { getPeerlistJobs } from "@/lib/peerlist-jobs";
 import {
   REMOTE_JOB_CATEGORIES,
+  REMOTE_JOB_SOURCES,
   type RemoteJob,
   type RemoteJobCategory,
+  type RemoteJobSource,
 } from "@/lib/types/remote-job";
 
 /**
@@ -39,6 +42,10 @@ export function isRemoteJobCategory(
   value: string
 ): value is RemoteJobCategory {
   return CATEGORY_LABELS.has(value);
+}
+
+export function isRemoteJobSource(value: string): value is RemoteJobSource {
+  return REMOTE_JOB_SOURCES.some((source) => source.id === value);
 }
 
 interface SourceJob {
@@ -115,9 +122,12 @@ function normalize(job: SourceJob): RemoteJob | null {
     openings: asPositiveInt(job.no_of_openings),
     postedAt: toIsoDate(job.date_posted),
     hourlyRate: toHourlyRate(job.ideal_hourly_rate),
+    yearlySalary: null,
+    location: null,
     engagement: asString(job.engagement_type),
     highDemand:
       job.is_high_demand_job === "1" || job.is_high_demand_job === 1,
+    source: "micro1",
   };
 }
 
@@ -140,8 +150,8 @@ async function fetchSourcePage(page: number): Promise<SourceJob[]> {
   return Array.isArray(body.data) ? (body.data as SourceJob[]) : [];
 }
 
-/** All technical roles, newest first. Backed by the fetch cache, so at most hourly. */
-export async function getRemoteJobs(): Promise<RemoteJob[]> {
+/** Technical micro1 roles, newest first. Backed by the fetch cache, so at most hourly. */
+async function fetchMicro1Jobs(): Promise<RemoteJob[]> {
   const jobs: RemoteJob[] = [];
   const seen = new Set<string>();
 
@@ -160,17 +170,64 @@ export async function getRemoteJobs(): Promise<RemoteJob[]> {
   return jobs.sort((a, b) => (b.postedAt ?? "").localeCompare(a.postedAt ?? ""));
 }
 
+/**
+ * Technical roles from micro1 and Peerlist, newest first.
+ * One source failing still returns the other. Both failing throws.
+ */
+export async function getRemoteJobs(): Promise<RemoteJob[]> {
+  const [microResult, peerResult] = await Promise.allSettled([
+    fetchMicro1Jobs(),
+    getPeerlistJobs(),
+  ]);
+
+  const jobs: RemoteJob[] = [];
+  const seen = new Set<string>();
+  const push = (list: RemoteJob[]) => {
+    for (const job of list) {
+      if (!seen.has(job.id)) {
+        seen.add(job.id);
+        jobs.push(job);
+      }
+    }
+  };
+
+  if (microResult.status === "fulfilled") push(microResult.value);
+  else console.error("micro1 jobs unavailable", microResult.reason);
+
+  if (peerResult.status === "fulfilled") push(peerResult.value);
+  else console.error("Peerlist jobs unavailable", peerResult.reason);
+
+  if (jobs.length === 0) {
+    const reason =
+      microResult.status === "rejected"
+        ? microResult.reason
+        : peerResult.status === "rejected"
+          ? peerResult.reason
+          : new Error("No remote jobs returned");
+    throw reason instanceof Error ? reason : new Error(String(reason));
+  }
+
+  return jobs.sort((a, b) => (b.postedAt ?? "").localeCompare(a.postedAt ?? ""));
+}
+
 export function filterRemoteJobs(
   jobs: RemoteJob[],
-  { search, category }: { search?: string; category?: RemoteJobCategory }
+  {
+    search,
+    category,
+    source,
+  }: { search?: string; category?: RemoteJobCategory; source?: RemoteJobSource }
 ): RemoteJob[] {
   const q = (search ?? "").trim().toLowerCase();
   return jobs.filter((job) => {
     if (category && job.category !== category) return false;
+    if (source && job.source !== source) return false;
     if (!q) return true;
     return (
       job.title.toLowerCase().includes(q) ||
+      job.company.toLowerCase().includes(q) ||
       job.categoryLabel.toLowerCase().includes(q) ||
+      (job.location ?? "").toLowerCase().includes(q) ||
       job.skills.some((s) => s.toLowerCase().includes(q))
     );
   });
