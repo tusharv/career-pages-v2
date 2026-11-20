@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2 - 2026-11-20
+
+- fix: new job updates
+
 ## 0.7.1 - 2026-11-01
 
 - fix: node version fix
