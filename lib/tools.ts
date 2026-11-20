@@ -4,6 +4,7 @@ export const TOOL_SLUGS = [
   "cursor",
   "supabase",
   "vercel",
+  "jobready",
   "scrimba",
   "hacktoberfest",
   "meetup",
@@ -13,13 +14,14 @@ export type ToolSlug = (typeof TOOL_SLUGS)[number];
 export type ToolLogo =
   | { type: "image"; src: string; alt: string; fill?: boolean }
   | { type: "cursor" }
-  | { type: "supabase" };
+  | { type: "supabase" }
+  | { type: "jobready" };
 export type ToolCopyItem = { title: string; body: string };
 export type ToolGuide = {
   slug: ToolSlug;
   name: string;
   logo: ToolLogo;
-  kind: "stack" | "learn" | "event" | "community";
+  kind: "stack" | "learn" | "event" | "community" | "career";
   purpose: string;
   tagline: string;
   description: string;
@@ -825,6 +827,89 @@ export const TOOLS: readonly ToolGuide[] = [
     metaDescription:
       "Luma Discover brings together events by location and category, along with community calendars. Use it to explore local tech sessions and find organisers whose events match your interests.",
     keywords: ["Luma", "local developer events", "professional networking"],
+  },
+  {
+    slug: "jobready",
+    name: "Job Ready",
+    kind: "career",
+    purpose: "Share a resume with employers",
+    tagline: "Show why you fit. One role at a time.",
+    description:
+      "Job Ready compares your experience with one role, then helps you publish a fact-checked CV. Employers open a link to the design you chose. Your assessment, practice plan, and chat stay private.",
+    bestFor:
+      "Job seekers who want employers to see a clear, role-specific resume instead of a generic CV.",
+    skipIf:
+      "You are not ready to review proposed edits and confirm they are accurate before anyone else sees them.",
+    logo: { type: "jobready" },
+    features: [
+      {
+        title: "A link employers can open",
+        body: "Publish a public profile with your chosen design and photo. Employers see your experience. Remove the link whenever you want.",
+      },
+      {
+        title: "Edits you approve",
+        body: "Tell Job Ready about work your CV is missing. Proposed changes to your summary, skills, and bullets stay private until you confirm they are accurate.",
+      },
+      {
+        title: "A polished PDF",
+        body: "When the result is ready to send, download a fact-checked CV styled with the theme you picked. The same design carries through to the public profile.",
+      },
+    ],
+    uses: [
+      {
+        title: "Share one role, not a generic CV",
+        body: "Start with a single job and make the experience that matches it easier to see. A public link is simpler to send than a file that looks the same for every application.",
+      },
+      {
+        title: "Keep the private notes private",
+        body: "Employers see the resume you published. Your fit review, learning plan, and chat are not part of that link.",
+      },
+    ],
+    activity: "Try this: publish one role-specific resume",
+    playbook: [
+      {
+        title: "Bring one role and your current CV",
+        body: "Upload the experience you have actually done and compare it with a single opening. Note which requirements your work already supports.",
+      },
+      {
+        title: "Approve only what is true",
+        body: "Review proposed edits to the summary, skills, and work bullets. Reject anything you cannot stand behind in an interview.",
+      },
+      {
+        title: "Share the public link",
+        body: "Choose a theme, publish when you are ready, and send employers that link. Download the PDF if a form still asks for a file.",
+      },
+    ],
+    tips: [
+      {
+        title: "One role at a time",
+        body: "A resume aimed at everything is easy to skim past. Make the connection to this opening before you send the next one.",
+      },
+      {
+        title: "You confirm every update",
+        body: "Chat suggestions are drafts. Read them against work you can explain, then apply only the lines that are accurate.",
+      },
+      {
+        title: "Unpublish when the search moves on",
+        body: "The public link is optional. Remove it when you no longer want that version of your CV available.",
+      },
+    ],
+    cost: "Check Job Ready for the current account options before you publish. Creating a link does not replace the employer’s own application form when one is required.",
+    resources: [
+      {
+        title: "Job Ready",
+        url: "https://jobready.tech/",
+      },
+    ],
+    relatedSlugs: ["scrimba", "meetup"],
+    metaTitle: "Job Ready: share a polished resume with employers",
+    metaDescription:
+      "Compare your experience with one role, then share a fact-checked CV. Employers see the profile you publish. Your assessment and chat stay private.",
+    keywords: [
+      "Job Ready",
+      "share resume with employers",
+      "role-specific CV",
+    ],
   },
 ];
 export function isToolSlug(value: string): value is ToolSlug {

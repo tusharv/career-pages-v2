@@ -44,6 +44,7 @@ interface PeerlistJobRecord {
   publishedAt: string | null;
   applyLink: string | null;
   salary: PeerlistSalary | null;
+  recentlyUpdated: boolean;
 }
 
 function asString(value: unknown): string | null {
@@ -116,6 +117,7 @@ function toRecord(value: unknown): PeerlistJobRecord | null {
     locations,
     publishedAt: asString(job.publishedAt),
     applyLink: asString(job.applyLink),
+    recentlyUpdated: job.recentlyUpdated === true,
     salary: rawSalary
       ? {
           min: asPositive(rawSalary.min),
@@ -231,6 +233,7 @@ export function normalizePeerlistJob(job: PeerlistJobRecord): RemoteJob | null {
     location: formatLocations(job.locations),
     engagement: job.type,
     highDemand: false,
+    recentlyUpdated: job.recentlyUpdated,
     source: "peerlist",
   };
 }
@@ -315,7 +318,7 @@ async function loadPeerlistJobs(): Promise<RemoteJob[]> {
 }
 
 /** Up to 40 recent remote engineering roles. Cached for an hour, snapshot on failure. */
-export const getPeerlistJobs = unstable_cache(loadPeerlistJobs, ["peerlist-remote-jobs-v2"], {
+export const getPeerlistJobs = unstable_cache(loadPeerlistJobs, ["peerlist-remote-jobs-v3"], {
   revalidate: CACHE_TTL_SECONDS,
   tags: ["remote-jobs"],
 });

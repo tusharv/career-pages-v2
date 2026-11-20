@@ -10,6 +10,7 @@ const FALLBACK_URLS: Record<ToolSlug, string> = {
   vercel: "https://vercel.com",
   hacktoberfest: "https://hacktoberfest.com",
   scrimba: "https://scrimba.com/?via=u412d258",
+  jobready: "https://jobready.tech/",
 };
 
 const ENV_KEYS: Partial<Record<ToolSlug, string>> = {

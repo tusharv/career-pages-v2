@@ -36,6 +36,8 @@ export interface RemoteJob {
   location: string | null;
   engagement: string | null;
   highDemand: boolean;
+  /** True when this listing replaced a closed role in the saved Peerlist list. */
+  recentlyUpdated: boolean;
   source: "micro1" | "peerlist";
 }
 

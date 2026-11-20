@@ -39,6 +39,13 @@ const groups: {
     slugs: ["vercel"],
   },
   {
+    id: "resume",
+    title: "Share a resume with employers",
+    description:
+      "Publish a polished, role-specific CV and send employers a link.",
+    slugs: ["jobready"],
+  },
+  {
     id: "community",
     title: "Meet and learn with like-minded people",
     description:

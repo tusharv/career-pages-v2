@@ -127,6 +127,7 @@ function normalize(job: SourceJob): RemoteJob | null {
     engagement: asString(job.engagement_type),
     highDemand:
       job.is_high_demand_job === "1" || job.is_high_demand_job === 1,
+    recentlyUpdated: false,
     source: "micro1",
   };
 }

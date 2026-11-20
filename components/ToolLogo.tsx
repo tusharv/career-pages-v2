@@ -81,6 +81,30 @@ function SupabaseMark({
   );
 }
 
+function JobReadyMark({ size, className }: { size: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn("shrink-0", className)}
+      aria-hidden
+      focusable="false"
+    >
+      <rect width="32" height="32" rx="7" fill="#1b6b45" />
+      <path
+        d="M9 23V16H16V9H23"
+        stroke="#f4faf6"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function ToolMark({
   tool,
   size,
@@ -95,6 +119,9 @@ function ToolMark({
   }
   if (tool.logo.type === "supabase") {
     return <SupabaseMark size={size} className={className} />;
+  }
+  if (tool.logo.type === "jobready") {
+    return <JobReadyMark size={size} className={className} />;
   }
 
   return (
@@ -140,6 +167,14 @@ export function ToolLogo({
           className="h-full w-full object-cover"
           aria-hidden={tool.logo.alt === ""}
         />
+      </span>
+    );
+  }
+
+  if (tool.logo.type === "jobready") {
+    return (
+      <span className={cn("inline-flex shrink-0", className)}>
+        <JobReadyMark size={framed ? box : size} />
       </span>
     );
   }

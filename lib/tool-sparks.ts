@@ -74,6 +74,14 @@ export const TOOL_SPARKS: Record<
     twist:
       "If you enjoy the group, try attending a second session. Recognising one familiar face can make the next hello much easier.",
   },
+  jobready: {
+    note: "One role. One link an employer can actually open.",
+    label: "Before you hit publish",
+    starter:
+      "Pick a role you would apply to this week. Mark three things on your CV that prove you can do it, and one requirement you cannot honestly claim yet.",
+    twist:
+      "Read the public profile as if you were the hiring manager. Would you understand the fit in under a minute, without your private notes?",
+  },
   luma: {
     note: "One good conversation is a lovely place to start.",
     label: "Make the follow-up easy",

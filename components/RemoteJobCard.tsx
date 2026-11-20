@@ -63,6 +63,14 @@ export function RemoteJobCard({
     >
       <CardHeader className="pb-2 pt-6">
         <div className="flex flex-wrap items-center gap-1.5">
+          {job.recentlyUpdated ? (
+            <Badge
+              variant="outline"
+              className="border-primary/40 text-primary"
+            >
+              Recently updated
+            </Badge>
+          ) : null}
           <Badge variant="secondary">{job.categoryLabel}</Badge>
           {job.source === 'peerlist' ? (
             <Badge variant="outline">Peerlist</Badge>

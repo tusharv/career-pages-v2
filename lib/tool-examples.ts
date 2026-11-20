@@ -1401,6 +1401,77 @@ const EXAMPLES = {
         "Publish the exercise kit with co-author credits and your actual contribution.",
     },
   ],
+  jobready: [
+    {
+      title: "A resume for one opening",
+      prompt:
+        "Compare your current CV with a single role and publish a version that makes the matching experience easy to see.",
+      steps: [
+        {
+          title: "Start with work you can explain",
+          body: "Upload your existing CV and the role. Mark which requirements your experience already supports.",
+        },
+        {
+          title: "Approve the edits",
+          body: "Review proposed changes to the summary, skills, and bullets. Keep only lines you can defend in an interview.",
+        },
+        {
+          title: "Share the public link",
+          body: "Choose a theme, publish the profile, and send that link. Download the PDF if an application form still asks for a file.",
+        },
+      ],
+      twist:
+        "Ask a willing peer to open the public link with no extra context. Note the first question they still have about your fit.",
+      takeaway:
+        "Keep a short note of what you changed for this role and what you left off because it was not accurate.",
+    },
+    {
+      title: "A public profile with private notes",
+      prompt:
+        "Publish a CV employers can open, while keeping the fit review and learning plan to yourself.",
+      steps: [
+        {
+          title: "Separate what is shared",
+          body: "Confirm the public page shows experience, design, and photo only. Check that the assessment and chat are not on that link.",
+        },
+        {
+          title: "Read it as an employer",
+          body: "Open the published link in a private window. Make sure the role connection is obvious without your private notes.",
+        },
+        {
+          title: "Decide when to unpublish",
+          body: "Remove the link when that version of the CV should no longer be available.",
+        },
+      ],
+      twist:
+        "Change the theme and confirm the public page and the PDF still describe the same experience.",
+      takeaway:
+        "Save the public URL you shared and the date you unpublished it, so you know which version employers saw.",
+    },
+    {
+      title: "A gap you can close before applying",
+      prompt:
+        "Use a missing requirement as a focused practice plan instead of hiding it in a generic CV.",
+      steps: [
+        {
+          title: "Name the gap",
+          body: "From the role comparison, pick the most important skill your experience does not yet support.",
+        },
+        {
+          title: "Practise one concrete step",
+          body: "Follow a small learning task that produces something you could later describe honestly on the CV.",
+        },
+        {
+          title: "Update only after the work exists",
+          body: "Add the skill to the resume after you have done the work, and approve the wording yourself.",
+        },
+      ],
+      twist:
+        "Write the bullet you hope to add, then wait to publish it until the project or exercise is real.",
+      takeaway:
+        "Show the before-and-after bullet and the work that made the new line true.",
+    },
+  ],
 } as const;
 export const TOOL_EXAMPLES: Record<ToolSlug, readonly PortfolioExample[]> = {
   ...EXAMPLES,
